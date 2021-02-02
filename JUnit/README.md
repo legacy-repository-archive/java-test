@@ -123,27 +123,18 @@ ___
 # 어노테이션
 |어노테이션|기능|
 |---------|----|
-|@Test|메서드가 테스트 메서드임을 나타낸다.<br>`JUnit4`의 `@Test`과 달리,<br>JUnit Jupiter(JUnit5)전용으로 작동하기 때문에 attribute를 선언하지 않는다.<br>어노테이션은 메서드를 상속 및 오버라이딩해도 사용 가능하다.|
-|@ParameterizedTest|메서드가 매개 변수가 있는 테스트 메서드임을 나타낸다.<br>어노테이션은 메서드를 상속 및 오버라이딩해도 사용 가능하다.|
-|@RepeatedTest|메서드가 반복 테스트를 위한 테스트 템플릿임을 나타낸다.<br>어노테이션은 메서드를 상속 및 오버라이딩해도 사용 가능하다.|
-|@TestFactory|메서드가 동적 테스트를 위한 테스트 팩토리임을 나타낸다.<br>어노테이션은 메서드를 상속 및 오버라이딩해도 사용 가능하다.|
-|@TestTemplate|메서드가 등록 된 공급자가 반환한 호출 컨텍스트 수에 따라,<br>여러 번 호출되도록 설계된 테스트 케이스의 템플릿임을 나타낸다.<br>어노테이션은 메서드를 상속 및 오버라이딩해도 사용 가능하다.|
+|@Test|메서드가 테스트 메서드임을 나타낸다.<br>`JUnit4`의 `@Test`과 달리,<br>JUnit Jupiter(JUnit5)전용으로 작동하기 때문에 attribute를 선언하지 않는다.<br>메서드를 오버라이딩하지 않는 경우 어노테이션은 상속되어 적용된다.|
+|@ParameterizedTest|메서드가 매개 변수가 있는 테스트 메서드임을 나타낸다.<br>메서드를 오버라이딩하지 않는 경우 어노테이션은 상속되어 적용된다.|
+|@RepeatedTest|메서드가 반복 테스트를 위한 테스트 템플릿임을 나타낸다.<br>메서드를 오버라이딩하지 않는 경우 어노테이션은 상속되어 적용된다.|
+|@TestFactory|메서드가 동적 테스트를 위한 테스트 팩토리임을 나타낸다.<br>메서드를 오버라이딩하지 않는 경우 어노테이션은 상속되어 적용된다.|
+|@TestTemplate|메서드가 등록 된 공급자가 반환한 호출 컨텍스트 수에 따라,<br>여러 번 호출되도록 설계된 테스트 케이스의 템플릿임을 나타낸다.<br>메서드를 오버라이딩하지 않는 경우 어노테이션은 상속되어 적용된다.|
 |@TestMethodOrder|어노테이션이 달린 테스트 클래스에 대한 테스트 메서드 실행 순서를 구성하는 데 사용된다.<br>JUnit 4의 @FixMethodOrder<br>어노테이션은 메서드를 상속해도 적용된다.|
 |@TestInstance|어노테이션이 달린 테스트 클래스에 대한 테스트 인스턴스 생명주기를 구성하는 데 사용된다.<br>어노테이션은 메서드를 상속해도 적용된다.|
 |@DisplayName|테스트 클래스 또는 테스트 메서드에 대한 `사용자 지정 표시 이름` 을 선언합니다.<br>어노테이션은 메서드를 상속해도 적용되지 않는다.|
 |@DisplayNameGeneration|테스트 클래스에 대한 사용자 지정 표시 이름 생성기를 선언한다.<br>어노테이션은 메서드를 상속해도 적용된다.|
-|@BeforeAll|`@Test` , `@RepeatedTest`, `@ParameterizedTest`및 `@TestFactory`와 같은<br>테스트 메소드가 실행되기 전에 해당 어노테이션이 붙은 메서드를 딱 1번 수행한다.<br>테스트 인스턴스 생명주기가 적용되지 않은 경우 메서드에 `static`을 붙여야한다.<br>JUnit 4의 `@BeforeClass`<br>어노테이션은 메서드를 상속해도 적용된다. |
-
-<br>어노테이션을 사용한 메서드는 상속되며 오버라이딩 가능하다.
-
-
-@BeforeEach
-
-의미 주석 메소드가 실행되어야 함 전에 각각 @Test , @RepeatedTest, @ParameterizedTest, 또는 @TestFactory현재의 메소드; JUnit 4의 @Before. 이러한 메서드는 재정의 되지 않는 한 상속 됩니다 .
-
-@AfterEach
-
-의미 주석 메소드가 실행되어야 함 후에 각각 @Test , @RepeatedTest, @ParameterizedTest, 또는 @TestFactory현재의 메소드; JUnit 4의 @After. 이러한 메서드는 재정의 되지 않는 한 상속 됩니다 .
+|@BeforeAll|`@Test` , `@RepeatedTest`, `@ParameterizedTest`및 `@TestFactory`와 같은<br>테스트 메소드가 실행되기 전에 해당 어노테이션이 붙은 메서드를 딱 1번 수행한다.<br>테스트 인스턴스 생명주기가 적용되지 않은 경우 메서드에 `static`을 붙여야한다.<br>JUnit 4의 `@BeforeClass`<br>어노테이션은 메서드를 상속해도 무조건 적용된다. |
+|@BeforeEach|`@Test` , `@RepeatedTest`, `@ParameterizedTest`및 `@TestFactory`와 같은<br>테스트 메소드가 실행되기 전에 해당 어노테이션이 붙은 메서드를 매번 수행한다.<br>JUnit 4의 @Before<br>메서드를 오버라이딩하지 않는다면, 어노테이션은 상속되어 적용된다.|
+|@AfterEach|`@Test` , `@RepeatedTest`, `@ParameterizedTest`및 `@TestFactory`와 같은<br>테스트 메소드가 실행된 후에 해당 어노테이션이 붙은 메서드를 매번 수행한다.<br>메서드를 오버라이딩하지 않는다면, 어노테이션은 상속되어 적용된다.|
 
 
 @AfterAll
