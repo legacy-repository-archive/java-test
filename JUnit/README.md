@@ -130,21 +130,14 @@ ___
 |@TestTemplate|메서드가 등록 된 공급자가 반환한 호출 컨텍스트 수에 따라,<br>여러 번 호출되도록 설계된 테스트 케이스의 템플릿임을 나타낸다.<br>메서드를 오버라이딩하지 않는 경우 어노테이션은 상속되어 적용된다.|
 |@TestMethodOrder|어노테이션이 달린 테스트 클래스에 대한 테스트 메서드 실행 순서를 구성하는 데 사용된다.<br>JUnit 4의 @FixMethodOrder<br>어노테이션은 메서드를 상속해도 적용된다.|
 |@TestInstance|어노테이션이 달린 테스트 클래스에 대한 테스트 인스턴스 생명주기를 구성하는 데 사용된다.<br>어노테이션은 메서드를 상속해도 적용된다.|
-|@DisplayName|테스트 클래스 또는 테스트 메서드에 대한 `사용자 지정 표시 이름` 을 선언합니다.<br>어노테이션은 메서드를 상속해도 적용되지 않는다.|
+|@DisplayName|테스트 클래스 또는 테스트 메서드에 대한 `사용자 지정 표시 이름` 을 선언합니다.<br>어노테이션은 메서드를 상속한다면 상속되지 않는다.|
 |@DisplayNameGeneration|테스트 클래스에 대한 사용자 지정 표시 이름 생성기를 선언한다.<br>어노테이션은 메서드를 상속해도 적용된다.|
-|@BeforeAll|`@Test` , `@RepeatedTest`, `@ParameterizedTest`및 `@TestFactory`와 같은<br>테스트 메소드가 실행되기 전에 해당 어노테이션이 붙은 메서드를 딱 1번 수행한다.<br>테스트 인스턴스 생명주기가 적용되지 않은 경우 메서드에 `static`을 붙여야한다.<br>JUnit 4의 `@BeforeClass`<br>어노테이션은 메서드를 상속해도 무조건 적용된다. |
+|@BeforeAll|`@Test` , `@RepeatedTest`, `@ParameterizedTest`및 `@TestFactory`와 같은<br>테스트 메소드가 실행되기 전에 해당 어노테이션이 붙은 메서드를 딱 1번 수행한다.<br>테스트 인스턴스 생명주기가 적용되지 않은 경우 메서드에 `static`을 붙여야한다.<br>JUnit 4의 `@BeforeClass`<br>어노테이션은 메서드를 상속할 때 무조건 상속되어야한다.|
 |@BeforeEach|`@Test` , `@RepeatedTest`, `@ParameterizedTest`및 `@TestFactory`와 같은<br>테스트 메소드가 실행되기 전에 해당 어노테이션이 붙은 메서드를 매번 수행한다.<br>JUnit 4의 @Before<br>메서드를 오버라이딩하지 않는다면, 어노테이션은 상속되어 적용된다.|
 |@AfterEach|`@Test` , `@RepeatedTest`, `@ParameterizedTest`및 `@TestFactory`와 같은<br>테스트 메소드가 실행된 후에 해당 어노테이션이 붙은 메서드를 매번 수행한다.<br>메서드를 오버라이딩하지 않는다면, 어노테이션은 상속되어 적용된다.|
-
-
-@AfterAll
-
-주석 메소드가 실행되어야 함을 나타내고, 이후 모든 @Test , @RepeatedTest, @ParameterizedTest및 @TestFactory현재 클래스의 메소드; JUnit 4의 @AfterClass. 이러한 메서드는 상속 되며 ( 숨겨 지거나 재정의 되지 않는 한 ) 반드시 상속 되어야합니다 static( "클래스 별" 테스트 인스턴스 수명주기 가 사용 되지 않는 경우 ).
-
-@Nested
-
-주석이 달린 클래스가 정적이 아닌 중첩 테스트 클래스 임을 나타냅니다 . @BeforeAll및 @AfterAll방법은 직접 사용할 수 없습니다 @Nested은 "당 클래스"를 제외 테스트 클래스 테스트 인스턴스 라이프 사이클이 사용됩니다. 이러한 주석은 상속 되지 않습니다 .
-
+|@AfterAll|`@Test` , `@RepeatedTest`, `@ParameterizedTest`및 `@TestFactory`와 같은<br>테스트 메소드가 실행된 후에 해당 어노테이션이 붙은 메서드를 딱 1번 수행한다.<br>테스트 인스턴스 생명주기가 적용되지 않은 경우 메서드에 `static`을 붙여야한다.<br>JUnit 4의 `@AfterClass`<br>어노테이션은 메서드를 상속할 때 무조건 상속되어야한다.|
+|@Nested|어노테이션이 달린 클래스가 none-static nested test 클래스임을 나타낸다.<br>그렇기에, @BeforeAll 및 @AfterAll 사용한 메서드는<br>각각의 클래스 별로 테스트 인스턴스 수명주기를 사용하지 않는 한<br>`@Nested` 테스트 클래스에서 직접 사용할 수 없다.<br>어노테이션은 메서드를 상속한다면 상속되지 않는다.|
+|||
 @Tag
 
 클래스 또는 메서드 수준에서 테스트 필터링을위한 태그 를 선언하는 데 사용됩니다 . TestNG의 테스트 그룹 또는 JUnit 4의 Categories와 유사합니다. 이러한 주석은 클래스 수준에서 상속 되지만 메서드 수준 에서는 상속 되지 않습니다.
