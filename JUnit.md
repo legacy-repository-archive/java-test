@@ -33,10 +33,8 @@ JUnit은 대다수의 자바 개발자가 이용하는 자바 테스팅 프레�
  
 ___   
   
-`Junit4`에서는, 내부 동작을 잘 표현하지 못했던 이름을 가진 어노테이션이 많았다.   
-그렇기에 
-기존에 메서드의 동작을 잘 표현하지 못했던 어노테이션의 이름들을     
-보다 명확성을 가질 수 있도록 새로운 이름으로 재정의해주었습니다.          
+`Junit4`에서는, 역할을 잘 표현하지 못하는 이름을 가진 어노테이션이 많았다.     
+그렇기에 `Junit5` 에서는,역할을 잘 표현하도록 새로운 이름을 정의해주었다.     
        
 |JUnit 5|JUnit 4|
 |-------|-------|
@@ -48,8 +46,53 @@ ___
 	      
 예시로, `Before`, `BeforeClass`만 보면 차이점을 제대로 이해하기 힘들지만,        
 `BeforeEach`, `BeforeAll`을 보면, 메서드를 각각/전체적으로 실행하는 것을 알 수 있습니다.     
-
 	
+___
+
+```java
+public class SampleTest { 
+  @Test
+    void groupedAssertions() {
+        // In a grouped assertion all assertions are executed, and any
+        // failures will be reported together.
+        assertAll("person",
+            () -> assertEquals("John", person.getFirstName()),
+            () -> assertEquals("Doe", person.getLastName())
+        );
+    }
+}
+```
+`assertAll()`로 `Lamda`를 사용할 수 있으며 이를, **Assertion Group**이라 말합니다.      
+하지만, 이런 의문을 가집니다. **각기 따로 진행하면 되지 왜 한번에 진행하지?**       
+         
+**Assertion Group**은 하나의 작업을 의미합니다.   
+그렇기에 하나의 작업안에 존재하는 기능들에 대한 테스트를 진행합니다.
+  
+하지만, 각각의 기능들을 따로 테스트하는 것과 다르게,    
+실패하면 실패한 테스트에 대한 **자세한 결과를 얻을 수 있습니다.**     
+물론, 옳게 된 테스트에 대한 결과도 얻을 수 있습니다.  
+    
+**Assertion Group 메서드**
+```java
+Address address = unitUnderTest.methodUnderTest();
+assertAll("Should return address of Oracle's headquarter",
+    () -> assertEquals("Redwood Shores", address.getCity()),
+    () -> assertEquals("Oracle Parkway", address.getStreet()),
+    () -> assertEquals("500", address.getNumber())
+);
+```
+   
+**콘솔 결과**
+```java
+org.opentest4j.MultipleFailuresError:
+    Should return address of Oracle's headquarter (3 failures)
+    expected: <Redwood Shores> but was: <Walldorf>
+    expected: <Oracle Parkway> but was: <Dietmar-Hopp-Allee>
+    expected: <500> but was: <16>
+```
+
+
+
 # JUnit 	
 	
 	
