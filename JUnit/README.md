@@ -143,11 +143,3 @@ ___
 |@ExtendWith|확장기능을 선언적으로 등록할 수 있다.<br>어노테이션은 메서드를 상속하면서 같이 상속된다.|
 |@RegisterExtension|필드를 통해 프로그래밍 방식으로 확장을 등록하는데 사용된다.<br>이러한 필드는 shadowed 처리 되지 않는 한 상속 됩니다.|
 |@TempDir|생명주기 또는 테스트에서<br>필드 주입 또는 매개 변수 주입을 통해 임시 디렉토리를 제공하는데 사용된다.<br>`org.junit.jupiter.api.io` package에 있다.|
-
-
-
-# JUnit 	
-	
-	
-	
-	
