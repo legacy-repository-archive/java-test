@@ -89,7 +89,35 @@ org.opentest4j.MultipleFailuresError:
     expected: <Oracle Parkway> but was: <Dietmar-Hopp-Allee>
     expected: <500> but was: <16>
 ```
+   
+___  
 
+**JUnit4**
+```java
+public class TestClass {
+    
+    @Test
+    public void run_test() {
+        // 테스트
+    }
+
+}
+```
+**JUnit5**
+```java
+class TestClass {
+    
+    @Test
+    void run_test() {
+        // 테스트
+    }
+
+}
+```
+기존에는 `public 클래스`의 `public 메서드`만 테스트가 가능했던 것과 달리,    
+접근 지정자가 없는 클래스/메서드에서도 `@Test`가 가능해졌다.         
+
+___   
 
 
 # JUnit 	
