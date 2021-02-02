@@ -132,14 +132,9 @@ ___
 |@TestInstance|어노테이션이 달린 테스트 클래스에 대한 테스트 인스턴스 생명주기를 구성하는 데 사용된다.<br>어노테이션은 메서드를 상속해도 적용된다.|
 |@DisplayName|테스트 클래스 또는 테스트 메서드에 대한 `사용자 지정 표시 이름` 을 선언합니다.<br>어노테이션은 메서드를 상속해도 적용되지 않는다.|
 |@DisplayNameGeneration|테스트 클래스에 대한 사용자 지정 표시 이름 생성기를 선언한다.<br>어노테이션은 메서드를 상속해도 적용된다.|
-
+|@BeforeAll|`@Test` , `@RepeatedTest`, `@ParameterizedTest`및 `@TestFactory`와 같은<br>테스트 메소드가 실행되기 전에 해당 어노테이션이 붙은 메서드를 딱 1번 수행한다.<br>테스트 인스턴스 생명주기가 적용되지 않은 경우 메서드에 `static`을 붙여야한다.<br>JUnit 4의 `@BeforeClass`<br>어노테이션은 메서드를 상속해도 적용된다. |
 
 <br>어노테이션을 사용한 메서드는 상속되며 오버라이딩 가능하다.
-
-
-
-
-
 
 
 @BeforeEach
@@ -150,9 +145,6 @@ ___
 
 의미 주석 메소드가 실행되어야 함 후에 각각 @Test , @RepeatedTest, @ParameterizedTest, 또는 @TestFactory현재의 메소드; JUnit 4의 @After. 이러한 메서드는 재정의 되지 않는 한 상속 됩니다 .
 
-@BeforeAll
-
-주석 메소드가 실행되어야 함을 나타내고 전에 모든 @Test , @RepeatedTest, @ParameterizedTest및 @TestFactory현재 클래스의 메소드; JUnit 4의 @BeforeClass. 이러한 메서드는 상속되고 ( 숨겨 지거나 재정의 되지 않는 한 ) 반드시 상속 되어야합니다 static( "클래스 별" 테스트 인스턴스 수명주기 가 사용 되지 않는 경우 ).
 
 @AfterAll
 
