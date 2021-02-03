@@ -93,5 +93,83 @@ class StudyTest {
 **테스트에 실패한 이유를 어느정도 유추할 수 있다.**          
 
 
-
 ## 메세지 입력하기
+`assert-` 메서드들은 공통적으로 메세지를 입력할 수 있도록 오버라이딩 되어있다.            
+그렇기에 `assert-` 메서드의 마지막 인자로 메세지를 입력하여 좀 더 쉽게 디버깅할 수 있다.        
+현재는 테스트량이 적기에 티가 안날 수 있지만, 현업에서는 무수히 많은 테스트를 진행하므로      
+어느 테스트가 실패했는지 원인은 무엇인지 알기 위해서라도 메세지를 작성하는 것이 좋다.          
+
+```java
+package me.kwj1270.thejavatest;
+
+import org.junit.jupiter.api.*;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class StudyTest {
+
+    @DisplayName("스터디 모두 화이팅")
+    @Test
+    public void Study_테스트() {
+        Study study = new Study();
+        assertNotNull(study);
+        assertEquals(StudyStatus.DRAFT, study.getStatus(), "스터디를 처음 만들면 상태값이 DRAFT여야 한다.");
+        System.out.println("Study_테스트");
+    }
+
+    @DisplayName("☺️")
+    @Test
+    public void 서브_테스트() {
+        System.out.println("서브_테스트");
+    }
+
+    @Disabled
+    @Test
+    public void 미완성_테스트() {
+        System.out.println("미완성_테스트");
+    }
+
+    @BeforeAll
+    static void BeforeAll_테스트() {
+        System.out.println("BeforeAll");
+    }
+
+    @BeforeEach
+    public void BeforeEach_테스트() {
+        System.out.println("BeforeEach");
+    }
+
+    @AfterEach
+    public void AfterEach_테스트() {
+        System.out.println("AfterEach");
+    }
+
+    @AfterAll
+    static void AfterAll_테스트() {
+        System.out.println("AfterAll");
+    }
+
+
+}
+```
+![JUnitAssertionTestMessage.png](./image/JUnitAssertionTestMessage.png)  
+
+## assert- 메서드들
+`assert-` 메서드에 대한 내용을 정리하고자 한다.  
+
+|assert- 메서드|설명|
+|------------|---|
+|assertEquals(expect, actual)|expect와 acutal이 일치하는지 확인한다.|
+|assertArrayEquals(expect, actual)|배열 자료형인 expect와 acutal이 일치하는지 확인한다.|    
+|assertFalse(condition)|condition이 false 인지 확인한다.|
+|assertTrue(condition)|condition이 true 인지 확인한다.|
+|assertNull(acutal)|acutal이 null인지 확인한다|
+|assertNotNull(acutal)|acutal이 null이 아닌지 확인한다|
+|assertSame(expect, actual)|expect와 actual가 같은 객체를 참조하고 있는지 확인한다.| 
+|assertNotSame(expect, actual)|expect와 actual가 같은 객체를 참조하고 있지 않은지 확인한다.|
+|assertfail()|테스트를 바로 실패 처리한다.| 
+
+assertEquals()메서드는 두 객체의 값이 같은지 확인하고, assertSame()메서드는 두 객체의 레퍼런스가 동일한가를 확인합니다. (== 연산자)
+
+## assert- 메 
+
