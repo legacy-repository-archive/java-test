@@ -146,3 +146,7 @@ class StudyTest {
 ![JUnitDisplayName.png](./image/JUnitDisplayName.png)
 
 개발자가 원하는 이름으로 지정해줄 수 있고, 심지어 이모지도 가능하다.   
+
+그렇기에 `@DisplayNameGeneration` 보다는 `@DisplayName`을 사용하는 것을 권장한다.        
+테스트 이름을 개발자가 원하는 이름으로 잘 표현할 수 있기 때문이다.          
+   
