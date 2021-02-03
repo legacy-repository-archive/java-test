@@ -73,3 +73,76 @@ class StudyTest {
 ```
 
 ![JUnitDisplayNameGeneration](./image/JUnitDisplayNameGeneration.png)    
+
+`@DisplayNameGeneration`의 멤버 값으로는    
+`DisplayNameGenerator`클래스에 내부에 존재하는 `static 클래스`의 `Class 타입`을 넣어주면 된다.         
+   
+|멤버|기능|
+|---|---|
+|DisplayNameGenerator.ReplaceUnderscores.class|`메서드이름`에서 `_` 및 `()` 제외|
+|DisplayNameGenerator.IndicativeSentences.class|`클래스이름`, `메서드이름`으로 표기|
+|DisplayNameGenerator.Simple.class|`메서드이름`에서 `()`만 제외|
+|DisplayNameGenerator.Standard.class|디폴트 멤버값<br>메서드 이름으로 표기|
+
+앞서 말했듯이, `@DisplayNameGeneration`는 **전략**을 지정하는 것이다.   
+그렇기 때문에 개발자가 원하는 이름을 자유롭게 지정할 수는 없다.    
+
+## @DisplayName    
+`@DisplayName`은 `@DisplayNameGeneration`와 다르게   
+개발자가 원하는 이름을 자유롭게 지정할 수 있다.    
+
+```java
+package me.kwj1270.thejavatest;
+
+import org.junit.jupiter.api.*;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class StudyTest {
+
+    @DisplayName("스터디 모두 화이팅")
+    @Test
+    public void Study_테스트() {
+        Study study = new Study();
+        assertNotNull(study);
+        System.out.println("Study_테스트");
+    }
+
+    @DisplayName("☺️")
+    @Test
+    public void 서브_테스트() {
+        System.out.println("서브_테스트");
+    }
+
+    @Disabled
+    @Test
+    public void 미완성_테스트() {
+        System.out.println("미완성_테스트");
+    }
+
+    @BeforeAll
+    static void BeforeAll_테스트() {
+        System.out.println("BeforeAll");
+    }
+
+    @BeforeEach
+    public void BeforeEach_테스트() {
+        System.out.println("BeforeEach");
+    }
+
+    @AfterEach
+    public void AfterEach_테스트() {
+        System.out.println("AfterEach");
+    }
+
+    @AfterAll
+    static void AfterAll_테스트() {
+        System.out.println("AfterAll");
+    }
+
+
+}
+```
+![JUnitDisplayName.png](JUnitDisplayName.png)
+
+개발자가 원하는 이름으로 지정해줄 수 있고, 심지어 이모지도 가능하다.   
