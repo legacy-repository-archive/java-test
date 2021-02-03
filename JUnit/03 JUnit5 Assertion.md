@@ -4,6 +4,24 @@ Assertion 은 우리가 실제 테스트에서 검증하고자하는 내용을 �
 코드에서 Assertion은, `org.junit.jupiter.api.Assertions`에 들어있는 `assert-` static 메서드를 말한다.        
 `org.junit.jupiter.api.Assertions`의 static 메서드이기에 `import static`을 이용해야 한다.    
 
+## assert- 메서드들
+`assert-` 메서드에 대한 내용을 정리하고자 한다.  
+
+|assert- 메서드|설명|
+|------------|---|
+|assertEquals(expect, actual)|expect와 acutal이 일치하는지 확인한다.|
+|assertArrayEquals(expect, actual)|배열 자료형인 expect와 acutal이 일치하는지 확인한다.|    
+|assertFalse(condition)|condition이 false 인지 확인한다.|
+|assertTrue(condition)|condition이 true 인지 확인한다.|
+|assertNull(acutal)|acutal이 null인지 확인한다|
+|assertNotNull(acutal)|acutal이 null이 아닌지 확인한다|
+|assertSame(expect, actual)|expect와 actual가 같은 객체를 참조하고 있는지 확인한다.| 
+|assertNotSame(expect, actual)|expect와 actual가 같은 객체를 참조하고 있지 않은지 확인한다.|
+|assertfail()|테스트를 바로 실패 처리한다.| 
+
+`assertEquals()`는 `equals()`메서드를 기준으로 두 객체의 값이 같은지 확인하고,        
+`assertSame()`는 `== 연산자`를 기준으로 두 객체의 레퍼런스가 동일한가를 확인한다.        
+
 ## 기본 사용해보기  
 `assert-` 메서드를 사용하기 위해서 몇 개의 소스 코드를 생성 및 수정하겠다.           
     
@@ -153,23 +171,6 @@ class StudyTest {
 }
 ```
 ![JUnitAssertionTestMessage.png](./image/JUnitAssertionTestMessage.png)  
-
-## assert- 메서드들
-`assert-` 메서드에 대한 내용을 정리하고자 한다.  
-
-|assert- 메서드|설명|
-|------------|---|
-|assertEquals(expect, actual)|expect와 acutal이 일치하는지 확인한다.|
-|assertArrayEquals(expect, actual)|배열 자료형인 expect와 acutal이 일치하는지 확인한다.|    
-|assertFalse(condition)|condition이 false 인지 확인한다.|
-|assertTrue(condition)|condition이 true 인지 확인한다.|
-|assertNull(acutal)|acutal이 null인지 확인한다|
-|assertNotNull(acutal)|acutal이 null이 아닌지 확인한다|
-|assertSame(expect, actual)|expect와 actual가 같은 객체를 참조하고 있는지 확인한다.| 
-|assertNotSame(expect, actual)|expect와 actual가 같은 객체를 참조하고 있지 않은지 확인한다.|
-|assertfail()|테스트를 바로 실패 처리한다.| 
-
-`assertEquals()`는 `equals()`메서드를 기준으로 두 객체의 값이 같은지 확인하고,        
-`assertSame()`는 `== 연산자`를 기준으로 두 객체의 레퍼런스가 동일한가를 확인한다.         
+ 
 
 
