@@ -169,7 +169,7 @@ class StudyTest {
 |assertNotSame(expect, actual)|expect와 actual가 같은 객체를 참조하고 있지 않은지 확인한다.|
 |assertfail()|테스트를 바로 실패 처리한다.| 
 
-assertEquals()메서드는 두 객체의 값이 같은지 확인하고, assertSame()메서드는 두 객체의 레퍼런스가 동일한가를 확인합니다. (== 연산자)
+`assertEquals()`는 `equals()`메서드를 기준으로 두 객체의 값이 같은지 확인하고,        
+`assertSame()`는 `== 연산자`를 기준으로 두 객체의 레퍼런스가 동일한가를 확인한다.         
 
-## assert- 메 
 
