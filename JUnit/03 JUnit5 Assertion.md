@@ -180,6 +180,70 @@ class StudyTest {
 }
 ```
 ![JUnitAssertionTestMessage.png](./image/JUnitAssertionTestMessage.png)  
- 
+
+**메시지 람다식으로 작성**
+```java
+package me.kwj1270.thejavatest;
+
+import org.junit.jupiter.api.*;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class StudyTest {
+
+    @DisplayName("스터디 모두 화이팅")
+    @Test
+    public void Study_테스트() {
+        Study study = new Study();
+        assertNotNull(study);
+        assertEquals(StudyStatus.DRAFT, study.getStatus(), () -> "스터디를 처음 만들면 상태값이 DRAFT여야 한다.");
+        System.out.println("Study_테스트");
+    }
+
+    @DisplayName("☺️")
+    @Test
+    public void 서브_테스트() {
+        System.out.println("서브_테스트");
+    }
+
+    @Disabled
+    @Test
+    public void 미완성_테스트() {
+        System.out.println("미완성_테스트");
+    }
+
+    @BeforeAll
+    static void BeforeAll_테스트() {
+        System.out.println("BeforeAll");
+    }
+
+    @BeforeEach
+    public void BeforeEach_테스트() {
+        System.out.println("BeforeEach");
+    }
+
+    @AfterEach
+    public void AfterEach_테스트() {
+        System.out.println("AfterEach");
+    }
+
+    @AfterAll
+    static void AfterAll_테스트() {
+        System.out.println("AfterAll");
+    }
+
+
+}
+```
+```java
+assertEquals(Object expected, Object actual, String message)
+assertEquals(Object expected, Object actual, Supplier<String> messageSupplier)
+```
+사실 `assert-` 메서드의 메세지 구문은 대부분 2개의 오버로딩이 존재한다.  
+바로, `String`과 `Supplier<String>`으로 되어있다.         
+```java
+        assertEquals(StudyStatus.DRAFT, study.getStatus(), () -> "스터디를 처음 만들면 상태값이 DRAFT여야 한다.");
+```
+그 중에 `Supplier<String>` 오버로딩을 이용하고자 한다면 람다식을 사용할 수 있다.    
 
 
