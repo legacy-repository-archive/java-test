@@ -143,6 +143,6 @@ class StudyTest {
 
 }
 ```
-![JUnitDisplayName.png](JUnitDisplayName.png)
+![JUnitDisplayName.png](./image/JUnitDisplayName.png)
 
 개발자가 원하는 이름으로 지정해줄 수 있고, 심지어 이모지도 가능하다.   
