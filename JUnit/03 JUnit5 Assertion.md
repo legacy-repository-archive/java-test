@@ -236,14 +236,15 @@ class StudyTest {
 }
 ```
 ```java
+assertEquals(StudyStatus.DRAFT, study.getStatus(), () -> "스터디를 처음 만들면 상태값이 DRAFT여야 한다.");
+```
+```java
 assertEquals(Object expected, Object actual, String message)
 assertEquals(Object expected, Object actual, Supplier<String> messageSupplier)
 ```
-사실 `assert-` 메서드의 메세지 구문은 대부분 2개의 오버로딩이 존재한다.  
-바로, `String`과 `Supplier<String>`으로 되어있다.         
-```java
-        assertEquals(StudyStatus.DRAFT, study.getStatus(), () -> "스터디를 처음 만들면 상태값이 DRAFT여야 한다.");
-```
-그 중에 `Supplier<String>` 오버로딩을 이용하고자 한다면 람다식을 사용할 수 있다.    
+`assert-`메서드의 메시지구문 오버로딩은 `String`과 `Supplier<String>`으로 되어있다.    
+그렇기에 `Supplier<String>` 오버로딩 메서드를 사용하면 람다식을 적용할 수 있다.         
+
+
 
 
