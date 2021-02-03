@@ -77,7 +77,7 @@ class StudyTest {
 ```
 ![JUnitStart](./image/JUnitStart.png)
 
-각 어노테이션에 대한 설명은 앞서 정리를 했기에 [해당 문서](./README.md)를 참고하자.   
+각 어노테이션에 대한 설명은 앞서 정리를 했기에 [해당 문서](./README.md#어노테이션)를 참고하자.   
 대신 간략히 설명하자면, 
 
 * **@BeforeAll :** 테스트를 실행하기 전에 1번 호출  
