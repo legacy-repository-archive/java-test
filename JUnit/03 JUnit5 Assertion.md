@@ -85,6 +85,12 @@ class StudyTest {
 }
 ```
 * 테스트 클래스에서는 Study의 상태가 `DRAFT`인지 확인한다.     
+   
+![JUnitAssertionTestBasic.png](./image/JUnitAssertionTestBasic.png)
+         
+위 사진에서 알 수 있듯이      
+테스트에 실패하면, 예상값하고 실제값에 대한 정보가 나오면서         
+**테스트에 실패한 이유를 어느정도 유추할 수 있다.**          
 
 
 
