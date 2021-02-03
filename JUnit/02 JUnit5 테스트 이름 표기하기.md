@@ -9,7 +9,6 @@
     
 이 외에도 JUnit5 문서를 보면 더 다양한 이름짓기 방법들이 있다.   
 
-___  
 
 ![JUnitStart.png](./image/JUnitStart.png)      
 테스트의 이름을 확인하는 방법은 실행 콘솔 왼쪽을 보면 알 수 있다.               
