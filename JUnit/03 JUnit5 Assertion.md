@@ -412,6 +412,10 @@ class StudyTest {
                 () -> assertTrue(study.getLimit() > 0, () -> "스터디 최대 참석 가능 인원은 0보다 커야한다.")
         );
 ```
+`assertAll()`의 파라미터를 보면 `Executable`자료형이 가변인자로 등록되어 있다.       
+그렇기에, 다수의 `assert-` 메서드를 인자로 넘겨줄 수 있다.     
+`assert-`다른 인자간의 구분은 기존과 마찬가지로 `,` 를 사용하고 `;`는 붙이지 않는다.      
+
   
 ___ 
 익명클래스에 `option + Enter(return)` 누르면 람다식으로 전환할 수 있다.    
