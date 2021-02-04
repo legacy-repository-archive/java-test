@@ -418,7 +418,82 @@ class StudyTest {
 그렇기에, 다수의 `assert-` 메서드를 인자로 넘겨줄 수 있다.     
 `assert-`다른 인자간의 구분은 기존과 마찬가지로 `,` 를 사용하고 `;`는 붙이지 않는다.      
 
-  
+## assertThrows
+
+```java
+package me.kwj1270.thejavatest;
+
+public class Study {
+    private StudyStatus studyStatus;
+    private int limit;
+
+    public Study(int limit){
+        if(limit < 0) throw new IllegalArgumentException("limit은 0보다 커야한다.");
+        this.limit = limit;
+    }
+
+    public StudyStatus getStatus() {
+        return this.studyStatus;
+    }
+
+    public int getLimit() {
+        return limit;
+    }
+}
+
+```
+```java
+package me.kwj1270.thejavatest;
+
+import org.junit.jupiter.api.*;
+
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class StudyTest {
+
+    @DisplayName("스터디 모두 화이팅")
+    @Test
+    public void Study_테스트() {
+        assertThrows(IllegalArgumentException.class, () -> new Study(-1));
+        System.out.println("Study_테스트");
+    }
+
+    @DisplayName("☺️")
+    @Test
+    public void 서브_테스트() {
+        System.out.println("서브_테스트");
+    }
+
+    @Disabled
+    @Test
+    public void 미완성_테스트() {
+        System.out.println("미완성_테스트");
+    }
+
+    @BeforeAll
+    static void BeforeAll_테스트() {
+        System.out.println("BeforeAll");
+    }
+
+    @BeforeEach
+    public void BeforeEach_테스트() {
+        System.out.println("BeforeEach");
+    }
+
+    @AfterEach
+    public void AfterEach_테스트() {
+        System.out.println("AfterEach");
+    }
+
+    @AfterAll
+    static void AfterAll_테스트() {
+        System.out.println("AfterAll");
+    }
+
+
+}
+```
 ___ 
 익명클래스에 `option + Enter(return)` 누르면 람다식으로 전환할 수 있다.    
 
