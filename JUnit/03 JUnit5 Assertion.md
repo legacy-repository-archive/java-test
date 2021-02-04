@@ -28,9 +28,6 @@ Assertion 은 우리가 실제 테스트에서 검증하고자하는 내용을 �
 이를 잘 이해하고 사용하도록 하자 (대부분 처음에 기대값, 실제값)        
 
 
-
-
-
 ## 기본 사용해보기  
 `assert-` 메서드를 사용하기 위해서 몇 개의 소스 코드를 생성 및 수정하겠다.           
     
@@ -396,9 +393,13 @@ class StudyTest {
 
 }
 ```
+  
+![JUnitAssertAllAfterOne.png](./image/JUnitAssertAllAfterOne.png)  
+![JUnitAssertAllAfterTwo.png](./image/JUnitAssertAllAfterTwo.png)   
 
-![JUnitAssertAllAfterOne.png](./image/JUnitAssertAllAfterOne.png)
-![JUnitAssertAllAfterTwo.png](./image/JUnitAssertAllAfterTwo.png)
+`assertAll()`을 사용하면,   
+
+
 ```java
         assertAll(
                 () -> assertNotNull(study),
