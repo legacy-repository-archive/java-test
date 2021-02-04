@@ -325,9 +325,36 @@ class StudyTest {
 또한, `assertThrows()` 첫번째 인자값으로 넘긴 예외 클래스 타입을 반환한다.        
 그렇기에 해당 예외 클래스 타입을 가져와, 사용자가 입력한 메시지와 맞는지도 확인 가능하다.        
 이렇게 하면, 보다 예외가 발생한 지점을 쉽게 찾을 수 있을 것이다.    
+    
+## assertTimeout       
+`assertTimeout()`은 실행하는 코드가 특정 시간 이내에 완료되는지 확인한다.          
+`assertTimeout()`는 첫번째 파라미터로 Duration, 두번째 인자로 테스트 대상을 입력해서            
+해당 시간내에 테스트 대상이 끝나는지 확인하는 작업을 수행한다.           
 
+```java
+package me.kwj1270.thejavatest;
 
+import org.junit.jupiter.api.*;
 
+import java.time.Duration;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class StudyTest {
+
+    @DisplayName("스터디 모두 화이팅")
+    @Test
+    public void Study_테스트() {
+        assertTimeout(Duration.ofMillis(10), () -> {
+            Thread.sleep(300);
+            new Study(10);
+        });
+    }
+
+}
+```
+
+JUnitAssertTimeoutOne.png
 ___ 
 익명클래스에 `option + Enter(return)` 누르면 람다식으로 전환할 수 있다.    
 
