@@ -353,8 +353,10 @@ class StudyTest {
 
 }
 ```
+![JUnitAssertTimeoutOne.png](./image/JUnitAssertTimeoutOne.png)
 
-JUnitAssertTimeoutOne.png
+위 코드에서는 일부러 `Thread.sleep()`을 이용해서 강제롤 에러를 발생시켰다.  
+
 ___ 
 익명클래스에 `option + Enter(return)` 누르면 람다식으로 전환할 수 있다.    
 
