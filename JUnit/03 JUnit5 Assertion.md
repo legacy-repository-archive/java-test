@@ -333,6 +333,7 @@ class StudyTest {
 }
 ```
 
+![JUnitAssertAllBefore.png](./image/JUnitAssertAllBefore.png)
 
 
 
