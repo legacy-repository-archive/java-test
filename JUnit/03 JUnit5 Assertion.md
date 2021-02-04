@@ -253,7 +253,83 @@ assertEquals(Object expected, Object actual, Supplier<String> messageSupplier)
 하지만, 람다식으로 만든다면 테스트에 실패했을 경우에만 메시지를 넘겨준다.       
 즉, 메시지를 만드는 비용이 조금 걱정되는 수준이면 람다식을 사용하는 것이 성능에서 유리하다.      
 
+## JUnit5 의 assertAll
+JUnit5에서는 `assertAll`이라는 메서드가 등장했다.          
+네이밍에서 유추해보자면 모든 구문을 테스트한다는 것인데,         
+일반적으로 메서드안에 테스트를 여러개 만들어서 검사하면 되지 않나 생각할 수 있다.      
 
+
+```java
+package me.kwj1270.thejavatest;
+
+public class Study {
+    private StudyStatus studyStatus;
+    private int limit = -10;
+    public StudyStatus getStatus() {
+        return this.studyStatus;
+    }
+
+    public int getLimit() {
+        return limit;
+    }
+}
+
+```
+```java
+package me.kwj1270.thejavatest;
+
+import org.junit.jupiter.api.*;
+
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class StudyTest {
+
+    @DisplayName("스터디 모두 화이팅")
+    @Test
+    public void Study_테스트() {
+        Study study = new Study();
+        assertNotNull(study);
+        assertEquals(StudyStatus.DRAFT, study.getStatus(), () -> "스터디를 처음 만들면 상태값이 DRAFT여야 한다.");
+        assertTrue(study.getLimit() > 0, () -> "스터디 최대 참석 가능 인원은 0보다 커야한다.");
+        System.out.println("Study_테스트");
+    }
+
+    @DisplayName("☺️")
+    @Test
+    public void 서브_테스트() {
+        System.out.println("서브_테스트");
+    }
+
+    @Disabled
+    @Test
+    public void 미완성_테스트() {
+        System.out.println("미완성_테스트");
+    }
+
+    @BeforeAll
+    static void BeforeAll_테스트() {
+        System.out.println("BeforeAll");
+    }
+
+    @BeforeEach
+    public void BeforeEach_테스트() {
+        System.out.println("BeforeEach");
+    }
+
+    @AfterEach
+    public void AfterEach_테스트() {
+        System.out.println("AfterEach");
+    }
+
+    @AfterAll
+    static void AfterAll_테스트() {
+        System.out.println("AfterAll");
+    }
+
+
+}
+```
   
   
 ___ 
