@@ -301,6 +301,10 @@ class StudyTest {
 ```
 ![JUnitAssertThrowsOne.png](./image/JUnitAssertThrowsOne.png)
 
+알맞은 예외클래스를 던졌기 때문에, 테스트는 성공적으로 끝났다.        
+만약 내가 원치 않는곳에서 에러가 발생했다면, 테스트는 실패하고       
+우리는 다른 예외가 발생한 이유를 찾아 수정을 진행하면 된다.       
+   
 ```java
 package me.kwj1270.thejavatest;
 
@@ -355,7 +359,40 @@ class StudyTest {
 ```
 ![JUnitAssertTimeoutOne.png](./image/JUnitAssertTimeoutOne.png)
 
-위 코드에서는 일부러 `Thread.sleep()`을 이용해서 강제롤 에러를 발생시켰다.  
+위 코드에서는 일부러 `Thread.sleep()`을 이용해서 강제로 에러를 발생시켰다.      
+한 가지 주의할 점은 시간이 지나면 바로 실패를 띄우는 것이 아니라,     
+`{}` 코드 블럭을 전부 확인 한 시간을 기준으로 비교를 진행한다.         
+
+
+```java
+package me.kwj1270.thejavatest;
+
+import org.junit.jupiter.api.*;
+
+import java.time.Duration;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class StudyTest {
+
+    @DisplayName("스터디 모두 화이팅")
+    @Test
+    public void Study_테스트() {
+        assertTimeoutPreemptively(Duration.ofMillis(10), () -> {
+            Thread.sleep(300);
+            new Study(10);
+        });
+    }
+
+}
+``` 
+만약, 시간이 지났다면 더 불필요한 계산 없이 바로 탈출을 하고자 한다면       
+`assertTimeoutPreemptively()` 메서드를 사용하면 된다.          
+    
+  
+  
+
+
 
 ___ 
 익명클래스에 `option + Enter(return)` 누르면 람다식으로 전환할 수 있다.    
