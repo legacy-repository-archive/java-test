@@ -419,7 +419,8 @@ class StudyTest {
 `assert-`다른 인자간의 구분은 기존과 마찬가지로 `,` 를 사용하고 `;`는 붙이지 않는다.      
 
 ## assertThrows
-
+`assertThrows()` 는 특정 상황에서 특정 예외가 발생하는지 확인하는 `assert-` 메서드이다.      
+    
 ```java
 package me.kwj1270.thejavatest;
 
@@ -494,6 +495,9 @@ class StudyTest {
 
 }
 ```
+![JUnitAssertThrowsOne.png](./image/JUnitAssertThrowsOne.png)
+
+
 ___ 
 익명클래스에 `option + Enter(return)` 누르면 람다식으로 전환할 수 있다.    
 
