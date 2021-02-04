@@ -338,7 +338,63 @@ class StudyTest {
 
 
 ### assertAll 적용 후 
+```java
+package me.kwj1270.thejavatest;
 
+import org.junit.jupiter.api.*;
+
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class StudyTest {
+
+    @DisplayName("스터디 모두 화이팅")
+    @Test
+    public void Study_테스트() {
+        Study study = new Study();
+        assertAll(
+                () -> assertNotNull(study),
+                () -> assertEquals(StudyStatus.DRAFT, study.getStatus(), () -> "스터디를 처음 만들면 상태값이 DRAFT여야 한다."),
+                () -> assertTrue(study.getLimit() > 0, () -> "스터디 최대 참석 가능 인원은 0보다 커야한다.")
+        );
+        System.out.println("Study_테스트");
+    }
+
+    @DisplayName("☺️")
+    @Test
+    public void 서브_테스트() {
+        System.out.println("서브_테스트");
+    }
+
+    @Disabled
+    @Test
+    public void 미완성_테스트() {
+        System.out.println("미완성_테스트");
+    }
+
+    @BeforeAll
+    static void BeforeAll_테스트() {
+        System.out.println("BeforeAll");
+    }
+
+    @BeforeEach
+    public void BeforeEach_테스트() {
+        System.out.println("BeforeEach");
+    }
+
+    @AfterEach
+    public void AfterEach_테스트() {
+        System.out.println("AfterEach");
+    }
+
+    @AfterAll
+    static void AfterAll_테스트() {
+        System.out.println("AfterAll");
+    }
+
+
+}
+```
   
 ___ 
 익명클래스에 `option + Enter(return)` 누르면 람다식으로 전환할 수 있다.    
