@@ -405,6 +405,9 @@ class StudyTest {
 즉, 모든 테스트에 대한 검증 결과를 한번에 확인할 수 있게 되었다.     
 
 ```java
+    public static void assertAll(Executable... executables) throws MultipleFailuresError {
+```
+```java
         assertAll(
                 () -> assertNotNull(study),
                 () -> assertEquals(StudyStatus.DRAFT, study.getStatus(), () -> "스터디를 처음 만들면 상태값이 DRAFT여야 한다."),
