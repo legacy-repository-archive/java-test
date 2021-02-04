@@ -338,7 +338,7 @@ class StudyTest {
 
 
 ### assertAll 적용 후 
-  
+
   
 ___ 
 익명클래스에 `option + Enter(return)` 누르면 람다식으로 전환할 수 있다.    
