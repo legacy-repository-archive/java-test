@@ -72,40 +72,7 @@ class StudyTest {
         assertEquals(StudyStatus.DRAFT, study.getStatus());
         System.out.println("Study_테스트");
     }
-
-    @DisplayName("☺️")
-    @Test
-    public void 서브_테스트() {
-        System.out.println("서브_테스트");
-    }
-
-    @Disabled
-    @Test
-    public void 미완성_테스트() {
-        System.out.println("미완성_테스트");
-    }
-
-    @BeforeAll
-    static void BeforeAll_테스트() {
-        System.out.println("BeforeAll");
-    }
-
-    @BeforeEach
-    public void BeforeEach_테스트() {
-        System.out.println("BeforeEach");
-    }
-
-    @AfterEach
-    public void AfterEach_테스트() {
-        System.out.println("AfterEach");
-    }
-
-    @AfterAll
-    static void AfterAll_테스트() {
-        System.out.println("AfterAll");
-    }
-
-
+    
 }
 ```
 * 테스트 클래스에서는 Study의 상태가 `DRAFT`인지 확인한다.     
@@ -141,39 +108,6 @@ class StudyTest {
         System.out.println("Study_테스트");
     }
 
-    @DisplayName("☺️")
-    @Test
-    public void 서브_테스트() {
-        System.out.println("서브_테스트");
-    }
-
-    @Disabled
-    @Test
-    public void 미완성_테스트() {
-        System.out.println("미완성_테스트");
-    }
-
-    @BeforeAll
-    static void BeforeAll_테스트() {
-        System.out.println("BeforeAll");
-    }
-
-    @BeforeEach
-    public void BeforeEach_테스트() {
-        System.out.println("BeforeEach");
-    }
-
-    @AfterEach
-    public void AfterEach_테스트() {
-        System.out.println("AfterEach");
-    }
-
-    @AfterAll
-    static void AfterAll_테스트() {
-        System.out.println("AfterAll");
-    }
-
-
 }
 ```
 ![JUnitAssertionTestMessage.png](./image/JUnitAssertionTestMessage.png)  
@@ -196,40 +130,7 @@ class StudyTest {
         assertEquals(StudyStatus.DRAFT, study.getStatus(), () -> "스터디를 처음 만들면 상태값이 DRAFT여야 한다.");
         System.out.println("Study_테스트");
     }
-
-    @DisplayName("☺️")
-    @Test
-    public void 서브_테스트() {
-        System.out.println("서브_테스트");
-    }
-
-    @Disabled
-    @Test
-    public void 미완성_테스트() {
-        System.out.println("미완성_테스트");
-    }
-
-    @BeforeAll
-    static void BeforeAll_테스트() {
-        System.out.println("BeforeAll");
-    }
-
-    @BeforeEach
-    public void BeforeEach_테스트() {
-        System.out.println("BeforeEach");
-    }
-
-    @AfterEach
-    public void AfterEach_테스트() {
-        System.out.println("AfterEach");
-    }
-
-    @AfterAll
-    static void AfterAll_테스트() {
-        System.out.println("AfterAll");
-    }
-
-
+    
 }
 ```
 ```java
@@ -296,37 +197,6 @@ class StudyTest {
         System.out.println("Study_테스트");
     }
 
-    @DisplayName("☺️")
-    @Test
-    public void 서브_테스트() {
-        System.out.println("서브_테스트");
-    }
-
-    @Disabled
-    @Test
-    public void 미완성_테스트() {
-        System.out.println("미완성_테스트");
-    }
-
-    @BeforeAll
-    static void BeforeAll_테스트() {
-        System.out.println("BeforeAll");
-    }
-
-    @BeforeEach
-    public void BeforeEach_테스트() {
-        System.out.println("BeforeEach");
-    }
-
-    @AfterEach
-    public void AfterEach_테스트() {
-        System.out.println("AfterEach");
-    }
-
-    @AfterAll
-    static void AfterAll_테스트() {
-        System.out.println("AfterAll");
-    }
 }
 ```
 
@@ -360,39 +230,6 @@ class StudyTest {
         );
         System.out.println("Study_테스트");
     }
-
-    @DisplayName("☺️")
-    @Test
-    public void 서브_테스트() {
-        System.out.println("서브_테스트");
-    }
-
-    @Disabled
-    @Test
-    public void 미완성_테스트() {
-        System.out.println("미완성_테스트");
-    }
-
-    @BeforeAll
-    static void BeforeAll_테스트() {
-        System.out.println("BeforeAll");
-    }
-
-    @BeforeEach
-    public void BeforeEach_테스트() {
-        System.out.println("BeforeEach");
-    }
-
-    @AfterEach
-    public void AfterEach_테스트() {
-        System.out.println("AfterEach");
-    }
-
-    @AfterAll
-    static void AfterAll_테스트() {
-        System.out.println("AfterAll");
-    }
-
 
 }
 ```
@@ -460,39 +297,6 @@ class StudyTest {
         System.out.println("Study_테스트");
     }
 
-    @DisplayName("☺️")
-    @Test
-    public void 서브_테스트() {
-        System.out.println("서브_테스트");
-    }
-
-    @Disabled
-    @Test
-    public void 미완성_테스트() {
-        System.out.println("미완성_테스트");
-    }
-
-    @BeforeAll
-    static void BeforeAll_테스트() {
-        System.out.println("BeforeAll");
-    }
-
-    @BeforeEach
-    public void BeforeEach_테스트() {
-        System.out.println("BeforeEach");
-    }
-
-    @AfterEach
-    public void AfterEach_테스트() {
-        System.out.println("AfterEach");
-    }
-
-    @AfterAll
-    static void AfterAll_테스트() {
-        System.out.println("AfterAll");
-    }
-
-
 }
 ```
 ![JUnitAssertThrowsOne.png](./image/JUnitAssertThrowsOne.png)
@@ -516,41 +320,13 @@ class StudyTest {
         System.out.println("Study_테스트");
     }
 
-    @DisplayName("☺️")
-    @Test
-    public void 서브_테스트() {
-        System.out.println("서브_테스트");
-    }
-
-    @Disabled
-    @Test
-    public void 미완성_테스트() {
-        System.out.println("미완성_테스트");
-    }
-
-    @BeforeAll
-    static void BeforeAll_테스트() {
-        System.out.println("BeforeAll");
-    }
-
-    @BeforeEach
-    public void BeforeEach_테스트() {
-        System.out.println("BeforeEach");
-    }
-
-    @AfterEach
-    public void AfterEach_테스트() {
-        System.out.println("AfterEach");
-    }
-
-    @AfterAll
-    static void AfterAll_테스트() {
-        System.out.println("AfterAll");
-    }
-
-
 }
 ```
+또한, `assertThrows()` 첫번째 인자값으로 넘긴 예외 클래스 타입을 반환한다.        
+그렇기에 해당 예외 클래스 타입을 가져와, 사용자가 입력한 메시지와 맞는지도 확인 가능하다.        
+이렇게 하면, 보다 예외가 발생한 지점을 쉽게 찾을 수 있을 것이다.    
+
+
 
 ___ 
 익명클래스에 `option + Enter(return)` 누르면 람다식으로 전환할 수 있다.    
