@@ -257,8 +257,11 @@ assertEquals(Object expected, Object actual, Supplier<String> messageSupplier)
 JUnit5에서는 `assertAll`이라는 메서드가 등장했다.          
 네이밍에서 유추해보자면 모든 구문을 테스트한다는 것인데,         
 일반적으로 메서드안에 테스트를 여러개 만들어서 검사하면 되지 않나 생각할 수 있다.      
+하지만, `assertAll`은 매우 유용한 Assertion이므로 이를 한 번 알아보자   
+   
+### assertAll 사용 전
 
-
+**main.me.kwj1270.thejavatest.Study**
 ```java
 package me.kwj1270.thejavatest;
 
@@ -275,11 +278,12 @@ public class Study {
 }
 
 ```
+   
+**test.me.kwj1270.thejavatest.StudyTest**
 ```java
 package me.kwj1270.thejavatest;
 
 import org.junit.jupiter.api.*;
-
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -326,10 +330,13 @@ class StudyTest {
     static void AfterAll_테스트() {
         System.out.println("AfterAll");
     }
-
-
 }
 ```
+
+
+
+
+### assertAll 적용 후 
   
   
 ___ 
