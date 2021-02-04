@@ -397,7 +397,12 @@ class StudyTest {
 ![JUnitAssertAllAfterOne.png](./image/JUnitAssertAllAfterOne.png)  
 ![JUnitAssertAllAfterTwo.png](./image/JUnitAssertAllAfterTwo.png)   
 
-`assertAll()`을 사용하면,   
+이전에는 테스트 중에 검사 결과가 잘못되었을 경우 도중에 멈춘다는 문제가 있었다.       
+그렇기에 여러 테스트에 문제가 있음에도 단 한 경우의 결과만 얻을 수 있었고            
+매번 하나의 `assert-` 메서드를 수행하고 고치고 이를 반복하는 비효율적인 작업을 수행했다.           
+    
+하지만, `assertAll()`을 사용하면, `()`안에 들어있는 모든 테스트에 대해서 검사를 진행한다.   
+즉, 모든 테스트에 대한 검증 결과를 한번에 확인할 수 있게 되었다.     
 
 
 ```java
