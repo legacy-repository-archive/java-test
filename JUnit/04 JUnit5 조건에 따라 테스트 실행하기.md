@@ -8,7 +8,7 @@
     * assumingThat(BooleanSupplier assumptionSupplier, Executable executable)      
        
 
-* **`@Enabled___`**와 **`@Disabled___`**    
+* **`@Enabled___`** 와 **`@Disabled___`**    
     * OnOs
     * OnJre
     * IfSystemProperty
