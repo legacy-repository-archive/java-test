@@ -249,12 +249,44 @@ class StudyTest {
 
 }
 ```
-![]()
+![JUnitOnJRE.png](./image/JUnitOnJRE.png)   
+
 * `Study_테스트()`는 `JRE.JAVA_8`을 사용 가능하다는 것을 명시했기에 호출되었다.       
 * `서브_테스트()`는 콘솔창의 `Disabled on JRE version: 1.8.0_281`메시지를 통해 호출되지 않았음을 알 수 있다.     
 
-
+   
 ## EnabledOnJRE AND DisabledOnJRE
+```java
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.*;
+
+import static org.assertj.core.api.Assertions.*;
+
+class StudyTest {
+
+    @EnabledIfEnvironmentVariable(named = "TEST_ENV", matches = "LOCAL")
+    @DisplayName("스터디 모두 화이팅")
+    @Test
+    public void Study_테스트() {
+        System.out.println("EnabledIfEnvironmentVariable: do it!!");
+        Study actual = new Study(10);
+        assertThat(actual.getLimit()).isGreaterThan(0);
+    }
+
+    @DisabledIfEnvironmentVariable(named = "TEST_ENV", matches = "LOCAL")
+    @DisplayName("☺️")
+    @Test
+    public void 서브_테스트() {
+        System.out.println("서브_테스트");
+    }
+
+}
+```
+![JUnitEnvironmentEnableDisable.png](./image/JUnitEnvironmentEnableDisable.png)   
+
+* `Study_테스트()`는 환경변수`TEST_ENV`의 값이 `LOCAL`이 맞으므로 호출되었다.        
+* `서브_테스트()`는 환경변수`TEST_ENV`의 값이 `LOCAL`이 맞으므로 호출되지 않았다.           
+
 ```java
 package me.kwj1270.thejavatest;
 
@@ -274,53 +306,19 @@ class StudyTest {
         assertThat(actual.getLimit()).isGreaterThan(0);
     }
 
-    @DisabledIfEnvironmentVariable(named = "TEST_ENV", matches = "MAIN")
+    @EnabledIfEnvironmentVariable(named = "TEST_ENV", matches = "MAIN")
     @DisplayName("☺️")
     @Test
     public void 서브_테스트() {
         System.out.println("서브_테스트");
     }
 
-    @Disabled
-    @Test
-    public void 미완성_테스트() {
-        System.out.println("미완성_테스트");
-    }
-
-    @BeforeAll
-    static void BeforeAll_테스트() {
-        System.out.println("BeforeAll");
-    }
-
-    @BeforeEach
-    public void BeforeEach_테스트() {
-        System.out.println("BeforeEach");
-    }
-
-    @AfterEach
-    public void AfterEach_테스트() {
-        System.out.println("AfterEach");
-    }
-
-    @AfterAll
-    static void AfterAll_테스트() {
-        System.out.println("AfterAll");
-    }
-
-
 }
-/*
-*     @EnabledIfEnvironmentVariable(named = "TEST_ENV", matches = "LOCAL")
-    @DisplayName("스터디 모두 화이팅")
-    @Test
-    public void Study_테스트() {
-        System.out.println("EnabledOnOs: do it!!");
-        Study actual = new Study(10);
-        assertThat(actual.getLimit()).isGreaterThan(0);
-    }
-* */
 ```
-![]()
+  
+![JUnitEnvironmentEnableEnable.png](./image/JUnitEnvironmentEnableEnable.png)   
 
-* 콘솔창의 `Disabled on JRE version: 1.8.0_281`메시지를 통해 `서브_테스트()`는 호출되지 않았음을 알 수 있다.     
+* `서브_테스트()`를 `EnabledIfEnvironmentVariable` 형태로 바꿨다.      
+* 이번에도 환경변수`TEST_ENV`의 값인 `LOCAL`과 `MAIN`과 맞지 않으므로 호출되지 않았다.     
+
 
