@@ -192,6 +192,9 @@ class StudyTest {
              
 # @Disabled___     
 
+`@Disabled___`로 시작하는 어노테이션들은 `@Enabled___` 과 정반대로   
+테스트 메서드에 기입하면, `()`안에 조건이 맞으면 해당 테스트 메서드를 실행시키지 않는다.      
+   
 ```java
 package me.kwj1270.thejavatest;
 
@@ -224,3 +227,8 @@ class StudyTest {
 
 }
 ```
+
+![]()
+
+* `서브_테스트()`에 `@DisabledOnOs({OS.MAC, OS.LINUX, OS.WINDOWS})`를 넣었기에 실행이 되지 않는다.
+
