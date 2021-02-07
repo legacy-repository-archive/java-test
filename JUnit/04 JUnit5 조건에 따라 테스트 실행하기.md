@@ -28,8 +28,6 @@ assumption의 조건이 맞는다면, 아래에 존재하는 소스코드를 실
 실행하거나 실행하지 말아야 되는 경우 이를 `assume-` 메서드를 통해 해결할 수 있다.       
 
 ```java
-package me.kwj1270.thejavatest;
-
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assumptions.*;
@@ -89,8 +87,6 @@ assumingThat(BooleanSupplier assumptionSupplier, Executable executable)
 단지, `Executable executable`에서 정의한 소스코드를 실행시키지 않을 뿐이다.   
 
 ```java
-package me.kwj1270.thejavatest;
-
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assumptions.*;
@@ -126,15 +122,13 @@ class StudyTest {
 현재 `TEST_ENV`의 값은 `LOCAL`이기 때문에        
 `assumingThat: local`이 호출된 것을 알 수 있다.   
 
-# @Enabled___     
-
+# @Enabled___ AND @Disabled___  
+## @Enabled___ With EnabledOnOS
 `@Enabled___` 로 시작하는 어노테이션을 테스트 메서드에 기입하면,   
 `()`안에 조건이 맞아야 해당 테스트 메서드를 수행시킨다.   
 
 
 ```java
-package me.kwj1270.thejavatest;
-
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.DisabledOnOs;
 import org.junit.jupiter.api.condition.EnabledOnOs;
@@ -161,8 +155,6 @@ class StudyTest {
 * 현재 필자의 환경은 Mac이여서 테스트가 성공적으로 수행되었다.   
 
 ```java
-package me.kwj1270.thejavatest;
-
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.DisabledOnOs;
 import org.junit.jupiter.api.condition.EnabledOnOs;
@@ -188,15 +180,12 @@ class StudyTest {
 ```
 * 어노테이션마다 다르지만,     
 @EnabledOnOs의 같은 경우는 `()`의 값에는 하나가 아닌 여러 멤버들을 넣을 수 있다.          
-             
-# @Disabled___     
 
+## @Disabled___ With EnabledOnOS
 `@Disabled___`로 시작하는 어노테이션들은 `@Enabled___` 과 정반대로   
 테스트 메서드에 기입하면, `()`안에 조건이 맞으면 해당 테스트 메서드를 실행시키지 않는다.      
    
 ```java
-package me.kwj1270.thejavatest;
-
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.DisabledOnOs;
 import org.junit.jupiter.api.condition.EnabledOnOs;
@@ -232,4 +221,59 @@ class StudyTest {
 * 콘솔창을 보면 `Disabled on operating system: Mac OS X` 메시지가 출력된 것이 보인다.   
 * `서브_테스트()`에 `@DisabledOnOs({OS.MAC, OS.LINUX, OS.WINDOWS})`를 넣었기에 실행이 되지 않았기 때문이다.  
 
+## EnabledOnJRE AND DisAbledOnJRE
+```java
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.*;
 
+import static org.assertj.core.api.Assertions.*;
+
+
+class StudyTest {
+
+    @EnabledOnJre({JRE.JAVA_9, JRE.JAVA_10, JRE.JAVA_11})
+    @DisplayName("스터디 모두 화이팅")
+    @Test
+    public void Study_테스트() {
+        String test_env = System.getenv("TEST_ENV");
+        System.out.println("EnabledOnOs: do it!!");
+        Study actual = new Study(10);
+        assertThat(actual.getLimit()).isGreaterThan(0);
+    }
+
+    @DisabledOnJre(JRE.JAVA_8)
+    @DisplayName("☺️")
+    @Test
+    public void 서브_테스트() {
+        System.out.println("서브_테스트");
+    }
+
+    @Disabled
+    @Test
+    public void 미완성_테스트() {
+        System.out.println("미완성_테스트");
+    }
+
+    @BeforeAll
+    static void BeforeAll_테스트() {
+        System.out.println("BeforeAll");
+    }
+
+    @BeforeEach
+    public void BeforeEach_테스트() {
+        System.out.println("BeforeEach");
+    }
+
+    @AfterEach
+    public void AfterEach_테스트() {
+        System.out.println("AfterEach");
+    }
+
+    @AfterAll
+    static void AfterAll_테스트() {
+        System.out.println("AfterAll");
+    }
+
+
+}
+```
