@@ -181,7 +181,7 @@ class StudyTest {
 * 어노테이션마다 다르지만,     
 @EnabledOnOs의 같은 경우는 `()`의 값에는 하나가 아닌 여러 멤버들을 넣을 수 있다.          
 
-## @Disabled___ With EnabledOnOS
+## @Disabled___ With DisabledOnOS
 `@Disabled___`로 시작하는 어노테이션들은 `@Enabled___` 과 정반대로   
 테스트 메서드에 기입하면, `()`안에 조건이 맞으면 해당 테스트 메서드를 실행시키지 않는다.      
    
@@ -221,7 +221,7 @@ class StudyTest {
 * 콘솔창을 보면 `Disabled on operating system: Mac OS X` 메시지가 출력된 것이 보인다.   
 * `서브_테스트()`에 `@DisabledOnOs({OS.MAC, OS.LINUX, OS.WINDOWS})`를 넣었기에 실행이 되지 않았기 때문이다.  
 
-## EnabledOnJRE AND DisAbledOnJRE
+## EnabledOnJRE AND DisabledOnJRE
 ```java
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.*;
@@ -231,17 +231,50 @@ import static org.assertj.core.api.Assertions.*;
 
 class StudyTest {
 
-    @EnabledOnJre({JRE.JAVA_9, JRE.JAVA_10, JRE.JAVA_11})
+    @EnabledOnJre({JRE.JAVA_8, JRE.JAVA_9, JRE.JAVA_10, JRE.JAVA_11})
     @DisplayName("스터디 모두 화이팅")
     @Test
     public void Study_테스트() {
-        String test_env = System.getenv("TEST_ENV");
-        System.out.println("EnabledOnOs: do it!!");
+        System.out.println("EnabledOnJRE: do it!!");
         Study actual = new Study(10);
         assertThat(actual.getLimit()).isGreaterThan(0);
     }
 
     @DisabledOnJre(JRE.JAVA_8)
+    @DisplayName("☺️")
+    @Test
+    public void 서브_테스트() {
+        System.out.println("서브_테스트");
+    }
+
+}
+```
+![]()
+* `Study_테스트()`는 `JRE.JAVA_8`을 사용 가능하다는 것을 명시했기에 호출되었다.       
+* `서브_테스트()`는 콘솔창의 `Disabled on JRE version: 1.8.0_281`메시지를 통해 호출되지 않았음을 알 수 있다.     
+
+
+## EnabledOnJRE AND DisabledOnJRE
+```java
+package me.kwj1270.thejavatest;
+
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.*;
+
+import static org.assertj.core.api.Assertions.*;
+
+class StudyTest {
+
+    @EnabledIfEnvironmentVariable(named = "TEST_ENV", matches = "LOCAL")
+    @DisplayName("스터디 모두 화이팅")
+    @Test
+    public void Study_테스트() {
+        System.out.println("EnabledIfEnvironmentVariable: do it!!");
+        Study actual = new Study(10);
+        assertThat(actual.getLimit()).isGreaterThan(0);
+    }
+
+    @DisabledIfEnvironmentVariable(named = "TEST_ENV", matches = "MAIN")
     @DisplayName("☺️")
     @Test
     public void 서브_테스트() {
@@ -276,4 +309,18 @@ class StudyTest {
 
 
 }
+/*
+*     @EnabledIfEnvironmentVariable(named = "TEST_ENV", matches = "LOCAL")
+    @DisplayName("스터디 모두 화이팅")
+    @Test
+    public void Study_테스트() {
+        System.out.println("EnabledOnOs: do it!!");
+        Study actual = new Study(10);
+        assertThat(actual.getLimit()).isGreaterThan(0);
+    }
+* */
 ```
+![]()
+
+* 콘솔창의 `Disabled on JRE version: 1.8.0_281`메시지를 통해 `서브_테스트()`는 호출되지 않았음을 알 수 있다.     
+
