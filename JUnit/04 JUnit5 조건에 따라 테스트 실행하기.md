@@ -127,4 +127,99 @@ class StudyTest {
 현재 `TEST_ENV`의 값은 `LOCAL`이기 때문에        
 `assumingThat: local`이 호출된 것을 알 수 있다.   
 
+# 어노테이션 `@Enabled___`     
 
+```java
+package me.kwj1270.thejavatest;
+
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
+
+import static org.assertj.core.api.Assertions.*;
+
+
+class StudyTest {
+
+    @EnabledOnOs(OS.MAC)
+    @DisplayName("스터디 모두 화이팅")
+    @Test
+    public void Study_테스트() {
+        String test_env = System.getenv("TEST_ENV");
+        System.out.println("assumingThat: woojae");
+        Study actual = new Study(10);
+        assertThat(actual.getLimit()).isGreaterThan(0);
+    }
+}
+```
+
+```java
+package me.kwj1270.thejavatest;
+
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
+
+import static org.assertj.core.api.Assertions.*;
+
+
+class StudyTest {
+
+    @EnabledOnOs({OS.MAC, OS.LINUX, OS.WINDOWS})
+    @DisplayName("스터디 모두 화이팅")
+    @Test
+    public void Study_테스트() {
+        String test_env = System.getenv("TEST_ENV");
+        System.out.println("assumingThat: woojae");
+        Study actual = new Study(10);
+        assertThat(actual.getLimit()).isGreaterThan(0);
+    }
+
+    @DisabledOnOs({OS.MAC, OS.LINUX, OS.WINDOWS})
+    @DisplayName("☺️")
+    @Test
+    public void 서브_테스트() {
+        System.out.println("서브_테스트");
+    }
+
+}
+
+```
+   
+   
+# 어노테이션 `@Disabled___`     
+
+```java
+package me.kwj1270.thejavatest;
+
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
+
+import static org.assertj.core.api.Assertions.*;
+
+
+class StudyTest {
+
+    @EnabledOnOs({OS.MAC, OS.LINUX, OS.WINDOWS})
+    @DisplayName("스터디 모두 화이팅")
+    @Test
+    public void Study_테스트() {
+        String test_env = System.getenv("TEST_ENV");
+        System.out.println("assumingThat: woojae");
+        Study actual = new Study(10);
+        assertThat(actual.getLimit()).isGreaterThan(0);
+    }
+
+    @DisabledOnOs({OS.MAC, OS.LINUX, OS.WINDOWS})
+    @DisplayName("☺️")
+    @Test
+    public void 서브_테스트() {
+        System.out.println("서브_테스트");
+    }
+
+}
+```
