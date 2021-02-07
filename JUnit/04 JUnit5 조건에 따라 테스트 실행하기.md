@@ -123,6 +123,8 @@ class StudyTest {
 }
 ```
 ![JUnitAssumingThatTest.png](./image/JUnitAssumingThatTest.png)   
+  
+현재 `TEST_ENV`의 값은 `LOCAL`이기 때문에        
+`assumingThat: local`이 호출된 것을 알 수 있다.   
 
-현재 `TEST_ENV`의 값은 `LOCAL`이기 때문에 
 
