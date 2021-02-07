@@ -233,3 +233,4 @@ class StudyTest {
 * 콘솔창을 보면 `Disabled on operating system: Mac OS X` 메시지가 출력된 것이 보인다.   
 * `서브_테스트()`에 `@DisabledOnOs({OS.MAC, OS.LINUX, OS.WINDOWS})`를 넣었기에 실행이 되지 않았기 때문이다.  
 
+
