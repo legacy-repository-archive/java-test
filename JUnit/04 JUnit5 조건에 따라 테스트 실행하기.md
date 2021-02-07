@@ -16,7 +16,6 @@
     * OnJre
     * IfSystemProperty
     * IfEnvironmentVariable
-    * If  
  
 # assumeTrue   
 ```java
