@@ -80,17 +80,49 @@ export TEST_ENV=LOCAL
     
   
 # assumingThat
- 
-```
+```java
+assumingThat(BooleanSupplier assumptionSupplier, Executable executable)
+```        
+`assumingThat()`은 마치 if구문과 비슷하다.            
+해당 조건에 맞으면 `Executable executable`에서 정의한 소스코드를 실행시킨다.          
+    
+그리고, `assumeTrue`와 다르게 조건이 맞지 않아도 테스트를 계속 수행한다.          
+단지, `Executable executable`에서 정의한 소스코드를 실행시키지 않을 뿐이다.   
+
+```java
+package me.kwj1270.thejavatest;
+
+import org.junit.jupiter.api.*;
+
+import static org.junit.jupiter.api.Assumptions.*;
+import static org.assertj.core.api.Assertions.*;
+
+
+class StudyTest {
+
     @DisplayName("스터디 모두 화이팅")
     @Test
     public void Study_테스트() {
         String test_env = System.getenv("TEST_ENV");
         System.out.println(test_env);
         assumeTrue("LOCAL".equalsIgnoreCase(test_env));
-        
-        Study actual = new Study(10);
-        assertThat(actual.getLimit()).isGreaterThan(0);
-    }
 
+        assumingThat("LOCAL".equalsIgnoreCase(test_env), () ->{
+            System.out.println("assumingThat: local");
+            Study actual = new Study(100);
+            assertThat(actual.getLimit()).isGreaterThan(0);
+        });
+
+        assumingThat("WOOJAE".equalsIgnoreCase(test_env), () ->{
+            System.out.println("assumingThat: woojae");
+            Study actual = new Study(10);
+            assertThat(actual.getLimit()).isGreaterThan(0);
+        });
+
+    }
+}
 ```
+![JUnitAssumingThatTest.png](./image/JUnitAssumingThatTest.png)   
+
+현재 `TEST_ENV`의 값은 `LOCAL`이기 때문에 
+
