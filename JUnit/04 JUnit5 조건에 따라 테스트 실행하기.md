@@ -157,7 +157,7 @@ class StudyTest {
     }
 }
 ```
-![JUnitEnabledAnnotaion.png](./image/JUnitEnabledAnnotaion.png)    
+![JUnitEnabledAnnotation.png](./image/JUnitEnabledAnnotation.png)    
   
 * 현재 필자의 환경은 Mac이여서 테스트가 성공적으로 수행되었다.   
 
@@ -228,7 +228,8 @@ class StudyTest {
 }
 ```
 
-![]()
+![JUnitDisabledAnnotation.png](./image/JUnitDisabledAnnotation.png)    
 
-* `서브_테스트()`에 `@DisabledOnOs({OS.MAC, OS.LINUX, OS.WINDOWS})`를 넣었기에 실행이 되지 않는다.
+* 콘솔창을 보면 `Disabled on operating system: Mac OS X` 메시지가 출력된 것이 보인다.   
+* `서브_테스트()`에 `@DisabledOnOs({OS.MAC, OS.LINUX, OS.WINDOWS})`를 넣었기에 실행이 되지 않았기 때문이다.  
 
