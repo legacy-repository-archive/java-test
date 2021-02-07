@@ -127,7 +127,11 @@ class StudyTest {
 현재 `TEST_ENV`의 값은 `LOCAL`이기 때문에        
 `assumingThat: local`이 호출된 것을 알 수 있다.   
 
-# 어노테이션 `@Enabled___`     
+# @Enabled___     
+
+`@Enabled___` 로 시작하는 어노테이션을 테스트 메서드에 기입하면,   
+`()`안에 조건이 맞아야 해당 테스트 메서드를 수행시킨다.   
+
 
 ```java
 package me.kwj1270.thejavatest;
@@ -147,12 +151,15 @@ class StudyTest {
     @Test
     public void Study_테스트() {
         String test_env = System.getenv("TEST_ENV");
-        System.out.println("assumingThat: woojae");
+        System.out.println("EnabledOnOs: do it!!");
         Study actual = new Study(10);
         assertThat(actual.getLimit()).isGreaterThan(0);
     }
 }
 ```
+![JUnitEnabledAnnotaion.png](./image/JUnitEnabledAnnotaion.png)    
+  
+* 현재 필자의 환경은 Mac이여서 테스트가 성공적으로 수행되었다.   
 
 ```java
 package me.kwj1270.thejavatest;
@@ -172,24 +179,18 @@ class StudyTest {
     @Test
     public void Study_테스트() {
         String test_env = System.getenv("TEST_ENV");
-        System.out.println("assumingThat: woojae");
+        System.out.println("EnabledOnOs: do it!!");
         Study actual = new Study(10);
         assertThat(actual.getLimit()).isGreaterThan(0);
-    }
-
-    @DisabledOnOs({OS.MAC, OS.LINUX, OS.WINDOWS})
-    @DisplayName("☺️")
-    @Test
-    public void 서브_테스트() {
-        System.out.println("서브_테스트");
     }
 
 }
 
 ```
-   
-   
-# 어노테이션 `@Disabled___`     
+* 어노테이션마다 다르지만,     
+@EnabledOnOs의 같은 경우는 `()`의 값에는 하나가 아닌 여러 멤버들을 넣을 수 있다.          
+             
+# @Disabled___     
 
 ```java
 package me.kwj1270.thejavatest;
@@ -209,7 +210,7 @@ class StudyTest {
     @Test
     public void Study_테스트() {
         String test_env = System.getenv("TEST_ENV");
-        System.out.println("assumingThat: woojae");
+        System.out.println("EnabledOnOs: do it!!");
         Study actual = new Study(10);
         assertThat(actual.getLimit()).isGreaterThan(0);
     }
