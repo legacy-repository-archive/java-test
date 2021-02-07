@@ -18,8 +18,11 @@
     * IfEnvironmentVariable
     * If  
  
-# assumeTrue(boolean assumption)   
-assumption의 조건이 맞지 않다면, 테스트를 실패시키고       
+# assumeTrue   
+```java
+assumeTrue(boolean assumption);
+```
+`assumeTrue()`는 assumption의 조건이 맞지 않다면, 테스트를 실패시키고       
 assumption의 조건이 맞는다면, 아래에 존재하는 소스코드를 실행시킨다.     
    
 앞서 말했듯이 `특정 OS`, `특정 JDK 버전`, `특정 환경 변수`, `특정 시스템 변수`에 따라       
@@ -60,18 +63,22 @@ class StudyTest {
 IntelliJ의 `terminal`에 들어간 후 `vim ~/.zshrc`을 입력한다. (zsh설치 되어있어야함)     
 
 **.zshrc(zsh 설정파일)**
-```
+```zshrc
 # 생략..
 
 export TEST_ENV=LOCAL
 
 # 생략..
-```
-`.zshrc` 설정파일에 `export TEST_ENV=LOCAL`을 입력해준다.            
-이후, IntelliJ를 **완전 종료 후 다시 켜야** 변경된 환경이 적용된다.     
-
-
-
+```   
+`.zshrc` 설정파일에 `export TEST_ENV=LOCAL`을 입력해준다.                   
+이후, IntelliJ를 **완전 종료 후 다시 재 구동**해야만 변경된 환경이 적용된다.           
+확인을 위해 IntelliJ terminal에서 `echo $TEST_ENV`을 입력하면 `LOCAL`이 나오는지 확인한다.     
+       
+이후, 기존 코드 그대로 테스트를 실행하면 아래와 같이 테스트가 성공하는 것을 알 수 있다.   
+     
+![JUnitAssumeTrueAfterSetting.png](./image/JUnitAssumeTrueAfterSetting.png)    
+    
+  
 # assumingThat
  
 ```
