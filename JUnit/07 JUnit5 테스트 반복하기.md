@@ -46,7 +46,17 @@ class StudyTest {
 
 }
 ```   
+`@RepeatedTest`를 선언한 테스트 메서드는              
+`RepetitionInfo` 인스턴스를 매개변수로 받아 사용할 수 있다.        
 
+`RepetitionInfo`은 인터페이스로 아래와 같은 2가지 추상 메서드를 가진다.    
+
+* `int getCurrentRepetition()` : 반복중인 **현재** 횟수를 리턴한다.       
+* `int getTotalRepetitions()` : 반복되어야할 **전체** 횟수를 리턴한다.     
+      
+구현체가 무엇인지는 자세히 알 수 없었지만,        
+이를 통해, 테스트 로직에 반복에 대한 현재 횟수와, 전체 횟수를 사용할 수 있다.    
+  
 ```java
 package me.kwj1270.thejavatest;
 
@@ -63,7 +73,21 @@ class StudyTest {
     }
 
 }    
-```
+```  
+`@RepeatedTest`의 멤버로는 `value`외에도 `name`이 존재한다.          
+`@RepeatedTest`의 `name`을 선언할 경우 `@DisplayName`처럼 **반복 테스트의 이름을 정의할 수 있다.**      
+      
+기본적으로 **문자열을 사용할 수 있으며** 추가로, `{}`값을 사용할 수 있다.       
+   
+* **`{displayName}` :** `@DisplayName`이 존재한다면 이를 따르고, 없으면 메서드의 이름을 따른다.       
+* **`{currentRepetition}` :** 반복중인 `현재` 횟수를 의미한다.  
+* **`{totalRepetitions}` :** 반복되어야할 `전체` 횟수를 의미한다.   
+
+  
+  
+`name`의 디폴트 값으로는 `"repetition {currentRepetition} of {totalRepetitions}"`값이 들어있다.   
+
+
 
 
 # @ParameterizedTest
