@@ -82,16 +82,18 @@ class StudyTest {
 * **`{displayName}` :** `@DisplayName`이 존재한다면 이를 따르고, 없으면 메서드의 이름을 따른다.       
 * **`{currentRepetition}` :** 반복중인 `현재` 횟수를 의미한다.  
 * **`{totalRepetitions}` :** 반복되어야할 `전체` 횟수를 의미한다.   
-
-  
-  
+     
 `name`의 디폴트 값으로는 `"repetition {currentRepetition} of {totalRepetitions}"`값이 들어있다.   
 
+    
+# @ParameterizedTest      
+`@ParameterizedTest`는 테스트에 여러 다른 매개변수를 대입해가며 반복적으로 실행한다.       
+`JUnit4`에서는 써드파티 라이브러리에서 불러와 사용했지만,       
+`JUnit5`에서 부터 기본으로 제공해주기 시작했다.           
+      
+```java
+```
 
-
-
-# @ParameterizedTest
-테스트에 여러 다른 매개변수를 대입해가며 반복 실행한다.
 {displayName}
 {index}
 {arguments}
