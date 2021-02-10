@@ -44,17 +44,27 @@ class StudyTest {
         System.out.println("test" + repetitionInfo.getCurrentRepetition()+"/"+repetitionInfo.getTotalRepetitions());
     }
 
-
 }
 ```   
 
+```java
+package me.kwj1270.thejavatest;
 
+import org.junit.jupiter.api.*;
 
+import static org.assertj.core.api.Assertions.*;
 
-{displayName}
-{currentRepetition}
-{totalRepetitions}
-RepetitionInfo 타입의 인자를 받을 수 있다.
+class StudyTest {
+
+    @DisplayName("반복_테스트")
+    @RepeatedTest(value = 10, name = "{displayName}, {currentRepetition}/{totalRepetitions}")
+    void 반복_테스트(RepetitionInfo repetitionInfo) {
+        System.out.println("test" + repetitionInfo.getCurrentRepetition()+"/"+repetitionInfo.getTotalRepetitions());
+    }
+
+}    
+```
+
 
 # @ParameterizedTest
 테스트에 여러 다른 매개변수를 대입해가며 반복 실행한다.
