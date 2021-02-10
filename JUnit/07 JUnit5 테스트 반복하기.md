@@ -92,6 +92,23 @@ class StudyTest {
 `JUnit5`에서 부터 기본으로 제공해주기 시작했다.           
       
 ```java
+package me.kwj1270.thejavatest;
+
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import static org.assertj.core.api.Assertions.*;
+
+class StudyTest {
+
+    @ParameterizedTest
+    @ValueSource(strings = {"날씨가", "많이", "추워지고", "있네요"})
+    void ParameterizedTest(String message){
+        System.out.println(message);
+    }
+
+}
 ```
 
 {displayName}
