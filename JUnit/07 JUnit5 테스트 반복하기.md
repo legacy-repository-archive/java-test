@@ -111,7 +111,31 @@ class StudyTest {
 }
 ```
 
-{displayName}
-{index}
-{arguments}
-{0}, {1}, ...
+```java
+package me.kwj1270.thejavatest;
+
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import static org.assertj.core.api.Assertions.*;
+
+class StudyTest {
+
+    @DisplayName("파라미터_TEST")
+    @ParameterizedTest(name = "{index} {displayName} {0}")
+    @ValueSource(strings = {"날씨가", "많이", "추워지고", "있네요"})
+    void ParameterizedTest(String message){
+        System.out.println(message);
+    }
+
+}
+
+```
+
+|||
+|----|-----|
+|{displayName}||
+|{index}||
+|{arguments}||
+|{0}, {1}, ...||
