@@ -37,6 +37,7 @@ class StudyTest {
         
 **그래서 이를 해결할 수 있는 커스텀 어노테이션을 한 번 만들어보겠다.**         
 
+# 커스텀 태그 테스트 어노테이션 만들기 
 **test.me.kwj1270.thejavatest.FastTest**
 ```java
 package me.kwj1270.thejavatest;
@@ -57,7 +58,8 @@ import java.lang.annotation.Target;
 public @interface FastTest {
 }
 ```
-
+* `@Test`와 `@Tag("fast")`를 합친 `@FastTest` 어노테이션을 만들었다.       
+    
 **test.me.kwj1270.thejavatest.SlowTest**
 ```java
 package me.kwj1270.thejavatest;
@@ -78,7 +80,8 @@ import java.lang.annotation.Target;
 public @interface SlowTest {
 }
 ```
-    
+* `@Test`와 `@Tag("slow")`를 합친 `@SlowTest` 어노테이션을 만들었다.     
+       
 **test.me.kwj1270.thejavatest.StudyTest.java**
 ```java
 package me.kwj1270.thejavatest;
