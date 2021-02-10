@@ -80,8 +80,8 @@ class StudyTest {
 기본적으로 **문자열을 사용할 수 있으며** 추가로, `{}`값을 사용할 수 있다.       
    
 * **`{displayName}` :** 메서드의 이름을 나타내며 `@DisplayName`이 있을 경우 어노테이션에 정의된 이름을 우선시한다.        
-* **`{currentRepetition}` :** 반복중인 `현재 횟수`를 의미한다.  
-* **`{totalRepetitions}` :** 반복되어야할 `전체 횟수`를 의미한다.   
+* **`{currentRepetition}` :** 현재 반복 횟수를 나타내며 1부터 시작한다. 
+* **`{totalRepetitions}` :** 전체 반복할 횟수를 나타낸다.    
      
 `name`의 디폴트 값으로는 `"repetition {currentRepetition} of {totalRepetitions}"`이 들어있다.   
 
