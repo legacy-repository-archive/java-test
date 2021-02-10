@@ -51,8 +51,8 @@ class StudyTest {
 
 `RepetitionInfo`은 인터페이스로 아래와 같은 2가지 추상 메서드를 가진다.    
 
-* `int getCurrentRepetition()` : 반복중인 **현재** 횟수를 리턴한다.       
-* `int getTotalRepetitions()` : 반복되어야할 **전체** 횟수를 리턴한다.     
+* `int getCurrentRepetition()` : 반복중인 **현재 횟수**를 리턴한다.       
+* `int getTotalRepetitions()` : 반복되어야할 **전체 횟수**를 리턴한다.     
       
 구현체가 무엇인지는 자세히 알 수 없었지만,        
 이를 통해, 테스트 로직에 반복에 대한 현재 횟수와, 전체 횟수를 사용할 수 있다.    
@@ -80,8 +80,8 @@ class StudyTest {
 기본적으로 **문자열을 사용할 수 있으며** 추가로, `{}`값을 사용할 수 있다.       
    
 * **`{displayName}` :** `@DisplayName`이 존재한다면 이를 따르고, 없으면 메서드의 이름을 따른다.       
-* **`{currentRepetition}` :** 반복중인 `현재` 횟수를 의미한다.  
-* **`{totalRepetitions}` :** 반복되어야할 `전체` 횟수를 의미한다.   
+* **`{currentRepetition}` :** 반복중인 `현재 횟수`를 의미한다.  
+* **`{totalRepetitions}` :** 반복되어야할 `전체 횟수`를 의미한다.   
      
 `name`의 디폴트 값으로는 `"repetition {currentRepetition} of {totalRepetitions}"`값이 들어있다.   
 
@@ -133,9 +133,10 @@ class StudyTest {
 
 ```
 
-|||
-|----|-----|
-|{displayName}||
-|{index}||
-|{arguments}||
-|{0}, {1}, ...||
+|name 속성|설명|      
+|----|-----|    
+|{displayName}|메서드의 이름을 나타낸다, `@DisplayName`이 있을 경우 어노테이션에 정의된 메서드 이름을 우선시한다.|    
+|{index}|현재 반복 횟수를 나타내며 1부터 시작하는 것을 기준으로 표현한다.|     
+|{arguments}|파라미터로 들어는 값들을 모두 출력한다.<bt>즉, 메서드에 들어오는 모든 매개변수를 한번에 표현한다.|   
+|{0}, {1}, ...|파라미터로 들어오는 값들을 정의된 순서에 맞게끔 가져온다<br>0부터 시작하여 가져올 수 있다.|    
+|{argumentsWithNames}|매개변수 이름과 값을 표현한다.<br>`이름=값`|       
