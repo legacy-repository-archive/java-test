@@ -322,7 +322,7 @@ class StudyTest {
     @DisplayName("파라미터_TEST")
     @ParameterizedTest(name = "{index} {displayName} {0}")
     @CsvSource({"10, '자바 스터디'", "20, 스프링"})
-    void ParameterizedTest(@AggregateWith(StudyAggregator.class)StudyStatus study) {
+    void ParameterizedTest(@AggregateWith(StudyAggregator.class) Study study){
         System.out.println(study);
     }
 
