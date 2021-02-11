@@ -242,8 +242,8 @@ class StudyTest {
 
 }
 ```
-![](./images/.png)
-       
+![JUnitValueSourceMultipleError.png](./image/JUnitValueSourceMultipleError.png)       
+          
 그렇기에 `@ValueSource`는 테스트 메서드에 **여러 인자를 받아와 사용하고자 한다면, 에러를 발생시킨다.**                   
       
 ## 일반적인 `@CsvSource` 사용
@@ -405,7 +405,6 @@ class StudyTest {
 ![JUnitValueSourceNullWithEmptySource.png](./image/JUnitValueSourceNullWithEmptySource.png)    
 ![JUnitValueSourceEmptySource.png](./image/JUnitValueSourceEmptySource.png)    
 ![JUnitCsvSourceSimple.png](./image/JUnitCsvSourceSimple.png)    
-![JUnitValueSourceMultipleError.png](./image/JUnitValueSourceMultipleError.png)    
 ![JUnitValueSourceConvertor.png](./image/JUnitValueSourceConvertor.png)     
 
 
