@@ -142,7 +142,9 @@ class StudyTest {
 }
 
 ```
-
+![JUnitParameterizedTestNameMember.png](./image/JUnitParameterizedTestNameMember.png)    
+  
+  
 `@ParameterizedTest`의 멤버로 `name`이 존재한다.          
 `@ParameterizedTest`의 `name`을 선언할 경우 `@DisplayName`처럼 **반복 테스트의 이름을 정의할 수 있다.**         
          
