@@ -171,8 +171,8 @@ class StudyTest {
 위 코드와 같이 특정 조건에 만족하면 `int 인자값`의 타입을 `Study 인자값`으로 바꿔줄 수 있으며   
 이처럼 인자값의 타입을 변환해주는 인터페이스가 존재함으로 [레퍼런스](https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests-argument-conversion-implicit)를 참고하자    
 (예를 들면, `Sting 타입의 "true"`를 `Boolean 타입의 true`로 바꿔준다.)      
-       
-# @SimpleArgumentConvertor      
+          
+# @ConvertWith 와 SimpleArgumentConvertor         
 만약, 인자 값 변환을 Junit5 에서 제공하는 문법. 즉, 암묵적 형변환이 아닌,     
 커스텀한 타입으로 변환. 죽, 명시적 형변환을 하고 싶다면 `@ConvertWith`을 사용할 수 있다.    
 
@@ -213,6 +213,78 @@ class StudyTest {
 
 
 ## @CsvSource
+
+**main.java.**
+```java
+package me.kwj1270.thejavatest;
+
+public class Study {
+    private StudyStatus studyStatus;
+
+    private int limit;
+
+    private String name;
+
+    public Study(int limit){
+        if(limit < 0) throw new IllegalArgumentException("limit은 0보다 커야한다.");
+        this.limit = limit;
+    }
+
+    public Study(int limit, String name){
+        if(limit < 0) throw new IllegalArgumentException("limit은 0보다 커야한다.");
+        this.limit = limit;
+        this.name = name;
+    }
+
+    public StudyStatus getStatus() {
+        return this.studyStatus;
+    }
+
+    public int getLimit() {
+        return this.limit;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public String toString() {
+        return "Study{" +
+                "studyStatus=" + studyStatus +
+                ", limit=" + limit +
+                ", name='" + name + '\'' +
+                '}';
+    }
+}
+```
+```java
+package me.kwj1270.thejavatest;
+
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.converter.ArgumentConversionException;
+import org.junit.jupiter.params.converter.ConvertWith;
+import org.junit.jupiter.params.converter.SimpleArgumentConverter;
+import org.junit.jupiter.params.provider.*;
+
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+class StudyTest {
+
+    @DisplayName("파라미터_TEST")
+    @ParameterizedTest(name = "{index} {displayName} {0}")
+    @CsvSource({"10, '자바 스터디'", "20, 스프링"})
+    void ParameterizedTest(Integer limit, String name){
+        System.out.println(new Study(limit, name));
+    }
+
+}
+```
+
+
+
 
 
 
