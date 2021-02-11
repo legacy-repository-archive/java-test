@@ -216,8 +216,8 @@ class StudyTest {
 즉, 하나의 `Argument`에만 적용되어 다른 타입으로 변환시키는 작업이여서 여러 인자에 대해 동작시킬수는 없다.              
 
 ## @CsvSource
-기존, `@ValueSource`는 메서드의 하나의 값만 넣을 수 있다.   
-
+기존, `@ValueSource`는 테스트 메서드 파라미터에 **하나의 인자값만 넣을 수 있다.**         
+    
 ```java
 package me.kwj1270.thejavatest;
 
@@ -243,13 +243,13 @@ class StudyTest {
 }
 ```
 ![](./images/.png)
-
-그렇기에 위와 같이 여러 인자를 받아와 사용하고자 한다면, 에러를 발생시킨다.           
-
+       
+그렇기에 `@ValueSource`는 테스트 메서드에 **여러 인자를 받아와 사용하고자 한다면, 에러를 발생시킨다.**                   
+      
 ## 일반적인 `@CsvSource` 사용
-
-`@CsvSource` 는 `@ValueSource`와는 다르게 하나의 테스트에 여러 인자값을 받을 수 있다.   
-    
+   
+`@CsvSource` 는 `@ValueSource`와는 다르게 하나의 **테스트 메스드에 여러 인자값을 넘겨줄 수 있다.**           
+         
 **main.java.**
 ```java
 package me.kwj1270.thejavatest;
