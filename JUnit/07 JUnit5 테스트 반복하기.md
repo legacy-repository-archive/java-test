@@ -143,3 +143,78 @@ class StudyTest {
 * **`{argumentsWithNames}` :** 매개변수의 이름과 값을 `이름=값` 형태로 한번에 표현한다.              
     
 `name`의 디폴트 값으로는 `default "[{index}] {argumentsWithNames}"`이 들어있다.     
+
+```java
+package me.kwj1270.thejavatest;
+
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.*;
+
+import static org.assertj.core.api.Assertions.*;
+
+class StudyTest {
+
+    @DisplayName("파라미터_TEST")
+    @ParameterizedTest(name = "{index} {displayName} {0}")
+    @ValueSource(ints = {10, 20, 30})
+    void ParameterizedTest(Study study){
+        System.out.println(study.getLimit());
+    }
+
+}
+```
+그리고, 인자로 들어올 값을 특정 클래스에 주입시켜 특정 클래스의 인스턴스를 가져올 수 있다.       
+`ParameterizedTest`에서는 원래 `int` 값을 파라미터의 인자로 보내지만,          
+`Study` 클래스에서 해당 값을 가지고 인스턴스를 생성하고 이를 파라미터의 인자로 보내고 있다.          
+
+위 코드와 같이 특정 조건에 만족하면 `int 인자값`의 타입을 `Study 인자값`으로 바꿔줄 수 있으며   
+이처럼 인자값의 타입을 변환해주는 인터페이스가 존재함으로 [레퍼런스](https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests-argument-conversion-implicit)를 참고하자    
+(예를 들면, `Sting 타입의 "true"`를 `Boolean 타입의 true`로 바꿔준다.)      
+       
+# @SimpleArgumentConvertor      
+만약, 인자 값 변환을 Junit5 에서 제공하는 문법. 즉, 암묵적 형변환이 아닌,     
+커스텀한 타입으로 변환. 죽, 명시적 형변환을 하고 싶다면 `@ConvertWith`을 사용할 수 있다.    
+
+```java
+package me.kwj1270.thejavatest;
+
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.converter.ArgumentConversionException;
+import org.junit.jupiter.params.converter.ConvertWith;
+import org.junit.jupiter.params.converter.SimpleArgumentConverter;
+import org.junit.jupiter.params.provider.*;
+
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+class StudyTest {
+  
+    @DisplayName("파라미터_TEST")
+    @ParameterizedTest(name = "{index} {displayName} {0}")
+    @ValueSource(ints = {10, 20, 30})
+    void ParameterizedTest(@ConvertWith(StudyConvertor.class) Study study){
+        System.out.println(study.getLimit());
+    }
+
+    static class StudyConvertor extends SimpleArgumentConverter {
+
+        @Override
+        protected Object convert(Object source, Class<?> targetType) throws ArgumentConversionException {
+            assertEquals(Study.class, targetType, "can only convert to Study");
+            return new Study(Integer.parseInt(source.toString()));
+        }
+    }
+
+}
+```
+![](./images/.png)    
+
+
+## @CsvSource
+
+
+
+
+
