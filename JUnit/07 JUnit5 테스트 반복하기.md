@@ -433,7 +433,37 @@ class StudyTest {
                 
 실행 결과를 보면 알 수 있듯이 `@NullAndEmptySource`을 통해            
 `null 값을 가진 인자`와 `아무런 값을 가지지 않은 인자`값을 가진 테스트 케이스가 추가되었다.            
-  
+
+```java
+package me.kwj1270.thejavatest;
+
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ParameterContext;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.aggregator.AggregateWith;
+import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
+import org.junit.jupiter.params.aggregator.ArgumentsAggregationException;
+import org.junit.jupiter.params.aggregator.ArgumentsAggregator;
+import org.junit.jupiter.params.converter.ArgumentConversionException;
+import org.junit.jupiter.params.converter.SimpleArgumentConverter;
+import org.junit.jupiter.params.provider.*;
+
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+class StudyTest {
+
+    @DisplayName("파라미터_TEST")
+    @ParameterizedTest(name = "{index} {displayName} {0}")
+    @ValueSource(strings = {"날씨가", "많이", "추워지고", "있네요"})
+    @EmptySource
+    @NullSource
+    void ParameterizedTest(String message) {
+        System.out.println(message);
+    }
+
+}
+```
 사실, `@NullAndEmptySource`는      
 내부에 `@NullSource`와 `@EmptySource`을 메타어노테이션으로 사용하는 어노테이션이다.      
 그렇기에 아래 사진과 같이 `@NullSource`와 `@EmptySource`을 정의를 해도 똑같은 결과를 얻을 수 있다.     
@@ -443,12 +473,72 @@ class StudyTest {
 ## @NullSource
 `@NullSource`는 인자값으로 `null`을 넘기는 테스트 케이스를 추가하는 어노테이션이다.   
 
-![JUnitValueSourceEmptySource.png](./image/JUnitValueSourceEmptySource.png)    
+```java
+```java
+package me.kwj1270.thejavatest;
+
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ParameterContext;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.aggregator.AggregateWith;
+import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
+import org.junit.jupiter.params.aggregator.ArgumentsAggregationException;
+import org.junit.jupiter.params.aggregator.ArgumentsAggregator;
+import org.junit.jupiter.params.converter.ArgumentConversionException;
+import org.junit.jupiter.params.converter.SimpleArgumentConverter;
+import org.junit.jupiter.params.provider.*;
+
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+class StudyTest {
+
+    @DisplayName("파라미터_TEST")
+    @ParameterizedTest(name = "{index} {displayName} {0}")
+    @ValueSource(strings = {"날씨가", "많이", "추워지고", "있네요"})
+    @NullSource
+    void ParameterizedTest(String message) {
+        System.out.println(message);
+    }
+
+}
+```
+
   
 ## @EmptySource  
 `@EmptySource`는 인자값으로 아무 값도 넘기지 않는 테스트 케이스를 추가하는 어노테이션이다.      
 
-  
+```java
+package me.kwj1270.thejavatest;
+
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ParameterContext;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.aggregator.AggregateWith;
+import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
+import org.junit.jupiter.params.aggregator.ArgumentsAggregationException;
+import org.junit.jupiter.params.aggregator.ArgumentsAggregator;
+import org.junit.jupiter.params.converter.ArgumentConversionException;
+import org.junit.jupiter.params.converter.SimpleArgumentConverter;
+import org.junit.jupiter.params.provider.*;
+
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+class StudyTest {
+
+    @DisplayName("파라미터_TEST")
+    @ParameterizedTest(name = "{index} {displayName} {0}")
+    @ValueSource(strings = {"날씨가", "많이", "추워지고", "있네요"})
+    @EmptySource
+    void ParameterizedTest(String message) {
+        System.out.println(message);
+    }
+
+}
+```
+![JUnitValueSourceEmptySource.png](./image/JUnitValueSourceEmptySource.png)    
+
   
 
 
