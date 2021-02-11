@@ -336,7 +336,7 @@ class StudyTest {
 
 }
 ```
-
+* static inner 클래스이거나, 퍼블릭 클래스여야 한다.   
 
 
 **main.java.**
