@@ -172,7 +172,7 @@ class StudyTest {
 이처럼 인자값의 타입을 변환해주는 인터페이스가 존재함으로 [레퍼런스](https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests-argument-conversion-implicit)를 참고하자    
 (예를 들면, `Sting 타입의 "true"`를 `Boolean 타입의 true`로 바꿔준다.)      
           
-# @ConvertWith 와 SimpleArgumentConvertor         
+## @ConvertWith 와 SimpleArgumentConvertor         
 만약, 인자 값 변환을 Junit5 에서 제공하는 문법. 즉, 암묵적 형변환이 아닌,     
 커스텀한 타입으로 변환. 죽, 명시적 형변환을 하고 싶다면 `@ConvertWith`을 사용할 수 있다.    
 
@@ -209,13 +209,14 @@ class StudyTest {
 
 }
 ```
-![](./images/.png)    
+![JUnitValueSourceConvertor.png](./image/JUnitValueSourceConvertor.png)        
+  
     
 `@ConvertWith`를 사용하기전에 `SimpleArgumentConverter`를 상속한 `Convertor`클래스가 필요하다.       
 단, `SimpleArgumentConverter`를 상속한 `Convertor`클래스의 작업은 단일 인자에 대해서만 동작한다.        
 즉, 하나의 `Argument`에만 적용되어 다른 타입으로 변환시키는 작업이여서 여러 인자에 대해 동작시킬수는 없다.              
 
-## @CsvSource
+# @CsvSource
 기존, `@ValueSource`는 테스트 메서드 파라미터에 **하나의 인자값만 넣을 수 있다.**         
     
 ```java
@@ -397,14 +398,16 @@ class StudyTest {
 
 
 # @NullAndEmptySource
+
+![JUnitValueSourceNullAndEmptySource.png](./image/JUnitValueSourceNullAndEmptySource.png)   
+![JUnitValueSourceNullWithEmptySource.png](./image/JUnitValueSourceNullWithEmptySource.png)    
+
 ## @NullSource
+![JUnitValueSourceEmptySource.png](./image/JUnitValueSourceEmptySource.png)    
+
 ## @EmptySource
 
    
-![JUnitValueSourceNullAndEmptySource.png](./image/JUnitValueSourceNullAndEmptySource.png)   
-![JUnitValueSourceNullWithEmptySource.png](./image/JUnitValueSourceNullWithEmptySource.png)    
-![JUnitValueSourceEmptySource.png](./image/JUnitValueSourceEmptySource.png)    
-![JUnitCsvSourceSimple.png](./image/JUnitCsvSourceSimple.png)    
-![JUnitValueSourceConvertor.png](./image/JUnitValueSourceConvertor.png)     
+
 
 
