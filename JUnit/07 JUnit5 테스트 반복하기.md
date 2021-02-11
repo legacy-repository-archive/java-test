@@ -210,7 +210,10 @@ class StudyTest {
 }
 ```
 ![](./images/.png)    
-
+    
+`@ConvertWith`를 사용하기전에 `SimpleArgumentConverter`를 상속한 `Convertor`클래스가 필요하다.       
+단, `SimpleArgumentConverter`를 상속한 `Convertor`클래스의 작업은 단일 인자에 대해서만 동작한다.        
+즉, 하나의 `Argument`에만 적용되어 다른 타입으로 변환시키는 작업이여서 여러 인자에 대해 동작시킬수는 없다.              
 
 ## @CsvSource
 기존, `@ValueSource`는 메서드의 하나의 값만 넣을 수 있다.   
@@ -241,12 +244,12 @@ class StudyTest {
 ```
 ![](./images/.png)
 
-그렇기에 위와 같은 방식으로 사용하면, 에러를 발생시킨다.       
+그렇기에 위와 같이 여러 인자를 받아와 사용하고자 한다면, 에러를 발생시킨다.           
 
 ___   
 
-`@CsvSource` 는 `@ValueSource`와는 다르게 하나의 테스트에 여러 값을 한 번에 넣을 수 있다.     
-
+`@CsvSource` 는 `@ValueSource`와는 다르게 하나의 테스트에 여러 인자값을 받을 수 있다.   
+    
 ```java
 package me.kwj1270.thejavatest;
 
