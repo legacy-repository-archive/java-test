@@ -350,6 +350,8 @@ class StudyTest {
 
 }
 ```
+![JUnitCsvSourceArgumentAccessor.png](./image/JUnitCsvSourceArgumentAccessor.png)           
+  
 * `ArgumentsAccessor` 클래스를 이용하면 인자 값을 한번에 읽어서 처리할 수 있다.        
 * `getter`에 들어오는 인덱스와 순서는 0부터 시작하여 `@CsvSource`정의된 순서로 분류된다.     
 
@@ -390,7 +392,9 @@ class StudyTest {
     }
 
 }
-```   
+```
+![JUnitCsvSourceArgumentsAggregator.png](./image/JUnitCsvSourceArgumentsAggregator.png)    
+
 * `ArgumentsAggregator` 인터페이스를 구현한 `Aggregator`클래스를 통해 명시적 형변환을 수행했다.        
 * `ArgumentsAggregator` 생성에는 조건이 있는데 구현클래스가 `static inner 클래스`이거나, `public 클래스`이어야 한다.        
 * 이후, 파라미터에 `@AggregateWith(Aggregator_구현클래스.class)`를 사용하여 형변환을 시킬 수 있다.    
@@ -474,7 +478,6 @@ class StudyTest {
 `@NullSource`는 인자값으로 `null`을 넘기는 테스트 케이스를 추가하는 어노테이션이다.   
 
 ```java
-```java
 package me.kwj1270.thejavatest;
 
 import org.junit.jupiter.api.*;
@@ -503,6 +506,7 @@ class StudyTest {
 
 }
 ```
+![JUnitValueSourceNullSource.png](./image/JUnitValueSourceNullSource.png)    
 
   
 ## @EmptySource  
