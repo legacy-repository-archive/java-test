@@ -49,7 +49,7 @@ class StudyTest {
 
 }
 ```   
-![JUnitRepaetedTestRepetitionInfoBasic.png](JUnitRepaetedTestRepetitionInfoBasic.png)    
+![JUnitRepaetedTestRepetitionInfoBasic.png](./image/JUnitRepaetedTestRepetitionInfoBasic.png)    
    
    
 `@RepeatedTest`를 선언한 테스트 메서드는              
