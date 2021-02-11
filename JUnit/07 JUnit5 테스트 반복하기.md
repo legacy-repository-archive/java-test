@@ -246,102 +246,10 @@ class StudyTest {
 
 그렇기에 위와 같이 여러 인자를 받아와 사용하고자 한다면, 에러를 발생시킨다.           
 
-___   
+## 일반적인 `@CsvSource` 사용
 
 `@CsvSource` 는 `@ValueSource`와는 다르게 하나의 테스트에 여러 인자값을 받을 수 있다.   
     
-```java
-package me.kwj1270.thejavatest;
-
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.converter.ArgumentConversionException;
-import org.junit.jupiter.params.converter.ConvertWith;
-import org.junit.jupiter.params.converter.SimpleArgumentConverter;
-import org.junit.jupiter.params.provider.*;
-
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
-
-class StudyTest {
-
-    @DisplayName("파라미터_TEST")
-    @ParameterizedTest(name = "{index} {displayName} {0}")
-    @CsvSource({"10, '자바 스터디'", "20, 스프링"})
-    void ParameterizedTest(Integer limit, String name) {
-        Study study = new Study(limit, name);
-        System.out.println(study);
-    }
-
-}
-```
-
-```java
-package me.kwj1270.thejavatest;
-
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
-import org.junit.jupiter.params.converter.ArgumentConversionException;
-import org.junit.jupiter.params.converter.SimpleArgumentConverter;
-import org.junit.jupiter.params.provider.*;
-
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
-
-class StudyTest {
-
-    @DisplayName("파라미터_TEST")
-    @ParameterizedTest(name = "{index} {displayName} {0}")
-    @CsvSource({"10, '자바 스터디'", "20, 스프링"})
-    void ParameterizedTest(ArgumentsAccessor argumentsAccessor) {
-        Study study = new Study(argumentsAccessor.getInteger(0), argumentsAccessor.getString(1));
-        System.out.println(study);
-    }
-
-}
-```
-`ArgumentsAccessor`
-
-```java
-package me.kwj1270.thejavatest;
-
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.ParameterContext;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.aggregator.AggregateWith;
-import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
-import org.junit.jupiter.params.aggregator.ArgumentsAggregationException;
-import org.junit.jupiter.params.aggregator.ArgumentsAggregator;
-import org.junit.jupiter.params.converter.ArgumentConversionException;
-import org.junit.jupiter.params.converter.SimpleArgumentConverter;
-import org.junit.jupiter.params.provider.*;
-
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
-
-class StudyTest {
-
-    @DisplayName("파라미터_TEST")
-    @ParameterizedTest(name = "{index} {displayName} {0}")
-    @CsvSource({"10, '자바 스터디'", "20, 스프링"})
-    void ParameterizedTest(@AggregateWith(StudyAggregator.class) Study study){
-        System.out.println(study);
-    }
-
-    static class StudyAggregator implements ArgumentsAggregator {
-
-        @Override
-        public Object aggregateArguments(ArgumentsAccessor argumentsAccessor, ParameterContext parameterContext) throws ArgumentsAggregationException {
-            return new Study(argumentsAccessor.getInteger(0), argumentsAccessor.getString(1));
-        }
-    }
-
-}
-```
-* static inner 클래스이거나, 퍼블릭 클래스여야 한다.   
-
-
 **main.java.**
 ```java
 package me.kwj1270.thejavatest;
@@ -410,6 +318,83 @@ class StudyTest {
 
 }
 ```
+![JUnitCsvSourceSimple.png](./image/JUnitCsvSourceSimple.png)
+
+* `@CsvSource`을 이용해서 여러개의 그리고 다양한 타입의 인자를 받아왔다.     
+
+
+## ArgumentsAccessor 사용
+```java
+package me.kwj1270.thejavatest;
+
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
+import org.junit.jupiter.params.converter.ArgumentConversionException;
+import org.junit.jupiter.params.converter.SimpleArgumentConverter;
+import org.junit.jupiter.params.provider.*;
+
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+class StudyTest {
+
+    @DisplayName("파라미터_TEST")
+    @ParameterizedTest(name = "{index} {displayName} {0}")
+    @CsvSource({"10, '자바 스터디'", "20, 스프링"})
+    void ParameterizedTest(ArgumentsAccessor argumentsAccessor) {
+        Study study = new Study(argumentsAccessor.getInteger(0), argumentsAccessor.getString(1));
+        System.out.println(study);
+    }
+
+}
+```
+* `ArgumentsAccessor` 클래스를 이용하면 인자 값을 한번에 읽어서 처리할 수 있다.        
+* `getter`에 들어오는 인덱스와 순서는 0부터 시작하여 `@CsvSource`정의된 순서로 분류된다.     
+
+
+## ArgumentsAggregator 사용
+```java
+package me.kwj1270.thejavatest;
+
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ParameterContext;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.aggregator.AggregateWith;
+import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
+import org.junit.jupiter.params.aggregator.ArgumentsAggregationException;
+import org.junit.jupiter.params.aggregator.ArgumentsAggregator;
+import org.junit.jupiter.params.converter.ArgumentConversionException;
+import org.junit.jupiter.params.converter.SimpleArgumentConverter;
+import org.junit.jupiter.params.provider.*;
+
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+class StudyTest {
+
+    @DisplayName("파라미터_TEST")
+    @ParameterizedTest(name = "{index} {displayName} {0}")
+    @CsvSource({"10, '자바 스터디'", "20, 스프링"})
+    void ParameterizedTest(@AggregateWith(StudyAggregator.class) Study study){
+        System.out.println(study);
+    }
+
+    static class StudyAggregator implements ArgumentsAggregator {
+
+        @Override
+        public Object aggregateArguments(ArgumentsAccessor argumentsAccessor, ParameterContext parameterContext) throws ArgumentsAggregationException {
+            return new Study(argumentsAccessor.getInteger(0), argumentsAccessor.getString(1));
+        }
+    }
+
+}
+```   
+* `ArgumentsAggregator` 인터페이스를 구현한 `Aggregator`클래스를 통해 명시적 형변환을 수행했다.        
+* `ArgumentsAggregator` 생성에는 조건이 있는데 구현클래스가 `static inner 클래스`이거나, `public 클래스`이어야 한다.        
+* 이후, 파라미터에 `@AggregateWith(Aggregator_구현클래스.class)`를 사용하여 형변환을 시킬 수 있다.    
+      
+
 
 # @NullAndEmptySource
 ## @NullSource
