@@ -251,7 +251,7 @@ class StudyTest {
    
 `@CsvSource` 는 `@ValueSource`와는 다르게 하나의 **테스트 메스드에 여러 인자값을 넘겨줄 수 있다.**           
          
-**main.java.**
+**main.java.me.kwj1270.thejavatest.Study.java**
 ```java
 package me.kwj1270.thejavatest;
 
