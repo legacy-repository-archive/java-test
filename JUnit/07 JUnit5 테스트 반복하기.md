@@ -395,11 +395,49 @@ class StudyTest {
 * `ArgumentsAggregator` 생성에는 조건이 있는데 구현클래스가 `static inner 클래스`이거나, `public 클래스`이어야 한다.        
 * 이후, 파라미터에 `@AggregateWith(Aggregator_구현클래스.class)`를 사용하여 형변환을 시킬 수 있다.    
       
-
-
+ 
 # @NullAndEmptySource
+`@NullAndEmptySource`는 테스트 케이스에        
+`null 값을 가진 인자`와 `아무런 값을 가지지 않은 인자`값을 추가하는 어노테이션이다.            
 
-![JUnitValueSourceNullAndEmptySource.png](./image/JUnitValueSourceNullAndEmptySource.png)   
+```java
+package me.kwj1270.thejavatest;
+
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ParameterContext;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.aggregator.AggregateWith;
+import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
+import org.junit.jupiter.params.aggregator.ArgumentsAggregationException;
+import org.junit.jupiter.params.aggregator.ArgumentsAggregator;
+import org.junit.jupiter.params.converter.ArgumentConversionException;
+import org.junit.jupiter.params.converter.SimpleArgumentConverter;
+import org.junit.jupiter.params.provider.*;
+
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+class StudyTest {
+
+    @DisplayName("파라미터_TEST")
+    @ParameterizedTest(name = "{index} {displayName} {0}")
+    @NullAndEmptySource
+    @ValueSource(strings = {"날씨가", "많이", "추워지고", "있네요"})
+    void ParameterizedTest(String message) {
+        System.out.println(message);
+    }
+
+}
+```
+![JUnitValueSourceNullAndEmptySource.png](./image/JUnitValueSourceNullAndEmptySource.png)       
+    
+             
+실행 결과를 보면 알 수 있듯이 `@NullAndEmptySource`을 통해            
+`null 값을 가진 인자`와 `아무런 값을 가지지 않은 인자`값을 가진 테스트 케이스가 추가되었다.            
+
+
+
+
 ![JUnitValueSourceNullWithEmptySource.png](./image/JUnitValueSourceNullWithEmptySource.png)    
 
 ## @NullSource
