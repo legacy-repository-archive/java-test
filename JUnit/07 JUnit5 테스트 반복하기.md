@@ -119,8 +119,10 @@ class StudyTest {
 }
 ```
 ![JUnitParameterizedTestValueSource.png](./image/JUnitParameterizedTestValueSource.png)   
- 
-
+     
+`@ParameterizedTest`를 사용하면 메서드의 파라미터에 인자값을 넣어줄 수 있는 어노테이션들이 사용가능하다.          
+`@ValueSource` 같은 경우 파라미터에 단일 인자값을 순서대로 넘겨주는 역할을 하고 있다.            
+   
 ```java
 package me.kwj1270.thejavatest;
 
