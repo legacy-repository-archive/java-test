@@ -171,13 +171,15 @@ class StudyTest {
 
     @DisplayName("파라미터_TEST")
     @ParameterizedTest(name = "{index} {displayName} {0}")
-    @ValueSource(ints = {10, 20, 30})
-    void ParameterizedTest(Study study){
-        System.out.println(study.getLimit());
+    @ValueSource(strings = {"10", "20", "30"})
+    void ParameterizedTest(int number){
+        System.out.println("암묵적 형변환 : "+ new Study(number).getLimit());
     }
 
-}
-```
+} 
+```    
+![JUnitParameterizedTestTypeCasting.png](./image/JUnitParameterizedTestTypeCasting.png)    
+   
 그리고, 인자로 들어올 값을 특정 클래스에 주입시켜 특정 클래스의 인스턴스를 가져올 수 있다.       
 `ParameterizedTest`에서는 원래 `int` 값을 파라미터의 인자로 보내지만,          
 `Study` 클래스에서 해당 값을 가지고 인스턴스를 생성하고 이를 파라미터의 인자로 보내고 있다.          
