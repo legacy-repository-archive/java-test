@@ -26,6 +26,9 @@ class StudyTest {
 
 }
 ```   
+![JUnitRepaetedTestSimple.png](./image/JUnitRepaetedTestSimple.png)     
+
+
 `@RepeatedTest()`에 `value 멤버`에 **`int`형 정수**를 입력하면       
 입력한 숫자만큼 테스트를 반복하도록 동작시킨다.      
 그리고 `value`멤버는 어노테이션 문법상 생략가능하므로 주로, 정수만 입력한다.        
@@ -46,6 +49,9 @@ class StudyTest {
 
 }
 ```   
+![JUnitRepaetedTestRepetitionInfo.png](./image/JUnitRepaetedTestRepetitionInfo.png)    
+  
+  
 `@RepeatedTest`를 선언한 테스트 메서드는              
 `RepetitionInfo` 인스턴스를 매개변수로 받아 사용할 수 있다.        
 
@@ -110,6 +116,8 @@ class StudyTest {
 
 }
 ```
+![JUnitParameterizedTestValueSource.png](./image/JUnitParameterizedTestValueSource.png)   
+ 
 
 ```java
 package me.kwj1270.thejavatest;
