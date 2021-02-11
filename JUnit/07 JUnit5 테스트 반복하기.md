@@ -49,7 +49,6 @@ class StudyTest {
 
 }
 ```   
-![JUnitRepaetedTestRepetitionInfo.png](./image/JUnitRepaetedTestRepetitionInfo.png)    
   
   
 `@RepeatedTest`를 선언한 테스트 메서드는              
@@ -80,6 +79,8 @@ class StudyTest {
 
 }    
 ```  
+![JUnitRepaetedTestRepetitionInfo.png](./image/JUnitRepaetedTestRepetitionInfo.png)       
+       
 `@RepeatedTest`의 멤버로는 `value`외에도 `name`이 존재한다.          
 `@RepeatedTest`의 `name`을 선언할 경우 `@DisplayName`처럼 **반복 테스트의 이름을 정의할 수 있다.**      
       
