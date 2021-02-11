@@ -49,8 +49,9 @@ class StudyTest {
 
 }
 ```   
-  
-  
+![JUnitRepaetedTestRepetitionInfoBasic.png](JUnitRepaetedTestRepetitionInfoBasic.png)    
+   
+   
 `@RepeatedTest`를 선언한 테스트 메서드는              
 `RepetitionInfo` 인스턴스를 매개변수로 받아 사용할 수 있다.        
 
