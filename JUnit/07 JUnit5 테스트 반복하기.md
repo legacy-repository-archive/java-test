@@ -429,23 +429,27 @@ class StudyTest {
 
 }
 ```
-![JUnitValueSourceNullAndEmptySource.png](./image/JUnitValueSourceNullAndEmptySource.png)       
-    
-             
+![JUnitValueSourceNullAndEmptySource.png](./image/JUnitValueSourceNullAndEmptySource.png)          
+                
 실행 결과를 보면 알 수 있듯이 `@NullAndEmptySource`을 통해            
 `null 값을 가진 인자`와 `아무런 값을 가지지 않은 인자`값을 가진 테스트 케이스가 추가되었다.            
-
-
-
+  
+사실, `@NullAndEmptySource`는      
+내부에 `@NullSource`와 `@EmptySource`을 메타어노테이션으로 사용하는 어노테이션이다.      
+그렇기에 아래 사진과 같이 `@NullSource`와 `@EmptySource`을 정의를 해도 똑같은 결과를 얻을 수 있다.     
 
 ![JUnitValueSourceNullWithEmptySource.png](./image/JUnitValueSourceNullWithEmptySource.png)    
 
 ## @NullSource
+`@NullSource`는 인자값으로 `null`을 넘기는 테스트 케이스를 추가하는 어노테이션이다.   
+
 ![JUnitValueSourceEmptySource.png](./image/JUnitValueSourceEmptySource.png)    
+  
+## @EmptySource  
+`@EmptySource`는 인자값으로 아무 값도 넘기지 않는 테스트 케이스를 추가하는 어노테이션이다.      
 
-## @EmptySource
-
-   
+  
+  
 
 
 
