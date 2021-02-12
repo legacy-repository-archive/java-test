@@ -169,8 +169,14 @@ class StudyTest {
 
 }
 ```
+![JUnitTestOrderDefine.png](./image/JUnitTestOrderDefine.png)     
+          
+`@Order`에 넣는 정수형 멤버값은 우선순위를 나타낸다.           
+그렇기 때문에 더 작은 값을 넣을 수록, 먼저 테스트를 진행한다.          
+int형 값을 가지기에, 음수랑 0도 사용할 수 있다. (직접 테스트해봤다.)      
+          
+**갑작스러운 궁금증 : 우선순위가 같은 경우는 어떻게 될까? 🤔**       
 
-**갑작스러운 궁금증 : 우선순위가 같은 경우는 어떻게 될까? **
 ```java
 package me.kwj1270.thejavatest;
 
@@ -242,6 +248,11 @@ class StudyTest {
     }
 
 }
-
 ```
+![JUnitTestOrderSamePriority.png](./image/JUnitTestOrderSamePriority.png)        
+         
+우선 순위가 동일할 경우,        
+기본 Junit5의 내부 로직처럼 메서드를 먼저 정의한 순서대로 한번 더 나뉘어진다.     
+
+
 
