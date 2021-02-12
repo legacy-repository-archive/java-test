@@ -105,6 +105,7 @@ JUnit5에서 부터는 테스트 인스턴스의 LifeCycle에 대한 설정을 �
 |TestInstance.Lifecycle.PER_METHOD|`@TestInstance`에 직접적으로 명시되지는 않았지만, JUnit 에서 제공하는 기본 전력이다.<br> 각각의 테스트 메서드마다 테스트 인스턴스를 생성해서 호출한다.|  
     
       
+**예시**  
 ```java
 package me.kwj1270.thejavatest;
 
@@ -119,6 +120,7 @@ import org.junit.jupiter.params.converter.SimpleArgumentConverter;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class StudyTest {
 
     int value = 0;
@@ -166,4 +168,7 @@ class StudyTest {
     }
 
 }
-```   
+```     
+   
+![JUnitTestInstanceClassStrategy.png](./image/JUnitTestInstanceClassStrategy.png)      
+
