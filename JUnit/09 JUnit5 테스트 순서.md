@@ -103,7 +103,7 @@ class StudyTest {
 
 }
 ```
-![JUnitTestOrderDefault.png](./imgae/JUnitTestOrderDefault.png)     
+![JUnitTestOrderDefault.png](./image/JUnitTestOrderDefault.png)     
          
 우선은, 메서드를 정의한 순서대로 `@Order` 값을 넣어주었고 예상한 결과값이 도출되었다.          
 
