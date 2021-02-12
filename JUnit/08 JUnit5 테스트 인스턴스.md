@@ -102,6 +102,68 @@ JUnit5에서 부터는 테스트 인스턴스의 LifeCycle에 대한 설정을 �
 |@TestInstance 멤버|설명|
 |-----------------|---|
 |TestInstance.Lifecycle.PER_CLASS|기존 전략과 다르게, 테스트 클래스당 테스트 인스턴스를 하나만 만들어 사용한다.<br>`@BeforeAll`과 `@AfterAll`을 선언한 테스트 메서드를<br>인스턴스 메소드 또는 인터페이스에 정의한 default 메소드로 정의할 수 있다.<br>경우에 따라, 테스트 간에 공유하는 모든 상태를 `@BeforeEach` 또는 `@AfterEach`에서 초기화 할 필요가 있다.<br>테스트에 있어 매번 인스턴스를 만들지 않아도 되므로 조금의 성능적 이익을 얻을 수 있다.|   
-|TestInstance.Lifecycle.PER_METHOD|`@TestInstance`에 직접적으로 명시되지는 않았지만, JUnit 에서 제공하는 기본 전력이다.<br> 각각의 테스트 메서드마다 테스트 인스턴스를 생성해서 호출한다.|
-       
-   
+|TestInstance.Lifecycle.PER_METHOD|`@TestInstance`에 직접적으로 명시되지는 않았지만, JUnit 에서 제공하는 기본 전력이다.<br> 각각의 테스트 메서드마다 테스트 인스턴스를 생성해서 호출한다.|  
+    
+      
+```java
+package me.kwj1270.thejavatest;
+
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ParameterContext;
+import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
+import org.junit.jupiter.params.aggregator.ArgumentsAggregationException;
+import org.junit.jupiter.params.aggregator.ArgumentsAggregator;
+import org.junit.jupiter.params.converter.ArgumentConversionException;
+import org.junit.jupiter.params.converter.SimpleArgumentConverter;
+
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+class StudyTest {
+
+    int value = 0;
+
+    @FastTest
+    @DisplayName("메인_테스트 fast")
+    public void 메인_테스트() {
+        Study actual = new Study(10);
+        assertThat(actual.getLimit()).isGreaterThan(0);
+        System.out.println();
+        System.out.println("메인_테스트 실행");
+        System.out.println("인스턴스의 해시값 : " + this);
+        System.out.println("value = " + ++value);
+        System.out.println();
+    }
+
+    @SlowTest
+    @DisplayName("서브_테스트 slow")
+    public void 서브_테스트() {
+        System.out.println();
+        System.out.println("서브_테스트 실행");
+        System.out.println("인스턴스의 해시값 : " + this);
+        System.out.println("value = " + ++value);
+        System.out.println();
+    }
+
+    @BeforeAll
+    static void BeforeAll_테스트() {
+        System.out.println("BeforeAll");
+    }
+
+    @BeforeEach
+    public void BeforeEach_테스트() {
+        System.out.println("BeforeEach");
+    }
+
+    @AfterEach
+    public void AfterEach_테스트() {
+        System.out.println("AfterEach");
+    }
+
+    @AfterAll
+    static void AfterAll_테스트() {
+        System.out.println("AfterAll");
+    }
+
+}
+```   
