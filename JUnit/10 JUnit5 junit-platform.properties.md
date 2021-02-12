@@ -118,6 +118,7 @@ class StudyTest {
     
 사용법은 `org.junit.jupiter.api.MethodOrderer$`뒤에 타입을 붙여주면 된다.    
     
+**junit-platform.properties**       
 ```properties
 junit.jupiter.testmethod.order.default=org.junit.jupiter.api.MethodOrderer$OrderAnnotation
 # junit.jupiter.testinstance.lifecycle.default=per_class
@@ -139,7 +140,8 @@ junit.jupiter.testmethod.order.default=org.junit.jupiter.api.MethodOrderer$Order
       
 사용법은 `junit.jupiter.testinstance.lifecycle.default=per_class` 기술하면 된다.      
 검색을 했을 때, `per_method`가 존재하는 지는 알기가 힘들어 우선 제외했는데 있을 경우 추가하겠다.         
-     
+       
+**junit-platform.properties**     
 ```properties
 # junit.jupiter.testmethod.order.default=org.junit.jupiter.api.MethodOrderer$OrderAnnotation
 junit.jupiter.testinstance.lifecycle.default=per_class
@@ -169,7 +171,8 @@ junit.jupiter.testinstance.lifecycle.default=per_class
 
 해당 프로퍼티값을 넣으면 어노테이션 내부에 `@ExtendWith({Condition이름.class})`을 가진 어노테이션에 대해서        
 테스트에서 제외하는 것을 무시하고 메서드를 실행시킨다.         
-     
+   
+**junit-platform.properties**    
 ```properties
 # junit.jupiter.testmethod.order.default=org.junit.jupiter.api.MethodOrderer$OrderAnnotation
 # junit.jupiter.testinstance.lifecycle.default=per_class
@@ -193,7 +196,7 @@ junit.jupiter.conditions.deactivate=org.junit.*DisabledCondition
 * IndicativeSentences       
 * ReplaceUnderscores     
    
-
+**junit-platform.properties**    
 ```properties
 # junit.jupiter.testmethod.order.default=org.junit.jupiter.api.MethodOrderer$OrderAnnotation
 # junit.jupiter.testinstance.lifecycle.default=per_class
@@ -211,7 +214,8 @@ junit.jupiter.displayname.generator.default=org.junit.jupiter.api.DisplayNameGen
 
 확장팩 자동 감지 기능
 junit.jupiter.extensions.autodetection.enabled = true
-
+ 
+**junit-platform.properties**   
 ```properties
 # junit.jupiter.testmethod.order.default=org.junit.jupiter.api.MethodOrderer$OrderAnnotation
 # junit.jupiter.testinstance.lifecycle.default=per_class
