@@ -174,8 +174,9 @@ junit.jupiter.testinstance.lifecycle.default=per_class
 junit.jupiter.conditions.deactivate=org.junit.*DisabledCondition
 # junit.jupiter.displayname.generator.default=org.junit.jupiter.api.DisplayNameGenerator$ReplaceUnderscores
 # junit.jupiter.extensions.autodetection.enabled = true
-```
-![JUnitPropertyDisabledApply.png](JUnitPropertyDisabledApply.png)    
+```   
+   
+![JUnitPropertyDisabledApply.png](./image/JUnitPropertyDisabledApply.png)    
          
 기존에 `@Disabled` 어노테이션을 선언한, `미완성_테스트` 메서드가 실행된 것을 알 수 있다.           
    
