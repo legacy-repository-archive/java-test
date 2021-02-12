@@ -184,6 +184,16 @@ junit.jupiter.conditions.deactivate=org.junit.*DisabledCondition
    
 
 ## properties, DisplayNameGenerator 설정
+기존, `@DisplayNameGeneration(DisplayNameGenerator.제네레이터_클래스.class)`를 대신하는 프로퍼티 값이다.      
+`@DisplayNameGeneration()`와 마찬가지로 제네레이터_클래스를      
+프로퍼티의 값인 `org.junit.jupiter.api.DisplayNameGenerator$`뒤에 기술할 수있다.  
+   
+* Standard   
+* Simple    
+* IndicativeSentences       
+* ReplaceUnderscores     
+   
+
 ```properties
 # junit.jupiter.testmethod.order.default=org.junit.jupiter.api.MethodOrderer$OrderAnnotation
 # junit.jupiter.testinstance.lifecycle.default=per_class
@@ -191,18 +201,6 @@ junit.jupiter.conditions.deactivate=org.junit.*DisabledCondition
 junit.jupiter.displayname.generator.default=org.junit.jupiter.api.DisplayNameGenerator$ReplaceUnderscores
 # junit.jupiter.extensions.autodetection.enabled = true
 ```
-
-기존, `@DisplayNameGeneration(DisplayNameGenerator.제네레이터_클래스.class)`를 대신하는 프로퍼티 값이다.      
-`@DisplayNameGeneration()`와 마찬가지로 제네레이터_클래스를      
-프로퍼티의 값인 `org.junit.jupiter.api.DisplayNameGenerator$`뒤에 기술할 수있다.  
-   
-* Standard   
-* Simple    
-* IndicativeSentences      
-* ReplaceUnderscores   
-
-
-
   
 ![JUnitPropertyDisplayNameGenerator.png](./image/JUnitPropertyDisplayNameGenerator.png)         
     
