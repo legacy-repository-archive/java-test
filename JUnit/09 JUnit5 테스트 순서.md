@@ -22,7 +22,9 @@ JUnit5 에서는 테스트 메서드를 정의한 순서대로 실행하도록 �
 # @MethodOrderer     
 앞서 언급한 대로 경우에 따라, 특정 순서대로 테스트를 실행하고 싶을 때도 있다.       
 그 경우에는 `@TestInstance(Lifecycle.PER_CLASS)`와 함께 `@TestMethodOrder`를 사용하면 된다.        
-       
+물론, 꼭 `@TestInstance(Lifecycle.PER_CLASS)`를 함깨 사용하라는 말은 아니다.   
+동일한 자원을 사용하지 않는다면, `@TestMethodOrder`만 사용하면 된다.     
+                   
 `@TestMethodOrder`의 멤버값으로 `MethodOrderer` 구현체를 설정해줘야 한다.          
 사용법으로는 `@TestMethodOrder(MethodOrderer.구현체이름.class)`와 같이 정의해주면 된다.       
     
@@ -31,7 +33,7 @@ JUnit5 에서는 테스트 메서드를 정의한 순서대로 실행하도록 �
 |MethodOrderer.MethodName|원본 메서드의 이름을 기준 및 알파벳,숫자순으로 실행 순서를 조율한다.<br>`Alphanumeric`을 대체하기 위해 나왔다.|   
 |MethodOrderer.DisplayName|Display에 표현되는 메서드의 이름을 기준 및 알파벳,숫자순으로 실행 순서를 조율한다.<br>즉, `@DisplayName`을 기준으로 순서를 조율하고, `@DisplayName`이 없으면 원래 메서드 이름이 비교대상이 된다.<br>`Alphanumeric`을 대체하기 위해 나왔다.|     
 |MethodOrderer.OrderAnnoation|`@Order`어노테이션을 통해 테스트 순서를 조율한다.<br>단, 스프링의 `@Order`이 아니고 Junit이 제공하는 `@Order`이다.<br>우선 순위를 주는 것이기에 값이 낮을 수록 더 먼저 실행된다.|   
-|MethodOrderer.Random||      
+|MethodOrderer.Random|정의된 테스트 메서드를 랜덤한 순서대로 실행을 시킨다.<br>필자 개인생각으로 완벽한 단위테스트를 검증할 때 사용할 것 같다.|          
 |MethodOrderer.Alphanumeric|메서드의 알파벳, 숫자순으로 실행 순서를 조율한다.<br>`String.compareTo(String)`와 동일하다고 보면된다.<br>현재 `@Deprecated`로 정의되어 사용을 권장하지는 않는다.|
 
 ## OrderAnnoation 과 @Order    
@@ -258,6 +260,5 @@ class StudyTest {
          
 우선 순위가 동일할 경우,        
 기본 Junit5의 내부 로직처럼 메서드를 먼저 정의한 순서대로 한번 더 나뉘어진다.     
-
 
 
