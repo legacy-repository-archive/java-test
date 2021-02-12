@@ -37,6 +37,7 @@ JUnit5 에서는 테스트 메서드를 정의한 순서대로 실행하도록 �
 ## OrderAnnoation 과 @Order    
 `MethodOrderer.OrderAnnoation`는 `@Order`에 멤버값이 작은 순서대로 메서드를 실행한다.         
 
+**우선 순위 순서대로 주기**
 ```java
 package me.kwj1270.thejavatest;
 
@@ -102,8 +103,11 @@ class StudyTest {
 
 }
 ```
-우리가 사용하는 JUnit5의 디폴트 설정은 위와 비슷한 로직일 것이다.   
+![JUnitTestOrderDefault.png](./imgae/JUnitTestOrderDefault.png)     
+         
+우선은, 메서드를 정의한 순서대로 `@Order` 값을 넣어주었고 예상한 결과값이 도출되었다.          
 
+**우선 순위 다르게 주기**
 ```java
 package me.kwj1270.thejavatest;
 
@@ -175,8 +179,9 @@ class StudyTest {
 그렇기 때문에 더 작은 값을 넣을 수록, 먼저 테스트를 진행한다.          
 int형 값을 가지기에, 음수랑 0도 사용할 수 있다. (직접 테스트해봤다.)      
           
-**갑작스러운 궁금증 : 우선순위가 같은 경우는 어떻게 될까? 🤔**       
-
+**갑작스러운 궁금증 : 우선순위가 같은 경우는 어떻게 될까? 🤔**         
+    
+**동일한 우선 순위 주기**
 ```java
 package me.kwj1270.thejavatest;
 
