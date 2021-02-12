@@ -30,9 +30,142 @@ JUnit5 에서는 테스트 메서드를 정의한 순서대로 실행하도록 �
 |----------------------|---|    
 |MethodOrderer.MethodName|원본 메서드의 이름을 기준 및 알파벳,숫자순으로 실행 순서를 조율한다.<br>`Alphanumeric`을 대체하기 위해 나왔다.|   
 |MethodOrderer.DisplayName|Display에 표현되는 메서드의 이름을 기준 및 알파벳,숫자순으로 실행 순서를 조율한다.<br>즉, `@DisplayName`을 기준으로 순서를 조율하고, `@DisplayName`이 없으면 원래 메서드 이름이 비교대상이 된다.<br>`Alphanumeric`을 대체하기 위해 나왔다.|     
-|MethodOrderer.OrderAnnoation||   
+|MethodOrderer.OrderAnnoation|`@Order`어노테이션을 통해 테스트 순서를 조율한다.<br>단, 스프링의 `@Order`이 아니고 Junit이 제공하는 `@Order`이다.<br>우선 순위를 주는 것이기에 값이 낮을 수록 더 먼저 실행된다.|   
 |MethodOrderer.Random||      
 |MethodOrderer.Alphanumeric|메서드의 알파벳, 숫자순으로 실행 순서를 조율한다.<br>`String.compareTo(String)`와 동일하다고 보면된다.<br>현재 `@Deprecated`로 정의되어 사용을 권장하지는 않는다.|
 
 ## OrderAnnoation 과 @Order    
+`MethodOrderer.OrderAnnoation`는 `@Order`에 멤버값이 작은 순서대로 메서드를 실행한다.         
+
+```java
+package me.kwj1270.thejavatest;
+
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ParameterContext;
+import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
+import org.junit.jupiter.params.aggregator.ArgumentsAggregationException;
+import org.junit.jupiter.params.aggregator.ArgumentsAggregator;
+import org.junit.jupiter.params.converter.ArgumentConversionException;
+import org.junit.jupiter.params.converter.SimpleArgumentConverter;
+
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+class StudyTest {
+
+    int value = 0;
+
+    @Order(1)
+    @FastTest
+    @DisplayName("메인_테스트 fast")
+    public void 메인_테스트() {
+        Study actual = new Study(10);
+        assertThat(actual.getLimit()).isGreaterThan(0);
+        System.out.println("\n메인_테스트 실행\n");
+    }
+
+    @Order(2)
+    @SlowTest
+    @DisplayName("서브_테스트 slow")
+    public void 서브_테스트() {
+        System.out.println("\n서브_테스트 실행\n");
+    }
+    
+    @Order(3)
+    @Test
+    public void 서브_테스트2() {
+        System.out.println("\n서브_테스트2 실행\n");
+    }
+
+    @BeforeAll
+    void BeforeAll_테스트() {
+        System.out.println("BeforeAll");
+    }
+
+    @BeforeEach
+    public void BeforeEach_테스트() {
+        System.out.println("BeforeEach");
+    }
+
+    @AfterEach
+    public void AfterEach_테스트() {
+        System.out.println("AfterEach");
+    }
+
+    @AfterAll
+    void AfterAll_테스트() {
+        System.out.println("AfterAll");
+    }
+
+}
+```
+우리가 사용하는 JUnit5의 디폴트 설정은 위와 비슷한 로직일 것이다.   
+
+```java
+package me.kwj1270.thejavatest;
+
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ParameterContext;
+import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
+import org.junit.jupiter.params.aggregator.ArgumentsAggregationException;
+import org.junit.jupiter.params.aggregator.ArgumentsAggregator;
+import org.junit.jupiter.params.converter.ArgumentConversionException;
+import org.junit.jupiter.params.converter.SimpleArgumentConverter;
+
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+class StudyTest {
+
+    int value = 0;
+
+    @Order(2)
+    @FastTest
+    @DisplayName("메인_테스트 fast")
+    public void 메인_테스트() {
+        Study actual = new Study(10);
+        assertThat(actual.getLimit()).isGreaterThan(0);
+        System.out.println("\n메인_테스트 실행\n");
+    }
+
+    @Order(1)
+    @SlowTest
+    @DisplayName("서브_테스트 slow")
+    public void 서브_테스트() {
+        System.out.println("\n서브_테스트 실행\n");
+    }
+    
+    @Order(3)
+    @Test
+    public void 서브_테스트2() {
+        System.out.println("\n서브_테스트2 실행\n");
+    }
+
+    @BeforeAll
+    void BeforeAll_테스트() {
+        System.out.println("BeforeAll");
+    }
+
+    @BeforeEach
+    public void BeforeEach_테스트() {
+        System.out.println("BeforeEach");
+    }
+
+    @AfterEach
+    public void AfterEach_테스트() {
+        System.out.println("AfterEach");
+    }
+
+    @AfterAll
+    void AfterAll_테스트() {
+        System.out.println("AfterAll");
+    }
+
+}
+```
+
 
