@@ -11,3 +11,8 @@
 JUnit5 에서는 `properties/yml`을 통해 테스트 클래스에 대한 공통적인 설정을 지원해준다.            
    
 # junit-platform.properties 만들기  
+   
+1. test 디렉터리 하위에 `[new directory]`로 resources 생성            
+2. resources 디렉터리 하위에 junit-platform.properties         
+
+단, IntelliJ Community를 이용할 경우, resources에 대해서 
