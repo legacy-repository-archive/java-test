@@ -101,10 +101,7 @@ JUnit5에서 부터는 테스트 인스턴스의 LifeCycle에 대한 설정을 �
 
 |@TestInstance 멤버|설명|
 |-----------------|---|
-|TestInstance.Lifecycle.PER_CLASS||
+|TestInstance.Lifecycle.PER_CLASS|기존 전략과 다르게, 테스트 클래스당 테스트 인스턴스를 하나만 만들어 사용한다.<br>`@BeforeAll`과 `@AfterAll`을 인스턴스 메소드 또는 인터페이스에 정의한 default 메소드로 정의할 수도 있으며,<br>경우에 따라, 테스트 간에 공유하는 모든 상태를 `@BeforeEach` 또는 `@AfterEach`에서 초기화 할 필요가 있다.<br>테스트를 진행함에 있어 매번 인스턴스를 만들지 않아도 되므로 성능적으로 조금의 이익을 볼 수 있다.|   
 |TestInstance.Lifecycle.PER_METHOD|`@TestInstance`에 직접적으로 명시되지는 않았지만, JUnit 에서 제공하는 기본 전력이다.<br> 각각의 테스트 메서드마다 테스트 인스턴스를 생성해서 호출한다.|
-
-@TestInstance(Lifecycle.PER_CLASS)   
-테스트 클래스당 인스턴스를 하나만 만들어 사용한다.    
-경우에 따라, 테스트 간에 공유하는 모든 상태를 @BeforeEach 또는 @AfterEach에서 초기화 할 필요가 있다.   
-@BeforeAll과 @AfterAll을 인스턴스 메소드 또는 인터페이스에 정의한 default 메소드로 정의할 수도 있다.    
+       
+   
