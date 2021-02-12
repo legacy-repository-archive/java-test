@@ -29,6 +29,7 @@ class StudyTest {
         assertThat(actual.getLimit()).isGreaterThan(0);
         System.out.println();
         System.out.println("메인_테스트 실행");
+        System.out.println("인스턴스의 해시값 : " + this);
         System.out.println("value = " + ++value);
         System.out.println();
     }
@@ -38,6 +39,7 @@ class StudyTest {
     public void 서브_테스트() {
         System.out.println();
         System.out.println("서브_테스트 실행");
+        System.out.println("인스턴스의 해시값 : " + this);
         System.out.println("value = " + ++value);
         System.out.println();
     }
@@ -65,9 +67,17 @@ class StudyTest {
 }
 ```
 ![JUnitTestInstanceDefaultStrategy.png](./image/JUnitTestInstanceDefaultStrategy.png)     
+             
+위 결과에서 보이는 2가지 출력문을 통해 우리는      
+테스트 메서드 마다 테스트 인스턴스를 새로 만들어 사용한다는 점을 알 수 있다.      
         
-위에서 보이는 결과로 인스턴스 변수 value 의 값은 1로만 출력이 되는데         
-이는 테스트 메서드 마다 테스트 인스턴스를 새로 만들어 사용하기 때문이다.          
+* **인스턴스의 해시값이 다르다 :** 가장 명확한 증거로, 메서드를 호출한 인스턴스의 해시값이 다르다.            
+* **value의 값이 공유되지 않는다. :** 전위 연산자를 사용했음에도 value 변수는 0을 기준으로 실행되었다.      
+             
+기본으로 셋팅된 해시값은 인스턴스의 주소를 기준으로 표현되기에        
+해시값이 다르다는 것은 일반적으로 서로 다른 메모리에 존재하는 인스턴스라는 것이다.      
+또한, 인스턴스 변수 value 의 값은 1로만 출력이 되는데                
+이는 테스트 메서드 마다 테스트 인스턴스를 새로 만들어 사용하기 때문이란 것을 알 수 있다.              
 
 ```java
     @BeforeAll
@@ -87,9 +97,13 @@ class StudyTest {
 
 # @TestInstance   
              
-JUnit5 부터 테스트 인스턴스 LifeCycle에 대한 설정을 개발자가 할 수 있게 되었다.           
+JUnit5에서 부터는 테스트 인스턴스의 LifeCycle에 대한 설정을 개발자가 할 수 있게 되었다.           
 
-      
+|@TestInstance 멤버|설명|
+|-----------------|---|
+|TestInstance.Lifecycle.PER_CLASS||
+|TestInstance.Lifecycle.PER_METHOD|`@TestInstance`에 직접적으로 명시되지는 않았지만, JUnit 에서 제공하는 기본 전력이다.<br> 각각의 테스트 메서드마다 테스트 인스턴스를 생성해서 호출한다.|
+
 @TestInstance(Lifecycle.PER_CLASS)   
 테스트 클래스당 인스턴스를 하나만 만들어 사용한다.    
 경우에 따라, 테스트 간에 공유하는 모든 상태를 @BeforeEach 또는 @AfterEach에서 초기화 할 필요가 있다.   
