@@ -148,7 +148,7 @@ class StudyTest {
     }
 
     @BeforeAll
-    static void BeforeAll_테스트() {
+    void BeforeAll_테스트() {
         System.out.println("BeforeAll");
     }
 
@@ -163,7 +163,7 @@ class StudyTest {
     }
 
     @AfterAll
-    static void AfterAll_테스트() {
+    void AfterAll_테스트() {
         System.out.println("AfterAll");
     }
 
