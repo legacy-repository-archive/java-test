@@ -4,7 +4,7 @@ JUnit5 에서는 테스트 메서드를 정의한 순서대로 실행하도록 �
 단, 정의한 순서대로 실행되기는 하지만, 우리가 그 순서에 의존해서는 안 된다.          
 왜냐하면 이 순서는 JUnit 내부 구현 로직에 따라 언제든지 바뀔 가능성이 있기 때문이다.         
       
-**그렇다면 왜? 기본 설정으로 테스트 메서드의 순서를 명확하게 드러내지 않은 것일까? 🤔**          
+**🤔 그렇다면 왜? 기본 설정으로 테스트 메서드의 순서를 명확하게 드러내지 않은 것일까?**          
           
 우리가 실행하는 것은 **단위 테스트**임을 기억하자             
 사실, 단위 테스트는 다른 단위 테스트와 독립적으로 실행가능해야한다.          
@@ -22,15 +22,17 @@ JUnit5 에서는 테스트 메서드를 정의한 순서대로 실행하도록 �
 # @MethodOrderer     
 앞서 언급한 대로 경우에 따라, 특정 순서대로 테스트를 실행하고 싶을 때도 있다.       
 그 경우에는 `@TestInstance(Lifecycle.PER_CLASS)`와 함께 `@TestMethodOrder`를 사용하면 된다.        
-     
-`@TestMethodOrder`의 멤버값으로 `MethodOrderer` 구현체를 설정해줘야 한다.        
-사용법으로는 `@TestMethodOrder(MethodOrderer.구현체이름)`과 같이 정의해주면 된다.   
-
+       
+`@TestMethodOrder`의 멤버값으로 `MethodOrderer` 구현체를 설정해줘야 한다.          
+사용법으로는 `@TestMethodOrder(MethodOrderer.구현체이름.class)`와 같이 정의해주면 된다.       
+    
 |MethodOrderer 기본 구현체|설명|
-|----------------------|---|
-|Alphanumeric||    
-|OrderAnnoation||   
-|Random||      
-   
+|----------------------|---|    
+|MethodOrderer.MethodName|원본 메서드의 이름을 기준 및 알파벳,숫자순으로 실행 순서를 조율한다.<br>`Alphanumeric`을 대체하기 위해 나왔다.|   
+|MethodOrderer.DisplayName|Display에 표현되는 메서드의 이름을 기준 및 알파벳,숫자순으로 실행 순서를 조율한다.<br>즉, `@DisplayName`을 기준으로 순서를 조율하고, `@DisplayName`이 없으면 원래 메서드 이름이 비교대상이 된다.<br>`Alphanumeric`을 대체하기 위해 나왔다.|     
+|MethodOrderer.OrderAnnoation||   
+|MethodOrderer.Random||      
+|MethodOrderer.Alphanumeric|메서드의 알파벳, 숫자순으로 실행 순서를 조율한다.<br>`String.compareTo(String)`와 동일하다고 보면된다.<br>현재 `@Deprecated`로 정의되어 사용을 권장하지는 않는다.|
+
 ## OrderAnnoation 과 @Order    
 
