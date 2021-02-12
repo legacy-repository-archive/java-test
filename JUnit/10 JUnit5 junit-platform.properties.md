@@ -135,9 +135,9 @@ junit.jupiter.testmethod.order.default=org.junit.jupiter.api.MethodOrderer$Order
      
 * per_class   
       
-사용법은 `junit.jupiter.testinstance.lifecycle.default=per_class`   
-
-
+사용법은 `junit.jupiter.testinstance.lifecycle.default=per_class` 기술하면 된다.      
+검색을 했을 때, `per_method`가 존재하는 지는 알기가 힘들어 우선 제외했는데 있을 경우 추가하겠다.         
+     
 ```properties
 # junit.jupiter.testmethod.order.default=org.junit.jupiter.api.MethodOrderer$OrderAnnotation
 junit.jupiter.testinstance.lifecycle.default=per_class
@@ -145,15 +145,29 @@ junit.jupiter.testinstance.lifecycle.default=per_class
 # junit.jupiter.displayname.generator.default=org.junit.jupiter.api.DisplayNameGenerator$ReplaceUnderscores
 # junit.jupiter.extensions.autodetection.enabled = true
 ```
-junit.jupiter.testinstance.lifecycle.default = per_class
+   
+![JUnitPropertyLifeCycle.png](./image/JUnitPropertyLifeCycle.png)       
+      
+테스트 클래스에는 `@TestInstance(TestInstance.Lifecycle.상수)`를 정의하지 않았지만,             
+테스트 인스턴스가 클래스 단위로 1개만 생성되기에 해시값이 같고 value 값이 공용으로 사용된다는 것을 알 수 있다.      
+   
+## properties, Disabled 적용 설정    
+테스트 클래스에 정의된 @Disabled 무시하고 테서트 메서드를 실행하는 프로퍼티 값이다.      
+          
+`junit.jupiter.conditions.deactivate = org.junit.*`에 사용할 수 있는 Condition 값은 아래와 같다.     
+  
+* DisabledCondition    
+* DisabledIfCondition
+* DisabledIfCondition
+* DisabledOnJreCondition
+* DisabledOnOsCondition
+* DisabledForJreRangeCondition
+* DisabledIfEnvironmentVariableCondition
+* DisabledIfSystemPropertyCondition
 
-
-
-## properties, Disabled 적용 설정 
-
-@Disabled 무시하고 실행하기
-junit.jupiter.conditions.deactivate = org.junit.*DisabledCondition
-
+해당 프로퍼티값을 넣으면 어노테이션 내부에 `@ExtendWith({Condition이름.class})`을 가진 어노테이션에 대해서        
+테스트에서 제외하는 것을 무시하고 메서드를 실행시킨다.         
+     
 ```properties
 # junit.jupiter.testmethod.order.default=org.junit.jupiter.api.MethodOrderer$OrderAnnotation
 # junit.jupiter.testinstance.lifecycle.default=per_class
@@ -161,11 +175,13 @@ junit.jupiter.conditions.deactivate=org.junit.*DisabledCondition
 # junit.jupiter.displayname.generator.default=org.junit.jupiter.api.DisplayNameGenerator$ReplaceUnderscores
 # junit.jupiter.extensions.autodetection.enabled = true
 ```
+![JUnitPropertyDisabledApply.png](JUnitPropertyDisabledApply.png)    
+         
+기존에 `@Disabled` 어노테이션을 선언한, `미완성_테스트` 메서드가 실행된 것을 알 수 있다.           
+   
 
 ## properties, DisplayNameGenerator 설정
 테스트 이름 표기 전략 설정
-junit.jupiter.displayname.generator.default = \
-    org.junit.jupiter.api.DisplayNameGenerator$ReplaceUnderscores
 
 ```properties
 # junit.jupiter.testmethod.order.default=org.junit.jupiter.api.MethodOrderer$OrderAnnotation
@@ -174,6 +190,8 @@ junit.jupiter.displayname.generator.default = \
 junit.jupiter.displayname.generator.default=org.junit.jupiter.api.DisplayNameGenerator$ReplaceUnderscores
 # junit.jupiter.extensions.autodetection.enabled = true
 ```
+  
+![JUnitPropertyDisplayNameGenerator.png](./image/JUnitPropertyDisplayNameGenerator.png)       
 
 ## properties, extensions 설정 
 
