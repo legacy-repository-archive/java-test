@@ -152,7 +152,7 @@ junit.jupiter.testinstance.lifecycle.default=per_class
 테스트 인스턴스가 클래스 단위로 1개만 생성되기에 해시값이 같고 value 값이 공용으로 사용된다는 것을 알 수 있다.      
    
 ## properties, Disabled 적용 설정    
-테스트 클래스에 정의된 @Disabled 무시하고 테서트 메서드를 실행하는 프로퍼티 값이다.      
+테스트 클래스에 정의된 `@Disabled-` 어노테이션을 무시하고 테서트 메서드를 실행하는 프로퍼티 값이다.      
           
 `junit.jupiter.conditions.deactivate = org.junit.*`에 사용할 수 있는 Condition 값은 아래와 같다.     
   
@@ -181,7 +181,15 @@ junit.jupiter.conditions.deactivate=org.junit.*DisabledCondition
    
 
 ## properties, DisplayNameGenerator 설정
-테스트 이름 표기 전략 설정
+기존, `@DisplayNameGeneration(DisplayNameGenerator.제네레이터_클래스.class)`를 대신하는 프로퍼티 값이다.      
+`@DisplayNameGeneration()`와 마찬가지로 제네레이터_클래스를      
+프로퍼티의 값인 `org.junit.jupiter.api.DisplayNameGenerator$`뒤에 기술할 수있다.  
+   
+* Standard   
+* Simple    
+* IndicativeSentences      
+* ReplaceUnderscores   
+
 
 ```properties
 # junit.jupiter.testmethod.order.default=org.junit.jupiter.api.MethodOrderer$OrderAnnotation
@@ -191,8 +199,11 @@ junit.jupiter.displayname.generator.default=org.junit.jupiter.api.DisplayNameGen
 # junit.jupiter.extensions.autodetection.enabled = true
 ```
   
-![JUnitPropertyDisplayNameGenerator.png](./image/JUnitPropertyDisplayNameGenerator.png)       
-
+![JUnitPropertyDisplayNameGenerator.png](./image/JUnitPropertyDisplayNameGenerator.png)         
+    
+테스트 클래스에 `@DisplayNameGeneration()`를 기술하지는 않았지만,         
+결과 콘솔 왼쪽에 테스트 메서드의 이름을 보면 지정한대로 이름이 바뀐 것을 알 수 있다.      
+    
 ## properties, extensions 설정 
 
 확장팩 자동 감지 기능
