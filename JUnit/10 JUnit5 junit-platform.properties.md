@@ -41,35 +41,50 @@ class StudyTest {
 
     int value = 0;
 
+    int value = 0;
+
     @Order(1)
     @FastTest
     @DisplayName("메인")
     public void 메인_테스트() {
         Study actual = new Study(10);
         assertThat(actual.getLimit()).isGreaterThan(0);
-        System.out.println("\n메인_테스트 실행\n");
+        System.out.println();
+        System.out.println(this);
+        System.out.println(++value);
+        System.out.println("메인_테스트 실행\n");
+
     }
 
     @Order(2)
     @SlowTest
     @DisplayName("서브")
     public void 서브_테스트() {
-        System.out.println("\n서브_테스트 실행\n");
+        System.out.println();
+        System.out.println(this);
+        System.out.println(++value);
+        System.out.println("서브_테스트 실행\n");
     }
 
     @Order(3)
     @SlowTest
     @DisplayName("서브2")
     public void 서브_테스트2() {
-        System.out.println("\n서브_테스트2 실행\n");
+        System.out.println();
+        System.out.println(this);
+        System.out.println(++value);
+        System.out.println("서브_테스트2 실행\n");
     }
 
-
+    @Order(4)
     @Disabled
     @DisplayName("미완성")
     @Test
     public void 미완성_테스트() {
-        System.out.println("\n미완성_테스트\n");
+        System.out.println();
+        System.out.println(this);
+        System.out.println(++value);
+        System.out.println("미완성_테스트");
     }
 
 
@@ -95,6 +110,7 @@ class StudyTest {
 
 }
 ```
+   
 ## properties, MethodOrderer 설정 
 
 
