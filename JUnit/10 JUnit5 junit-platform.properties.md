@@ -12,7 +12,9 @@ JUnit5 에서는 `properties/yml`을 통해 테스트 클래스에 대한 공통
    
 # junit-platform.properties 만들기  
 > JUnit 설정 파일로, 클래스패스 루트 (src/test/resources/)에 넣어두면 적용된다.    
-       
+   
+![JUnitCreateProperties.png](./image/JUnitCreateProperties.png)     
+   
 1. test 디렉터리 하위에 `[new directory]`로 resources 생성            
 2. resources 디렉터리 하위에 junit-platform.properties         
    
