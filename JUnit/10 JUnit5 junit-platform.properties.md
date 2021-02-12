@@ -36,16 +36,14 @@ import org.junit.jupiter.api.*;
 
 import static org.assertj.core.api.Assertions.*;
 
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class StudyTest {
 
     int value = 0;
 
     int value = 0;
 
-    @Order(1)
+    @Order(3)
     @FastTest
-    @DisplayName("메인")
     public void 메인_테스트() {
         Study actual = new Study(10);
         assertThat(actual.getLimit()).isGreaterThan(0);
@@ -56,9 +54,8 @@ class StudyTest {
 
     }
 
-    @Order(2)
+    @Order(1)
     @SlowTest
-    @DisplayName("서브")
     public void 서브_테스트() {
         System.out.println();
         System.out.println(this);
@@ -66,9 +63,8 @@ class StudyTest {
         System.out.println("서브_테스트 실행\n");
     }
 
-    @Order(3)
+    @Order(2)
     @SlowTest
-    @DisplayName("서브2")
     public void 서브_테스트2() {
         System.out.println();
         System.out.println(this);
@@ -78,7 +74,6 @@ class StudyTest {
 
     @Order(4)
     @Disabled
-    @DisplayName("미완성")
     @Test
     public void 미완성_테스트() {
         System.out.println();
@@ -86,7 +81,6 @@ class StudyTest {
         System.out.println(++value);
         System.out.println("미완성_테스트");
     }
-
 
     @BeforeAll
     static void BeforeAll_테스트() {
@@ -112,27 +106,84 @@ class StudyTest {
 ```
    
 ## properties, MethodOrderer 설정 
-
-
-junit.jupiter.testmethod.order.default = \
-    org.junit.jupiter.api.MethodOrderer$OrderAnnotation
-
+기존, `@TestMethodOrder(MethodOrderer.오더클래스이름.class)`을 대신하는 프로퍼티 값이다.      
+어노테이션과 마찬가지로, 아래와 같은 MethodOrderer 타입을 사용할 수 있다.            
+       
+* OrderAnnotation     
+* MethodName    
+* DisplayName     
+* Random        
+    
+사용법은 `org.junit.jupiter.api.MethodOrderer$`뒤에 타입을 붙여주면 된다.    
+    
+```properties
+junit.jupiter.testmethod.order.default=org.junit.jupiter.api.MethodOrderer$OrderAnnotation
+# junit.jupiter.testinstance.lifecycle.default=per_class
+# junit.jupiter.conditions.deactivate=org.junit.*DisabledCondition
+# junit.jupiter.displayname.generator.default=org.junit.jupiter.api.DisplayNameGenerator$ReplaceUnderscores
+# junit.jupiter.extensions.autodetection.enabled = true
+```
+   
+![JUnitPropertyMethodOrder.png](./image/JUnitPropertyMethodOrder.png)      
+        
+테스트 클래스에는 `@TestMethodOrder(MethodOrderer.오더클래스이름.class)`를 정의하지 않았지만,        
+`@Order`에 정의된 우선순위대로 테스트 메서드가 실행되는 것을 알 수 있다.       
+     
 ## properties, LifeCycle 설정 
+기존, `@TestInstance(TestInstance.Lifecycle.상수)`를 대신하는 프로퍼티 값이다.        
+어노테이션과 마찬가지로 테스트 인스턴스 라이프사이클 설정할 수 있다.   
+     
+* per_class   
+      
+사용법은 `junit.jupiter.testinstance.lifecycle.default=per_class`   
 
-테스트 인스턴스 라이프사이클 설정
+
+```properties
+# junit.jupiter.testmethod.order.default=org.junit.jupiter.api.MethodOrderer$OrderAnnotation
+junit.jupiter.testinstance.lifecycle.default=per_class
+# junit.jupiter.conditions.deactivate=org.junit.*DisabledCondition
+# junit.jupiter.displayname.generator.default=org.junit.jupiter.api.DisplayNameGenerator$ReplaceUnderscores
+# junit.jupiter.extensions.autodetection.enabled = true
+```
 junit.jupiter.testinstance.lifecycle.default = per_class
 
-## properties, extensions 설정 
 
-확장팩 자동 감지 기능
-junit.jupiter.extensions.autodetection.enabled = true
 
 ## properties, Disabled 적용 설정 
 
 @Disabled 무시하고 실행하기
 junit.jupiter.conditions.deactivate = org.junit.*DisabledCondition
 
+```properties
+# junit.jupiter.testmethod.order.default=org.junit.jupiter.api.MethodOrderer$OrderAnnotation
+# junit.jupiter.testinstance.lifecycle.default=per_class
+junit.jupiter.conditions.deactivate=org.junit.*DisabledCondition
+# junit.jupiter.displayname.generator.default=org.junit.jupiter.api.DisplayNameGenerator$ReplaceUnderscores
+# junit.jupiter.extensions.autodetection.enabled = true
+```
+
 ## properties, DisplayNameGenerator 설정
 테스트 이름 표기 전략 설정
 junit.jupiter.displayname.generator.default = \
     org.junit.jupiter.api.DisplayNameGenerator$ReplaceUnderscores
+
+```properties
+# junit.jupiter.testmethod.order.default=org.junit.jupiter.api.MethodOrderer$OrderAnnotation
+# junit.jupiter.testinstance.lifecycle.default=per_class
+# junit.jupiter.conditions.deactivate=org.junit.*DisabledCondition
+junit.jupiter.displayname.generator.default=org.junit.jupiter.api.DisplayNameGenerator$ReplaceUnderscores
+# junit.jupiter.extensions.autodetection.enabled = true
+```
+
+## properties, extensions 설정 
+
+확장팩 자동 감지 기능
+junit.jupiter.extensions.autodetection.enabled = true
+
+```properties
+# junit.jupiter.testmethod.order.default=org.junit.jupiter.api.MethodOrderer$OrderAnnotation
+# junit.jupiter.testinstance.lifecycle.default=per_class
+# junit.jupiter.conditions.deactivate=org.junit.*DisabledCondition
+# junit.jupiter.displayname.generator.default=org.junit.jupiter.api.DisplayNameGenerator$ReplaceUnderscores
+junit.jupiter.extensions.autodetection.enabled = true
+```
