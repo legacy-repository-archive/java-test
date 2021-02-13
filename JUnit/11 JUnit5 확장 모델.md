@@ -111,9 +111,9 @@ public class FindSlowTestExtension implements BeforeTestExecutionCallback, After
         store.put("START_TIME", System.currentTimeMillis());
     }
 ```
-우리가 앞서 정의한 `getStore(extensionContext)`를 통해 `Store` 구현체를 가져온다.    
-앞서 말했듯이 `Store`는 `Key-Value`와 비슷한 구조를 가진다.     
-`Key`의 값으로는 **`"START_TIME"`** 을 `Value`의 값으로는 **현재 시간**을 구해서 넣어준면 된다.     
+우리가 앞서 정의한 `getStore(extensionContext)`를 통해 `Store` 구현체를 가져온다.       
+앞서 말했듯이 `Store`는 `Key-Value`와 비슷한 구조를 가진다.        
+`Key`의 값으로는 **`"START_TIME"`** 을 `Value`의 값으로는 **현재 시간**을 구해서 넣어준면 된다.       
 
 ## afterTestExecution 정의하기   
 `afterTestExecution`는 테스트 케이스를 실행한 후에 동작하는 메서드이다.                
@@ -190,11 +190,11 @@ class StudyTest {
 
 }
 ```
-![JUnitExtenedWith.png](./image/JUnitExtenedWith.png)        
-
-사실, 우리가 앞서 구현했던, `BeforeTestExecutionCallback, AfterTestExecutionCallback`는 
-`Extension`을 상속하는 (인터페이스간의 상속) 인터페이스였다.        
-그렇기에 `@ExtendWith`를 통해 확장을 등록할 수 있다.   
+![JUnitExtenedWith.png](./image/JUnitExtenedWith.png)          
+       
+사실, 우리가 앞서 구현했던, `BeforeTestExecutionCallback, AfterTestExecutionCallback`는              
+`Extension`을 상속하는 (인터페이스간의 상속) 인터페이스였다.                 
+그렇기에 `@ExtendWith`를 통해 확장을 등록할 수 있다.         
 
 ## 프로그래밍 등록 `@RegisterExtension` 
 `@ExtendWith`을 통해 등록을 한다면 선언된 `Extension` 구현체를 커스터마이징 할 수 없다.       
@@ -306,3 +306,4 @@ class StudyTest {
 그리고 한 가지 더 중요한 점으로 꼭 `Extension` 구현체를 직접 `new` 로 생성하지 않아도 된다.          
 빌더나 팩토리를 이용해서 만들어도 인스턴스만 만들면 되기에 상관이 없다.          
   
+## 자동 등록 자바 `ServiceLoader`
