@@ -323,7 +323,7 @@ junit.jupiter.extensions.autodetection.enabled = true
 `junit.jupiter.extensions.autodetection.enabled = true`를 통해 설정을 활성화시키자.         
                
 하지만, 이 방법을 사용하기는 매우 까다롭다.                
-특정한 포맷에 맞춰야하기 때문에 `META-INF` 안에다가 `ServiceJar` 디렉터리를 만들고          
+특정한 포맷에 맞춰야하기 때문에 `META-INF` 안에다가 `services` 디렉터리를 만들고          
 `Extension` 구현체의 FQCN을 적어놓은 파일을 만들어서 사용해야한다.          
 그리고 명시적으로 `Extension` 구현체를 나타내주지 않기 때문에 사용은 그리 추천하지 않는다.      
      
