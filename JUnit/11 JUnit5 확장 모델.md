@@ -306,4 +306,27 @@ class StudyTest {
 그리고 한 가지 더 중요한 점으로 꼭 `Extension` 구현체를 직접 `new` 로 생성하지 않아도 된다.          
 빌더나 팩토리를 이용해서 만들어도 인스턴스만 만들면 되기에 상관이 없다.          
   
-## 자동 등록 자바 `ServiceLoader`
+## 자동 등록 자바 `ServiceLoader` 
+**junit-platform.properties**   
+```properties
+# junit.jupiter.testmethod.order.default=org.junit.jupiter.api.MethodOrderer$OrderAnnotation
+# junit.jupiter.testinstance.lifecycle.default=per_class
+# junit.jupiter.conditions.deactivate=org.junit.*DisabledCondition
+# junit.jupiter.displayname.generator.default=org.junit.jupiter.api.DisplayNameGenerator$ReplaceUnderscores
+junit.jupiter.extensions.autodetection.enabled = true
+```   
+             
+`Extension` 구현체를 의존성(dependency)에만 추가해놓고              
+`ServiceLoader`를 사용해서 자동으로 감지 및 등록하는 방법이 있다.                 
+하지만, 자동으로 감지하는 기능은 기본적으로 설정이 비활성화 되어있다.                  
+그렇기에 위와 같은 기능을 사용하고자 한다면             
+`junit.jupiter.extensions.autodetection.enabled = true`를 통해 설정을 활성화시키자.         
+               
+하지만, 이 방법을 사용하기는 매우 까다롭다.                
+특정한 포맷에 맞춰야하기 때문에 `META-INF` 안에다가 `ServiceJar` 디렉터리를 만들고          
+`Extension` 구현체의 FQCN을 적어놓은 파일을 만들어서 사용해야한다.          
+그리고 명시적으로 `Extension` 구현체를 나타내주지 않기 때문에 사용은 그리 추천하지 않는다.      
+     
+보다 자세한 내용을 알고 싶다면, [JUnit5 레퍼런스](https://junit.org/junit5/docs/current/user-guide/#extensions)를 확인하자     
+
+
