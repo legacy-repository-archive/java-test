@@ -1,8 +1,4 @@
-# 들어가면서 
-이 Repository는 
-인프런 - 더 자바 테스트 
-
-# JUnit 소개
+# JUnit
 
 JUnit은 대다수의 자바 개발자가 이용하는 자바 테스팅 프레임워크다.      
 실제로 [JetBrains의 설문조사](https://www.jetbrains.com/lp/devecosystem-2019/java/)에 따르면      
