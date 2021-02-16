@@ -6,9 +6,18 @@
 `spring-boot-starter-test`가 없는 경우, 의존성을 직접 추가해줘야 한다.     
 
 ```xml
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 ```
 ```gradle
+dependencies {
+    ...
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
 ```
 
 ```xml
