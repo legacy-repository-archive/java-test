@@ -44,8 +44,8 @@ new를 이용해 StudyService 인스턴스를 만들고자 하지만 불가능�
          
 그리고 바로 이러한 상황이 **`Mock`을 사용하기 아주 좋은 예시이다.**          
 
-### mock() 메서드 
-**Mock 객체 생성**
+### mock()    
+**mock()**
 ```java
 package me.kwj1270.thejavatest.study;
 
@@ -93,7 +93,7 @@ class StudyServiceTest {
 
 `org.mockito.Mockito`의 static 메서드인 `mock()`을 이용하면 손쉽게 Mock객체륾 만들 수 있다.     
 
-### @Mock 어노테이션     
+### @Mock     
 ```java
 package me.kwj1270.thejavatest.study;
 
@@ -121,6 +121,42 @@ class StudyServiceTest {
 }
 ```   
 위와 같이 `@Mock`을 사용하여 `Mock`객체를 만들 수 있다.      
-단, `@Mock`이 테스트 환경에서 동작하도록 `@ExtendWith(MockitoExtension.class)`를 붙여주면 된다.    
-
+단, `@Mock`이 테스트 환경에서 동작하도록 `@ExtendWith(MockitoExtension.class)`를 붙여줘야 한다.       
+  
 ![MockitoCreateMockObjectByAnnotation.png](./images/MockitoCreateMockObjectByAnnotation.png)    
+
+## @Mock VS mock()   
+* **`@Mock` :** Mock 객체를 여러 테스트 케이스에 걸쳐 사용하는 경우 
+* **`mock()` :** 특정 테스트 케이스에서만 사용하는 경우   
+   
+하지만, 특정 테스트 케이스에만 사용되는 인스턴스를 만들기 위해 `@Mock`을 사용하는 방법도 있다.     
+
+```java
+package me.kwj1270.thejavatest.study;
+
+import me.kwj1270.thejavatest.member.MemberService;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@ExtendWith(MockitoExtension.class)
+class StudyServiceTest {
+
+    @Test
+    void createStudyService(@Mock MemberService memberService, 
+                            @Mock StudyRepository studyRepository) {
+        
+        StudyService studyService = new StudyService(memberService, studyRepository);
+        assertNotNull(studyService);
+        System.out.println("테스트 성공");
+    }
+}
+```
+![MockitoCreateMockObjectByAnnotationInParameter.png](./images/MockitoCreateMockObjectByAnnotationInParameter.png)    
+   
+위 코드와 같이 매개변수로 `@Mock`과 생성할 `Mock`대상 객체를 기술해주면 된다.           
+
+  
