@@ -18,7 +18,7 @@ class StudyServiceTest {
 ```
 
 ## Mock 사용하기   
-`StudyService` 를 테스트하려면 StudyService 인스턴스를 만들어야 한다.     
+`StudyService` 를 테스트하려면 `StudyService` 인스턴스를 만들어야 한다.     
    
 ```java
 package me.kwj1270.thejavatest.study;
@@ -44,3 +44,83 @@ new를 이용해 StudyService 인스턴스를 만들고자 하지만 불가능�
          
 그리고 바로 이러한 상황이 **`Mock`을 사용하기 아주 좋은 예시이다.**          
 
+### mock() 메서드 
+**Mock 객체 생성**
+```java
+package me.kwj1270.thejavatest.study;
+
+import me.kwj1270.thejavatest.member.MemberService;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class StudyServiceTest {
+
+    @Test
+    void createStudyService() {
+        MemberService memberService = Mockito.mock(MemberService.class);
+        StudyRepository studyRepository = Mockito.mock(StudyRepository.class);
+        StudyService studyService = new StudyService(memberService, studyRepository);
+
+        assertNotNull(studyService);
+    }
+}
+```
+**import static 방법**   
+```java
+package me.kwj1270.thejavatest.study;
+
+import me.kwj1270.thejavatest.member.MemberService;
+import org.junit.jupiter.api.Test;
+
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+class StudyServiceTest {
+
+    @Test
+    void createStudyService() {
+        MemberService memberService = mock(MemberService.class);
+        StudyRepository studyRepository = mock(StudyRepository.class);
+        StudyService studyService = new StudyService(memberService, studyRepository);
+
+        assertNotNull(studyService);
+    }
+}
+```  
+![MockitoCreateMockObject.png](./images/MockitoCreateMockObject.png)       
+
+`org.mockito.Mockito`의 static 메서드인 `mock()`을 이용하면 손쉽게 Mock객체륾 만들 수 있다.     
+
+### @Mock 어노테이션     
+```java
+package me.kwj1270.thejavatest.study;
+
+import me.kwj1270.thejavatest.member.MemberService;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@ExtendWith(MockitoExtension.class)
+class StudyServiceTest {
+    
+    @Mock
+    MemberService memberService;
+    
+    @Mock
+    StudyRepository studyRepository;
+    
+    @Test
+    void createStudyService() {
+        StudyService studyService = new StudyService(memberService, studyRepository);
+        assertNotNull(studyService);
+        System.out.println("테스트 성공");
+    }
+}
+```   
+위와 같이 `@Mock`을 사용하여 `Mock`객체를 만들 수 있다.      
+단, `@Mock`이 테스트 환경에서 동작하도록 `@ExtendWith(MockitoExtension.class)`를 붙여주면 된다.    
+
+![MockitoCreateMockObjectByAnnotation.png](./images/MockitoCreateMockObjectByAnnotation.png)    
