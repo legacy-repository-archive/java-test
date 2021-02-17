@@ -50,7 +50,7 @@ class StudyServiceTest {
 그렇기 때문에 값을 받아온다 한들 아무런 값이 없기에 이와 관련된 테스트는 더 이상 진행하기 어렵다.            
         
 이 같은 상황에서 `Mock` 인스턴스에게 마치 실제 메서드를 호출한 것과 같은 `가짜 동작`을 넣어줄 수 있다.       
-그리고 이러한 작업을 `stubbing`이라 부른다.         
+그리고 이러한 작업을 `Stubbing`이라 부른다.         
   
 ## when()   
 ```java
@@ -151,7 +151,7 @@ class StudyServiceTest {
 ```
 ![MockitoStubbingDeep.png](./images/MockitoStubbingDeep.png)          
       
-`stubbing`은 테스트 케이스 전 구간에 걸쳐 해당 메서드를 실행하는 값을 정의하는 것이다.       
+`Stubbing`은 테스트 케이스 전 구간에 걸쳐 해당 메서드를 실행하는 값을 정의하는 것이다.       
 그렇기 때문에, `studyService`의 `createNewStudy()`를 실행해도 정의한대로 동작한다.       
 
 ```java
@@ -168,19 +168,19 @@ class StudyServiceTest {
 `studyService`의 `createNewStudy()`를 보게되면,         
 의존성 주입받았던, `MemberService` 인스턴스의 `findById()`를 호출하고 있다.        
 의존성 주입받았던, `MemberService` 인스턴스는 앞서 `when()`으로 지정한 인스턴스이다.    
-그렇기 때문에 다른 흐름이지만, 이정에 정의해 두었던 `stubbig` 기능이 동작한 것이다.      
+그렇기 때문에 다른 흐름이지만, 이정에 정의해 두었던 `Stubbing` 기능이 동작한 것이다.      
                 
 참고로 `if(newStudy == null)`로 null 처리를 해준 이유는          
 `newStudy`가 참조하는 `createNewStudy`의 `Study` 반환 값은          
 `Mock` 객체인 `StudyRepository`의 `save()` 메서드의 반환 값이기 때문이다.         
-마찬가지로 `stubbing` 처리를 하지 않은 `Mock`객체의 반환값이기 때문에 null이 리턴되었다.    
+마찬가지로 `Stubbing` 처리를 하지 않은 `Mock`객체의 반환값이기 때문에 null이 리턴되었다.    
 
 ## any()   
 ```java
         when(memberService.findById(1L)).thenReturn(Optional.of(member));
 ```
 기존에 우리는, `when()`을 호출하면서 메서드에 특정 파라미터 값을 넘겨주었다.      
-하지만, 이 같은 방법을 사용하게되면 특정 메서드만을 
+하지만, 이 같은 방법을 사용하게되면 특정 파리미터에 대한 `Stubbing`이 이루어진다.    
 
 ```java
 package me.kwj1270.thejavatest.study;
@@ -229,3 +229,62 @@ class StudyServiceTest {
 ```   
 ![]()   
   
+위 결과를 보면 알수 있듯이, 다른 파라미터를 넣었을 경우 `Stubbing`이 되지 않았음을 알 수 있다.   
+그렇다면, 파라미터의 값은 범위가 엄청 넓고 많은데 그것을 일일히 `Stubbing`해야 할까?    
+물론, 당연히 아니다 😉     
+`Mockito` 클래스의 `static` 메서드인 `any-`타입 메서드를 사용하면 된다.      
+    
+`Mockito` 클래스의 `any-` 타입 메서드는 매개변수의 범위를 대신해주며      
+이름 그대로 아무값이나 들어와도 `Stubbing`을 할 수 있게 만들어주는 유용한 메서드이다.       
+
+특정 자료형에 따라 메서드가 세분화되어 나누어져있으며, `any자료형()`형태로 되어있다.   
+
+
+
+```java
+package me.kwj1270.thejavatest.study;
+
+import me.kwj1270.thejavatest.domain.Member;
+import me.kwj1270.thejavatest.domain.Study;
+import me.kwj1270.thejavatest.member.MemberService;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+
+import static org.mockito.Mockito.*;
+
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import javax.swing.text.html.Option;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@ExtendWith(MockitoExtension.class)
+class StudyServiceTest {
+
+    @Test
+    void createStudyService(@Mock MemberService memberService,
+                            @Mock StudyRepository studyRepository) {
+
+        StudyService studyService = new StudyService(memberService, studyRepository);
+        assertNotNull(studyService);
+
+        Member member = new Member();
+        member.setId(1L);
+        member.setEmail("kwj1270@naver.com");
+
+        when(memberService.findById(any())).thenReturn(Optional.of(member));
+        Optional<Member> findById = memberService.findById(1L);
+        Optional<Member> findById_two = memberService.findById(2L);
+
+        assertEquals("kwj1270@naver.com", findById.get().getEmail());
+        assertEquals("kwj1270@naver.com", findById_two.get().getEmail());
+
+        System.out.println("테스트 성공");
+
+    }
+}
+```
+
+   
