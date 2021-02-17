@@ -62,13 +62,11 @@ import me.kwj1270.thejavatest.member.MemberService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-
-import static org.mockito.Mockito.*;
-
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
+import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -113,13 +111,11 @@ import me.kwj1270.thejavatest.member.MemberService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-
-import static org.mockito.Mockito.*;
-
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
+import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -191,14 +187,11 @@ import me.kwj1270.thejavatest.member.MemberService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-
-import static org.mockito.Mockito.*;
-
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
+import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -239,8 +232,6 @@ class StudyServiceTest {
 
 특정 자료형에 따라 메서드가 세분화되어 나누어져있으며, `any자료형()`형태로 되어있다.   
 
-
-
 ```java
 package me.kwj1270.thejavatest.study;
 
@@ -250,14 +241,11 @@ import me.kwj1270.thejavatest.member.MemberService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-
-import static org.mockito.Mockito.*;
-
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
+import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -286,5 +274,138 @@ class StudyServiceTest {
     }
 }
 ```
+![MockitoArgumentMatchers.png](./images/MockitoArgumentMatchers.png)   
+   
+`any()`와 같이 이러한 작업을 하는 요소를 `Argument matchers`라 부르며,      
+더 자세한 내용은 [레퍼런스](Argument matchers)를 참고하자 (some-()도 있다)     
+
+## returnThrow() 와 doThrow()     
+Stubbing 했을 때 어떤 값을 리턴하는게 아니라 **예외를 던지는 작업도 할 수 있다.**         
+   
+```java
+package me.kwj1270.thejavatest.study;
+
+import me.kwj1270.thejavatest.domain.Member;
+import me.kwj1270.thejavatest.domain.Study;
+import me.kwj1270.thejavatest.member.MemberService;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Optional;
+
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+@ExtendWith(MockitoExtension.class)
+class StudyServiceTest {
+
+    @Test
+    void createStudyService(@Mock MemberService memberService,
+                            @Mock StudyRepository studyRepository) {
+
+        StudyService studyService = new StudyService(memberService, studyRepository);
+        assertNotNull(studyService);
+
+        Member member = new Member();
+        member.setId(1L);
+        member.setEmail("kwj1270@naver.com");
+
+        when(memberService.findById(any())).thenReturn(Optional.of(member));
+        Optional<Member> findById = memberService.findById(1L);
+        Optional<Member> findById_two = memberService.findById(2L);
+
+        assertEquals("kwj1270@naver.com", findById.get().getEmail());
+        assertEquals("kwj1270@naver.com", findById_two.get().getEmail());
+
+        when(memberService.findById(1L)).thenThrow(new IllegalArgumentException());
+        doThrow(new IllegalArgumentException()).when(memberService).validate(1L);
+
+        assertAll(
+                () -> {
+                    assertThrows(IllegalArgumentException.class, () -> {
+                        memberService.findById(1L);
+                    });
+                },
+
+                () -> {
+                    assertThrows(IllegalArgumentException.class, () -> {
+                        memberService.validate(1L);
+                    });
+                }
+        );
+
+
+        System.out.println("테스트 성공");
+
+    }
+}
+```
+![]()  
+
+이전 Junit에서 배웠던, assertAll과 assertThrows을 이용해서 예외테스팅을 진행해보았다. 
+결과에서 알 수 있듯이 테스팅은 통과했고 우리는 2가지 경우를 함께 살펴보았다.   
+      
+* `when(Mock인스턴스의 특정 메서드).thenThrow()`: 반환형이 있는 경우에 사용한다.          
+* `doThrow(new Exception클래스).when(Mock인스턴스).특정메서드()`: 반환형이 void인 경우에 사용한다.      
+  
+그리고 위 예시에서는 특정 값을 기준으로 했지만,   
+여러 값을 한번에 처리하고 싶다면 앞서 배웠던 `Argument matchers` 를 이용하면 된다.  
+    
+## 체이닝 기법을 이용하기     
+Stubbing 진해을 위해 앞서, `thenReturn()`과 `thenThrow()`를 사용했다.     
+하지만, 메서드를 살펴보면 `OngoingStubbing` 인스턴스를 리턴하기에 우리는 체이닝 기법을 이용할 수 있다.      
+더불어, **호출되는 순서가 지정되어 있어 같은 배개변수라도 매번 다른 값을 행동하도록 조작할 수 있다.**             
+
+```java
+package me.kwj1270.thejavatest.study;
+
+import me.kwj1270.thejavatest.domain.Member;
+import me.kwj1270.thejavatest.member.MemberService;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+
+import static org.mockito.Mockito.*;
+
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@ExtendWith(MockitoExtension.class)
+class StudyServiceTest {
+
+    @Test
+    void createStudyService(@Mock MemberService memberService,
+                            @Mock StudyRepository studyRepository) {
+
+        StudyService studyService = new StudyService(memberService, studyRepository);
+        assertNotNull(studyService);
+
+        Member member = new Member();
+        member.setId(1L);
+        member.setEmail("kwj1270@naver.com");
+
+        when(memberService.findById(any()))
+                .thenReturn(Optional.of(member))
+                .thenThrow(new RuntimeException())
+                .thenReturn(Optional.empty());
+
+        Optional<Member> findById = memberService.findById(1L);
+        assertEquals("kwj1270@naver.com", findById.get().getEmail());
+
+        assertThrows(RuntimeException.class, () -> {
+            memberService.findById(2L);
+        });
+
+        assertEquals(Optional.empty(), memberService.findById(3L));
+        System.out.println("테스트 성공");
+    }
+}
+```
+![]()
 
    
