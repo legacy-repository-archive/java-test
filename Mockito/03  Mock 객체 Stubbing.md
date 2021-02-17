@@ -274,7 +274,7 @@ class StudyServiceTest {
     }
 }
 ```
-![MockitoArgumentMatchers.png](./images/MockitoArgumentMatchers.png)   
+![MockitoStubbingArgumentMatchers.png](./images/MockitoStubbingArgumentMatchers.png)      
    
 `any()`와 같이 이러한 작업을 하는 요소를 `Argument matchers`라 부르며,      
 더 자세한 내용은 [레퍼런스](Argument matchers)를 참고하자 (some-()도 있다)     
@@ -342,7 +342,7 @@ class StudyServiceTest {
     }
 }
 ```
-![]()  
+![MockitoStubbingThrowException.png](./images/MockitoStubbingThrowException.png)  
 
 이전 Junit에서 배웠던, assertAll과 assertThrows을 이용해서 예외테스팅을 진행해보았다. 
 결과에서 알 수 있듯이 테스팅은 통과했고 우리는 2가지 경우를 함께 살펴보았다.   
@@ -406,11 +406,7 @@ class StudyServiceTest {
     }
 }
 ```
-![]()
+![MockitoMultiStubbing.png](./images/MockitoMultiStubbing.png)
 
    
-MockitoStubbingThrowException.png
-MockitoStubbingArgumentMatchers.png
-MockitoStubbingDeep.png
-MockitoStubbingBasic.png
-MockitoMultiStubbing.png
+
