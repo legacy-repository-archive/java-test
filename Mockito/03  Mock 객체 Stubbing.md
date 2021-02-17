@@ -220,7 +220,7 @@ class StudyServiceTest {
     }
 }
 ```   
-![]()   
+![MockitoSingleStubbingTestFailed.png](./images/MockitoSingleStubbingTestFailed.png)   
   
 위 결과를 보면 알수 있듯이, 다른 파라미터를 넣었을 경우 `Stubbing`이 되지 않았음을 알 수 있다.   
 그렇다면, 파라미터의 값은 범위가 엄청 넓고 많은데 그것을 일일히 `Stubbing`해야 할까?    
