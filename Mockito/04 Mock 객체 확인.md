@@ -152,6 +152,7 @@ class StudyServiceTest {
 `never()` 메서드는 `times()`와 반대로 뒤에 따라오는 메서드를 실행하지 않아야 하는 경우를 테스트하는 메서드이다.   
           
 ## InOrder          
+여태까지는 `verify()` 메서드를 통해 메서드의 사용 횟수에 대해서 검증을 했다.   
 
 ```java
 package me.kwj1270.thejavatest.study;
