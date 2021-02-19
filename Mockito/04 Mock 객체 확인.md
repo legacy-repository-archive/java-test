@@ -159,6 +159,7 @@ class StudyServiceTest {
 `times()` 외에도 `never()` 메서드를 사용할 수 있다.       
 `never()` 메서드는 `times()`와 반대로 뒤에 따라오는 메서드를 실행하지 않아야 하는 경우를 테스트하는 메서드이다.   
 
+**timeout**
 ```java
    //passes when someMethod() is called no later than within 100 ms
    //exits immediately when verification is satisfied (e.g. may not wait full 100 ms)
