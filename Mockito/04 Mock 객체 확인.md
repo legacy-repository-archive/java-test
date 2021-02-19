@@ -278,7 +278,11 @@ class StudyServiceTest {
 }
 ```   
 ![MockitoVerifyNoMoreInteractionsSuccess.png](./images/MockitoVerifyNoMoreInteractionsSuccess.png)                     
-                   
+         
+테스트케이스에서 `Mock` 인스턴스인 `memberService`에 대해서          
+`memberService` 인스턴스의 `notify(member)`를 실행하고 이후 다른 메서드는 실행하지 않는다.           
+그렇기 때문에 더 이상 검증할 것이 존재하지 않기 때문에 `verifyNoMoreInteractions()`에 성공하게 된다.       
+     
 ## InOrder            
 여태까지는 `verify()` 메서드를 통해 메서드의 사용 횟수에 대해서 검증을 했다.         
 단, `verify()` 메서드는 단순히 횟수에 대해서만 검증을 하기에 어떤 로직으로 실행 되었는지까지는 검증 못한다.     
