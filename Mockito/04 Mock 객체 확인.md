@@ -269,10 +269,31 @@ class StudyServiceTest {
 `InOrder` 인스턴스의 `verify()`메서드를 통해 실행 순서를 검증할 수 있다.                          
 물론, 여기서 사용되는 `verify()`는 횟수를 검증하는 `Mockito`의 `verify()`와는 다르다.                     
 단, 형식은 비슷한데 `verify()`의 매개변수로 `Mock` 인스턴스를 넣어주고, 이후 검증할 메서드를 등록한다.       
+    
+꼭 `Mock` 인스턴스가 호출하는 모든 메서드를 기술할 필요가 없으며   
+단순히 내가 사용하고자 하는 메서드만을 기술해주면 된다.   
+  
+예를 들어 아래와 같은 순서로 메서드를 호출한다 가정한다.     
 
+1. A 메서드
+2. B 메서드
+3. C 메서드 
 
+순서에 맞게끔이라 하면, A,B,C 메서드 모두 호출해야 한다고 생각할 수 있지만,   
+`verify()`에 `A`, `C`를 지정해줘도 되고, `B`, `C` 를 지정해줘도 정상동작한다.       
+  
+* `memberService.findById(memberId);`    
+* `memberService.notify(newstudy);`       
+* `memberService.notify(member.get());`    
 
-
+예시 코드 같은 경우 위와 같은 순서로 동작하지만,     
+       
+* `notify(newstudy);`   
+* `notify(member.get());`
+             
+위와 같이 2개의 메서드를 정의를 해줬어도 테스트가 성공 했고        
+이로 인해, 꼭 모든 메서드를 기술하지 않아도 되는 것임을 알 수 있다.              
+        
 
   
 
