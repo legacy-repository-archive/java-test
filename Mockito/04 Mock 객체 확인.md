@@ -92,6 +92,8 @@ class StudyServiceTest {
 ```java
 verify(Mock 인스턴스, times(카운트)).Mock_인스턴스_메서드(특정매개변수);
 ```
+![MockitoVerifyTimesTest.png](./images/MockitoVerifyTimesTest.png)    
+        
 `verify(memberService, times(1)).notify(study);`를 통해 notify() 메서드의 호출여부에 대해 검증할 수 있다.   
 `times()`는 지정한 메서드가 **`정확히 몇 번 호출되었는지`** 를 그 갯수의 기준을 정의하는 메서드이다.           
 이 뒤에 오는 매개변수는 `Stubbing`과 마찬가지로 특정 매개변수를 처리하는 메서드를 지정하는 것이다.       
@@ -148,6 +150,8 @@ class StudyServiceTest {
     }
 }
 ```      
+![MockitoVerifyNeverTest.png](./images/MockitoVerifyNeverTest.png)      
+  
 `times()` 외에도 `never()` 메서드를 사용할 수 있다.       
 `never()` 메서드는 `times()`와 반대로 뒤에 따라오는 메서드를 실행하지 않아야 하는 경우를 테스트하는 메서드이다.   
           
