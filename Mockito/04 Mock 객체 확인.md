@@ -152,8 +152,19 @@ class StudyServiceTest {
 `never()` 메서드는 `times()`와 반대로 뒤에 따라오는 메서드를 실행하지 않아야 하는 경우를 테스트하는 메서드이다.   
           
 ## InOrder          
-여태까지는 `verify()` 메서드를 통해 메서드의 사용 횟수에 대해서 검증을 했다.   
+여태까지는 `verify()` 메서드를 통해 메서드의 사용 횟수에 대해서 검증을 했다.
+단, `verify()` 메서드는 단순히 횟수에 대해서만 검증을 하기에 어떤 로직으로 실행 되었는지까지는 검증 못한다.  
+           
+예를들어 1번 메서드 다음에, 2번 메서드를 호출한다 가정한다.          
+`verify()`메서드를 통해 1번 메서드와 2번 메서드의 사용횟수를 검증을 한다.          
+그런데 갑작스런 요구사항 변화로 2번 메서드 다음, 1번 메서드를 호출하는 것으로 바뀌었다.       
+하지만, 개발자는 이 요구사항을 통해 코드 수정을 깜빡하고 테스트를 진행했지만 테스트는 성공적으로 나왔다.   
+왜냐하면 `verify()`메서드는 횟수만 검증하기 때문이다.   
 
+이런 경우 우리는 `Mock`객체가 메서드를 실행하는 순서에 대해서도 검증을 할 필요가 있다.   
+그리고 정말 다행스럽게도 `Mockito`에서는 `inOrder()`메서드를 제공하고       
+`inOrder()`메서드에서 리턴되는 `InOrder` 인스턴스를 활용하면 된다.        
+       
 ```java
 package me.kwj1270.thejavatest.study;
 
@@ -189,9 +200,75 @@ public class StudyService {
 
 }
 ```
-Mock객체에서 호출하는 메서드의 순서가 중요하다면?    
+```java
+package me.kwj1270.thejavatest.study;
 
- 
+import me.kwj1270.thejavatest.domain.Member;
+import me.kwj1270.thejavatest.domain.Study;
+import me.kwj1270.thejavatest.member.MemberService;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InOrder;
+import org.mockito.Mock;
+
+import static org.mockito.Mockito.*;
+
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@ExtendWith(MockitoExtension.class)
+class StudyServiceTest {
+
+    @Test
+    void createStudyService(@Mock MemberService memberService,
+                            @Mock StudyRepository studyRepository) {
+
+        StudyService studyService = new StudyService(memberService, studyRepository);
+        assertNotNull(studyService);
+
+        Member member = new Member();
+        member.setId(1L);
+        member.setEmail("kwj1270@naver.com");
+
+        Study study = new Study(10, "테스트");
+
+        when(memberService.findById(1L)).thenReturn(Optional.of(member));
+        when(studyRepository.save(study)).thenReturn(study);
+
+        studyService.createNewStudy(1L, study);
+        assertEquals(member.getId(), study.getOwnerId());
+
+        verify(memberService, times(1)).notify(study);
+        verify(memberService, times(1)).notify(member);
+        verify(memberService, never()).validate(any());
+
+        InOrder inOrder = inOrder(memberService);
+        inOrder.verify(memberService).notify(study);
+        inOrder.verify(memberService).notify(member);
+
+        System.out.println("테스트 성공");
+    }
+}
+```
+![]()   
+             
+`InOrder` 인스턴스의 `verify()`메서드를 통해 실행 순서를 검증할 수 있다.                       
+물론, 여기서 사용되는 `verify()`는 횟수를 검증하는 `Mockito`의 `verify()`와는 다르다.                   
+단, 형식은 비슷한데 `verify()`의 매개변수로 `Mock` 인스턴스를 넣어주고, 이후 검증할 메서드를 등록한다.     
+
+```java
+    // InOrder인스턴스.verify(Mock인스턴스).검증할 Mock 인스턴스의 메서드(특정 파라미터)   
+    
+       inOrder.verify(memberService).notify(study);
+       inOrder.verify(memberService).notify(member);
+```
+
+
+
+  
 
 
 
