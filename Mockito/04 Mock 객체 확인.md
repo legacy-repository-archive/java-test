@@ -253,6 +253,9 @@ class StudyServiceTest {
     }
 }
 ```
+
+![]()   
+         
 ```java
      // inOrder(Mock 인스턴스)   
      
@@ -262,9 +265,7 @@ class StudyServiceTest {
     
         inOrder.verify(memberService).notify(study);
         inOrder.verify(memberService).notify(member);
-```
-![]()   
-             
+```         
 `InOrder` 인스턴스의 `verify()`메서드를 통해 실행 순서를 검증할 수 있다.                       
 물론, 여기서 사용되는 `verify()`는 횟수를 검증하는 `Mockito`의 `verify()`와는 다르다.                   
 단, 형식은 비슷한데 `verify()`의 매개변수로 `Mock` 인스턴스를 넣어주고, 이후 검증할 메서드를 등록한다.     
