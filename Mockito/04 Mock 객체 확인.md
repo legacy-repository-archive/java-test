@@ -212,7 +212,7 @@ class StudyServiceTest {
 
 }
 ```
-![MockitoVerifyNoMoreInteractionsFailed.png](./images/MockitoVerifyNoMoreInteractionsFailed.png)         
+![MockitoVerifyNoMoreInteractionsFailed.png](./images/MockitoVerifyNoMoreInteractionsFailed.png)                     
 
 위 코드에서는 테스팅에 실패한다.      
 그 이유는 `createNewStudy(1L, study);` 메서드의 내부 로직에서   
