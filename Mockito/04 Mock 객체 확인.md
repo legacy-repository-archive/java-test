@@ -155,9 +155,73 @@ class StudyServiceTest {
   
 `times()` 외에도 `never()` 메서드를 사용할 수 있다.       
 `never()` 메서드는 `times()`와 반대로 뒤에 따라오는 메서드를 실행하지 않아야 하는 경우를 테스트하는 메서드이다.   
+    
+## verifyNoMoreInteractions      
+모든 `verify()` 검증이 끝났다면 안정성을 위해 `verifyNoMoreInteractions()`을 호출할 수 있다.       
+`verifyNoMoreInteractions()`는 `Mock` 인스턴스의 메서드를 더 이상 `verify()` 검증할 필요가 없다는 뜻이다.        
+그렇기에 만약, 아직 검증할 내용이 있다면? 테스에 실패하게 한다.      
+      
+```java
+package me.kwj1270.thejavatest.study;
 
-##
+import me.kwj1270.thejavatest.domain.Member;
+import me.kwj1270.thejavatest.domain.Study;
+import me.kwj1270.thejavatest.member.MemberService;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 
+import static org.mockito.Mockito.*;
+
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@ExtendWith(MockitoExtension.class)
+class StudyServiceTest {
+
+    @Test
+    void createStudyService(@Mock MemberService memberService,
+                            @Mock StudyRepository studyRepository) {
+
+        StudyService studyService = new StudyService(memberService, studyRepository);
+        assertNotNull(studyService);
+
+        Member member = new Member();
+        member.setId(1L);
+        member.setEmail("kwj1270@naver.com");
+
+        Study study = new Study(10, "테스트");
+
+        when(memberService.findById(1L)).thenReturn(Optional.of(member));
+        when(studyRepository.save(study)).thenReturn(study);
+
+        studyService.createNewStudy(1L, study);
+        assertEquals(member.getId(), study.getOwnerId());
+
+        verify(memberService, times(1)).notify(study);
+        verify(memberService, never()).validate(any());
+
+        verifyNoMoreInteractions(memberService);
+        
+        System.out.println("테스트 성공");
+    }
+
+
+}
+```
+![MockitoVerifyNoMoreInteractionsFailed.png](./images/MockitoVerifyNoMoreInteractionsFailed.png)         
+
+위 코드에서는 테스팅에 실패한다.      
+그 이유는 `createNewStudy(1L, study);` 메서드의 내부 로직에서   
+`notify(member)`를 실행하고 있기 때문이다.   
+
+앞서 말했듯이 `verifyNoMoreInteractions()`는 더 이상 검증할 것이 남아있지 않을 때 성공을 리턴한다.  
+하지만, `notify(member)`에 대해서는 검증이 이루어지지 않았으므로 테스트에 실패한 것이다.   
+테스트에 성공하고자 한다면, 코드를 아래와 같이 추가하자.    
+   
 ```java
 package me.kwj1270.thejavatest.study;
 
@@ -200,7 +264,7 @@ class StudyServiceTest {
         assertEquals(member.getId(), study.getOwnerId());
 
         verify(memberService, times(1)).notify(study);
-        verify(memberService, times(1)).notify(member);
+        verify(memberService, times(1)).notify(member); // 추가한 부분 
         verify(memberService, never()).validate(any());
 
         verifyNoMoreInteractions(memberService);
@@ -208,12 +272,13 @@ class StudyServiceTest {
         System.out.println("테스트 성공");
     }
 
-
 }
-```
+```   
+![MockitoVerifyNoMoreInteractionsFailed.png](./images/MockitoVerifyNoMoreInteractionsFailed.png)                
+       
 ## InOrder          
 여태까지는 `verify()` 메서드를 통해 메서드의 사용 횟수에 대해서 검증을 했다.      
-단, `verify()` 메서드는 단순히 횟수에 대해서만 검증을 하기에 어떤 로직으로 실행 되었는지까지는 검증 못한다.      
+단, `verify()` 메서드는 단순히 횟수에 대해서만 검증을 하기에 어떤 로직으로 실행 되었는지까지는 검증 못한다.
               
 예를들어 1번 메서드 다음에, 2번 메서드를 호출한다 가정한다.             
 `verify()`메서드를 통해 1번 메서드와 2번 메서드의 사용횟수를 검증을 한다.            
@@ -225,6 +290,9 @@ class StudyServiceTest {
 그리고 정말 다행스럽게도 `Mockito`에서는 `inOrder()`메서드를 제공하고          
 `inOrder()`메서드에서 리턴되는 `InOrder` 인스턴스를 활용하면 된다.           
        
+참고로 `InOrder`인스턴스의 `verify()` 는 `Mockito.verify()`와 별개이다.      
+그렇기에 `InOrder`인스턴스의 검증 동작은 
+
 ```java
 package me.kwj1270.thejavatest.study;
 
