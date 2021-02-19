@@ -88,11 +88,12 @@ class StudyServiceTest {
         System.out.println("테스트 성공");
     }
 }
-```
+``` 
+![MockitoVerifyTimesTest.png](./images/MockitoVerifyTimesTest.png)      
+    
 ```java
 verify(Mock 인스턴스, times(카운트)).Mock_인스턴스_메서드(특정매개변수);
 ```
-![MockitoVerifyTimesTest.png](./images/MockitoVerifyTimesTest.png)    
         
 `verify(memberService, times(1)).notify(study);`를 통해 notify() 메서드의 호출여부에 대해 검증할 수 있다.   
 `times()`는 지정한 메서드가 **`정확히 몇 번 호출되었는지`** 를 그 갯수의 기준을 정의하는 메서드이다.           
@@ -352,7 +353,7 @@ class StudyServiceTest {
     }
 }
 ```
-![MockitoInOrderTestFailed.png](./images/MockitoInOrderTestFailed.png)
-
-
-
+![MockitoInOrderTestFailed.png](./images/MockitoInOrderTestFailed.png)   
+        
+위 결과를 통해 순서를 뒤 바꾸었을 경우 테스트가 실패한다는 것을 알 수 있고       
+`InOreder`는 **메서드의 실행 순서를 검증**한다는 것을 알 수 있다.          
