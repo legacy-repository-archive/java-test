@@ -220,7 +220,7 @@ class StudyServiceTest {
 
 앞서 말했듯이 `verifyNoMoreInteractions()`는 더 이상 검증할 것이 남아있지 않을 때 성공을 리턴한다.  
 하지만, `notify(member)`에 대해서는 검증이 이루어지지 않았으므로 테스트에 실패한 것이다.   
-테스트에 성공하고자 한다면, 코드를 아래와 같이 추가하자.    
+테스트에 성공하고자 한다면, 코드를 아래와 같이 추가하자.      
    
 ```java
 package me.kwj1270.thejavatest.study;
@@ -274,25 +274,25 @@ class StudyServiceTest {
 
 }
 ```   
-![MockitoVerifyNoMoreInteractionsFailed.png](./images/MockitoVerifyNoMoreInteractionsFailed.png)                
-       
-## InOrder          
-여태까지는 `verify()` 메서드를 통해 메서드의 사용 횟수에 대해서 검증을 했다.      
-단, `verify()` 메서드는 단순히 횟수에 대해서만 검증을 하기에 어떤 로직으로 실행 되었는지까지는 검증 못한다.
-              
-예를들어 1번 메서드 다음에, 2번 메서드를 호출한다 가정한다.             
-`verify()`메서드를 통해 1번 메서드와 2번 메서드의 사용횟수를 검증을 한다.            
-그런데 갑작스런 요구사항 변화로 2번 메서드 다음, 1번 메서드를 호출하는 것으로 바뀌었다.          
-하지만, 개발자는 이 요구사항을 통해 코드 수정을 깜빡하고 테스트를 진행했지만 테스트는 성공적으로 나왔다.      
-왜냐하면 `verify()`메서드는 횟수만 검증하기 때문이다.      
-
-이런 경우 우리는 `Mock`객체가 메서드를 실행하는 순서에 대해서도 검증을 할 필요가 있다.      
-그리고 정말 다행스럽게도 `Mockito`에서는 `inOrder()`메서드를 제공하고          
-`inOrder()`메서드에서 리턴되는 `InOrder` 인스턴스를 활용하면 된다.           
-       
-참고로 `InOrder`인스턴스의 `verify()` 는 `Mockito.verify()`와 별개이다.      
-그렇기에 `InOrder`인스턴스의 검증 동작은 
-
+![MockitoVerifyNoMoreInteractionsSuccess.png](./images/MockitoVerifyNoMoreInteractionsSuccess.png)                     
+                   
+## InOrder            
+여태까지는 `verify()` 메서드를 통해 메서드의 사용 횟수에 대해서 검증을 했다.         
+단, `verify()` 메서드는 단순히 횟수에 대해서만 검증을 하기에 어떤 로직으로 실행 되었는지까지는 검증 못한다.     
+                  
+예를들어 1번 메서드 다음에, 2번 메서드를 호출한다 가정한다.                
+`verify()`메서드를 통해 1번 메서드와 2번 메서드의 사용횟수를 검증을 한다.               
+그런데 갑작스런 요구사항 변화로 2번 메서드 다음, 1번 메서드를 호출하는 것으로 바뀌었다.             
+하지만, 개발자는 이 요구사항을 통해 코드 수정을 깜빡하고 테스트를 진행했지만 테스트는 성공적으로 나왔다.           
+왜냐하면 `verify()`메서드는 횟수만 검증하기 때문이다.           
+           
+이런 경우 우리는 `Mock`객체가 메서드를 실행하는 순서에 대해서도 검증을 할 필요가 있다.             
+그리고 정말 다행스럽게도 `Mockito`에서는 `inOrder()`메서드를 제공하고                      
+`inOrder()`메서드에서 리턴되는 `InOrder` 인스턴스를 활용하면 된다.                     
+                         
+참고로 `InOrder`인스턴스의 `verify()` 는 `Mockito.verify()`와 별개이다.                      
+그렇기에 `InOrder`인스턴스의 검증은 `verifyNoMoreInteractions()`의 검증과는 별개이다.                  
+     
 ```java
 package me.kwj1270.thejavatest.study;
 
