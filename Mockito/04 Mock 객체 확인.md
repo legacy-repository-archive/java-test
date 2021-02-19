@@ -289,10 +289,10 @@ class StudyServiceTest {
 이런 경우 우리는 `Mock`객체가 메서드를 실행하는 순서에 대해서도 검증을 할 필요가 있다.             
 그리고 정말 다행스럽게도 `Mockito`에서는 `inOrder()`메서드를 제공하고                      
 `inOrder()`메서드에서 리턴되는 `InOrder` 인스턴스를 활용하면 된다.                     
-                         
-참고로 `InOrder`인스턴스의 `verify()` 는 `Mockito.verify()`와 별개이다.                      
-그렇기에 `InOrder`인스턴스의 검증은 `verifyNoMoreInteractions()`의 검증과는 별개이다.                  
-     
+                            
+참고로 `InOrder`인스턴스의 `verify()` 는 `Mockito.verify()`와 별개이다.                        
+그렇기에 `InOrder`인스턴스의 검증은 `verifyNoMoreInteractions()`의 검증 대상과는 별개이다.                    
+          
 ```java
 package me.kwj1270.thejavatest.study;
 
