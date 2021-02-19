@@ -254,7 +254,7 @@ class StudyServiceTest {
 }
 ```
 
-![]()   
+![MockitoInOrderTestSuccess.png](./images/MockitoInOrderTestSuccess.png)   
          
 ```java
      // inOrder(Mock 인스턴스)   
@@ -293,9 +293,62 @@ class StudyServiceTest {
              
 위와 같이 2개의 메서드를 정의를 해줬어도 테스트가 성공 했고        
 이로 인해, 꼭 모든 메서드를 기술하지 않아도 되는 것임을 알 수 있다.              
-        
+          
+**`verify()`순서를 뒤바꾼 코드**         
+```java
+package me.kwj1270.thejavatest.study;
 
-  
+import me.kwj1270.thejavatest.domain.Member;
+import me.kwj1270.thejavatest.domain.Study;
+import me.kwj1270.thejavatest.member.MemberService;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InOrder;
+import org.mockito.Mock;
+
+import static org.mockito.Mockito.*;
+
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@ExtendWith(MockitoExtension.class)
+class StudyServiceTest {
+
+    @Test
+    void createStudyService(@Mock MemberService memberService,
+                            @Mock StudyRepository studyRepository) {
+
+        StudyService studyService = new StudyService(memberService, studyRepository);
+        assertNotNull(studyService);
+
+        Member member = new Member();
+        member.setId(1L);
+        member.setEmail("kwj1270@naver.com");
+
+        Study study = new Study(10, "테스트");
+
+        when(memberService.findById(1L)).thenReturn(Optional.of(member));
+        when(studyRepository.save(study)).thenReturn(study);
+
+        studyService.createNewStudy(1L, study);
+        assertEquals(member.getId(), study.getOwnerId());
+
+        verify(memberService, times(1)).notify(study);
+        verify(memberService, times(1)).notify(member);
+        verify(memberService, never()).validate(any());
+
+        InOrder inOrder = inOrder(memberService);
+        inOrder.verify(memberService).notify(member);
+        inOrder.verify(memberService).notify(study);
+
+        System.out.println("테스트 성공");
+    }
+}
+```
+![MockitoInOrderTestFailed.png](./images/MockitoInOrderTestFailed.png)
 
 
 
