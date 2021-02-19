@@ -158,7 +158,25 @@ class StudyServiceTest {
   
 `times()` 외에도 `never()` 메서드를 사용할 수 있다.       
 `never()` 메서드는 `times()`와 반대로 뒤에 따라오는 메서드를 실행하지 않아야 하는 경우를 테스트하는 메서드이다.   
-    
+
+```java
+   //passes when someMethod() is called no later than within 100 ms
+   //exits immediately when verification is satisfied (e.g. may not wait full 100 ms)
+   verify(mock, timeout(100)).someMethod();
+   //above is an alias to:
+   verify(mock, timeout(100).times(1)).someMethod();
+
+   //passes as soon as someMethod() has been called 2 times under 100 ms
+   verify(mock, timeout(100).times(2)).someMethod();
+
+   //equivalent: this also passes as soon as someMethod() has been called 2 times under 100 ms
+   verify(mock, timeout(100).atLeast(2)).someMethod();
+```
+`verify()`에는 `timeout()`이라는 메서드를 넣어 줄 수도 있다.       
+ `timeout()`은 특정 시간내에 메서드가 수행되었는가를 나타내며 `times(2)`과 같이 사용되기도 한다.     
+ 즉, 특정 시간내에 메서드가 몇회 실행되었는가를 테스팅할 수 있다는 것이다.       
+ 하지만, 실무에서 거의 사용해본적이 없다고 하니, 있다는 점만 알아두고 가자           
+
 ## verifyNoMoreInteractions      
 모든 `verify()` 검증이 끝났다면 안정성을 위해 `verifyNoMoreInteractions()`을 호출할 수 있다.       
 `verifyNoMoreInteractions()`는 `Mock` 인스턴스의 메서드를 더 이상 `verify()` 검증할 필요가 없다는 뜻이다.        
@@ -487,3 +505,4 @@ class StudyServiceTest {
         
 위 결과를 통해 순서를 뒤 바꾸었을 경우 테스트가 실패한다는 것을 알 수 있고       
 `InOreder`는 **메서드의 실행 순서를 검증**한다는 것을 알 수 있다.          
+
