@@ -207,3 +207,8 @@ class StudyServiceTest {
 }
 ```  
 ![MockitoBDDStyleSuccess.png](./images/MockitoBDDStyleSuccess.png)      
+    
+추가로)       
+어떤 기능 설계를 할때(어떤 서비스를 제공하는가) TDD를 작성하는 것도 나쁘지 않다.         
+즉, 아직 구체적인 클래스를 정의하지 않았을 때, TDD를 통해서 **행동을 유추하고 이를 클래스로 옮기는 과정**도 괜찮다.       
+
